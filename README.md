@@ -2,7 +2,7 @@
 
 Trò chơi lớp học môn **Nghiệp vụ ngoại thương & Logistics** (Nhóm 1). Cả lớp vào vai phòng xuất khẩu của Công ty CP Thực phẩm An Nam, soạn hợp đồng bán xoài sấy dẻo cho chuỗi siêu thị Siam Retail (Bangkok, Thái Lan). Kết thúc trò chơi, hợp đồng còn trống đúng một ô (giá cả) và dẫn thẳng vào phần thuyết trình **Nghệ thuật đàm phán với các nước ASEAN – Thái Lan**.
 
-**Chơi ngay:** https://thanhtai0308.github.io/hop-dong-sai-gon-bangkok/
+**Chơi ngay:** https://hopdong-xuatkhau.github.io/
 
 ## Cách chơi
 
