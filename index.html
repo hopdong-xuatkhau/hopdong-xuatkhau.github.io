@@ -1,0 +1,1599 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hợp đồng Sài Gòn – Bangkok</title>
+<meta name="description" content="Trò chơi Nghiệp vụ ngoại thương & Logistics: soạn hợp đồng xuất khẩu xoài sấy sang Thái Lan, chọn Incoterms, thanh toán, chứng từ và bước vào bàn đàm phán.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='8' width='26' height='16' rx='2' fill='%23E5621C'/%3E%3Cpath d='M8 11v10M12 11v10M16 11v10M20 11v10M24 11v10' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Big+Shoulders+Stencil+Display:wght@700;800&family=Noto+Serif:wght@400;700&display=swap">
+<style>
+/* Layout: one-screen "port control room" — header, container route strip, then question desk (left) + responder & live contract (right). */
+:root {
+  --bg: #E7EDF0;
+  --bg-2: #D9E3E8;
+  --surface: #FBFCFD;
+  --surface-2: #F0F4F6;
+  --ink: #0D2131;
+  --ink-2: #445C6B;
+  --ink-3: #74899A;
+  --line: #C8D4DB;
+  --accent: #E0601B;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #FBE2D2;
+  --sea: #C3DDE7;
+  --sea-2: #93C3D4;
+  --sea-ink: #1C5B77;
+  --land: #DCE4CF;
+  --land-ink: #5E6F4A;
+  --teal: #0D7480;
+  --ok: #1C8549;
+  --ok-soft: #D7EFE0;
+  --bad: #C2342A;
+  --bad-soft: #F7DDD9;
+  --gold: #A97B0C;
+  --paper: #FFFEFB;
+  --paper-ink: #17222D;
+  --paper-line: #E2DCCD;
+  --c1: #E0601B; --c2: #0D7480; --c3: #2D4E80; --c4: #A8363F; --c5: #B88A12; --c6: #4F7A3A;
+  --shadow: 0 1px 2px rgba(13,33,49,.06), 0 10px 28px rgba(13,33,49,.10);
+  --scrim: rgba(9,22,33,.55);
+  --f-ui: "Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --f-doc: "Noto Serif", Georgia, "Times New Roman", serif;
+  --f-code: "Big Shoulders Stencil Display", "Be Vietnam Pro", Impact, "Arial Narrow", sans-serif;
+  --r: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #07131D; --bg-2: #0B1B29; --surface: #0E2131; --surface-2: #13293C; --ink: #E6EEF3; --ink-2: #A1B4C2; --ink-3: #6E8595; --line: #20384C;
+    --accent: #FF7B35; --accent-ink: #1B0B02; --accent-soft: #3B2316; --sea: #0C2639; --sea-2: #164562; --sea-ink: #7FC4DD; --land: #16251D; --land-ink: #8FA67A;
+    --teal: #33B9C2; --ok: #3CCB78; --ok-soft: #0F2F1E; --bad: #FF6A5B; --bad-soft: #3A1613; --gold: #E9BB3D;
+    --paper: #102435; --paper-ink: #E8EFF4; --paper-line: #253F55;
+    --c1: #F2742E; --c2: #1E9AA4; --c3: #4C72B0; --c4: #C8505A; --c5: #D7A82A; --c6: #6C9A50;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35); --scrim: rgba(2,8,13,.72);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #07131D; --bg-2: #0B1B29; --surface: #0E2131; --surface-2: #13293C; --ink: #E6EEF3; --ink-2: #A1B4C2; --ink-3: #6E8595; --line: #20384C;
+  --accent: #FF7B35; --accent-ink: #1B0B02; --accent-soft: #3B2316; --sea: #0C2639; --sea-2: #164562; --sea-ink: #7FC4DD; --land: #16251D; --land-ink: #8FA67A;
+  --teal: #33B9C2; --ok: #3CCB78; --ok-soft: #0F2F1E; --bad: #FF6A5B; --bad-soft: #3A1613; --gold: #E9BB3D;
+  --paper: #102435; --paper-ink: #E8EFF4; --paper-line: #253F55;
+  --c1: #F2742E; --c2: #1E9AA4; --c3: #4C72B0; --c4: #C8505A; --c5: #D7A82A; --c6: #6C9A50;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35); --scrim: rgba(2,8,13,.72);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { font-size: clamp(15px, min(0.62vw + 9px, 1.1vh + 7px), 21px); height: 100%; }
+body {
+  margin: 0; min-height: 100%; background: var(--bg); color: var(--ink);
+  font-family: var(--f-ui); line-height: 1.5; -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+}
+[hidden] { display: none !important; }
+button { font: inherit; color: inherit; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+p { margin: 0; }
+.eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.code { font-family: var(--f-code); letter-spacing: .04em; }
+.tnum { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: .62em 1.1em; border-radius: 999px; font-weight: 600; cursor: pointer;
+  transition: transform .12s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover { border-color: var(--ink-3); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { border-color: var(--ink); }
+.btn-lg { font-size: 1.08rem; padding: .78em 1.5em; }
+.btn-ghost { background: transparent; }
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
+.icon-btn { width: 2.4rem; height: 2.4rem; padding: 0; border-radius: 50%; }
+.icon-btn svg { width: 1.15rem; height: 1.15rem; }
+
+/* ---------- App shell ---------- */
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+.screen { flex: 1; display: flex; flex-direction: column; }
+
+/* ---------- Intro ---------- */
+.intro { max-width: 1240px; width: 100%; margin: 0 auto; padding-block: 2.2rem 3rem; display: grid; gap: 2rem; }
+.intro-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.tag-line { display: inline-flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+.cn-badge { font-family: var(--f-code); font-size: 1.05rem; letter-spacing: .08em; border: 2px solid var(--ink); padding: .1em .55em; border-radius: 4px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2.5rem; align-items: center; }
+.hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.9rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.06; }
+.hero h1 .route { display: block; font-family: var(--f-code); font-weight: 800; letter-spacing: .02em; color: var(--accent); font-size: .92em; margin-top: .25em; }
+.hero .lede { margin-top: 1.1rem; font-size: 1.08rem; color: var(--ink-2); max-width: 36em; }
+.hero-art { width: 100%; max-width: 100%; aspect-ratio: 16 / 11; border-radius: 16px; overflow: hidden; background: var(--sea); border: 1.5px solid var(--line); }
+.hero-art svg { width: 100%; height: 100%; display: block; }
+.setup { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.4rem 1.5rem; display: grid; gap: 1.2rem; box-shadow: var(--shadow); }
+.setup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.1rem 1.6rem; }
+.field { display: grid; gap: .4rem; align-content: start; }
+.field label, .field .lbl { font-weight: 600; font-size: .92rem; }
+.field .hint { font-size: .8rem; color: var(--ink-3); }
+.stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; width: max-content; }
+.stepper button { border: 0; background: var(--surface-2); width: 2.4rem; height: 2.4rem; cursor: pointer; font-size: 1.2rem; font-weight: 700; }
+.stepper output { min-width: 3rem; text-align: center; font-weight: 800; font-size: 1.15rem; }
+.check { display: flex; align-items: center; gap: .55rem; cursor: pointer; font-size: .92rem; }
+.check input { width: 1.15rem; height: 1.15rem; accent-color: var(--accent); }
+select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); width: max-content; }
+.qpick { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: .45rem 1.2rem; }
+.qpick .check { padding: .45rem .6rem; border-radius: 8px; background: var(--surface-2); }
+.qpick .check small { color: var(--ink-3); margin-left: auto; font-weight: 600; white-space: nowrap; }
+.setup-actions { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+.setup-actions .note { color: var(--ink-3); font-size: .85rem; }
+
+/* ---------- Brief ---------- */
+.brief { max-width: 1180px; width: 100%; margin: 0 auto; padding-block: 2rem 3rem; display: grid; gap: 1.6rem; }
+.brief-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+.order { background: var(--paper); color: var(--paper-ink); border: 1.5px solid var(--paper-line); border-radius: 14px; padding: 1.5rem 1.6rem; box-shadow: var(--shadow); position: relative; }
+.order h2 { font-family: var(--f-doc); font-size: 1.5rem; }
+.kv { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); border-top: 1px solid var(--paper-line); }
+.kv > div { padding: .62rem 0; border-bottom: 1px solid var(--paper-line); }
+.kv .k { color: var(--ink-3); font-size: .88rem; }
+.kv .v { font-weight: 600; text-align: right; }
+.kv .v small { display: block; font-weight: 400; color: var(--ink-3); font-size: .82rem; }
+.rules { display: grid; gap: .9rem; }
+.rule { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: .9rem; align-items: start; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: .9rem 1rem; }
+.rule .ico { width: 2.6rem; height: 2.6rem; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.rule .ico svg { width: 1.4rem; height: 1.4rem; }
+.rule h3 { font-size: 1rem; margin-bottom: .2rem; }
+.rule p { color: var(--ink-2); font-size: .92rem; }
+.pts { display: inline-flex; gap: .35rem; flex-wrap: wrap; margin-top: .35rem; }
+.pts span { font-size: .78rem; font-weight: 700; padding: .1em .6em; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); }
+
+/* ---------- Game header ---------- */
+.topbar { display: flex; align-items: center; gap: 1rem; padding-block: .75rem; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: .7rem; min-width: 0; }
+.brand .cn-badge { font-size: .95rem; }
+.brand b { font-size: 1rem; white-space: nowrap; }
+.prog { display: flex; align-items: center; gap: .55rem; margin-left: auto; }
+.pips { display: flex; gap: .3rem; }
+.pip { width: 1.6rem; height: .5rem; border-radius: 3px; background: var(--line); }
+.pip.done { background: var(--ok); }
+.pip.warn { background: var(--gold); }
+.pip.now { background: var(--accent); }
+.health { display: flex; align-items: center; gap: .55rem; min-width: 12rem; }
+.health .bar { flex: 1; height: .62rem; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
+.health .bar i { display: block; height: 100%; width: 100%; background: var(--ok); transition: width .6s ease, background .3s; }
+.health b { font-size: .95rem; min-width: 3ch; text-align: right; }
+.tools { display: flex; gap: .4rem; }
+
+/* ---------- Route strip ---------- */
+.routebox { border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--land); position: relative; }
+.routebox svg { display: block; width: 100%; height: auto; max-height: clamp(72px, 15vh, 170px); }
+.route-now { display: none; padding: .4rem .8rem; font-size: .85rem; font-weight: 600; background: var(--surface); border-top: 1px solid var(--line); }
+#vehicle { transition: transform 1.1s cubic-bezier(.45,.05,.2,1); }
+#prog-line { transition: stroke-dashoffset 1.1s cubic-bezier(.45,.05,.2,1); }
+.rt-label { font: 600 15px var(--f-ui); fill: var(--ink-2); }
+.rt-label.on { fill: var(--ink); font-weight: 800; }
+.rt-country { font: 800 13px var(--f-ui); letter-spacing: .2em; fill: var(--land-ink); }
+.rt-sea { font: 800 13px var(--f-ui); letter-spacing: .2em; fill: var(--sea-ink); opacity: .75; }
+
+/* ---------- Game main ---------- */
+.game { flex: 1; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: .8rem; padding-bottom: 1rem; }
+.desk { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 1rem; min-height: 0; }
+.qcard { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.15rem 1.5rem 1.2rem; display: flex; flex-direction: column; gap: .85rem; min-width: 0; box-shadow: var(--shadow); }
+.qmeta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: .35em; font-size: .76rem; font-weight: 700; padding: .22em .7em; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-2); }
+.chip.hot { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip.src { background: transparent; }
+.qstage { font-size: 1.45rem; font-weight: 800; letter-spacing: -.01em; }
+.scenario { background: var(--surface-2); border-radius: 12px; padding: .95rem 1.1rem; color: var(--ink-2); font-size: 1rem; border: 1px solid var(--line); }
+.scenario strong { color: var(--ink); }
+.scenario ul { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .25rem; }
+.qtext { font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+.opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.opt {
+  display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: .8rem; align-items: center; text-align: left;
+  background: var(--surface); border: 2px solid var(--line); border-radius: 12px; padding: .8rem .95rem; cursor: pointer;
+  font-size: 1.02rem; font-weight: 600; min-height: 3.9rem; transition: border-color .15s, background .15s, transform .12s;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); }
+.opt .L { width: 2.4rem; height: 2.4rem; border-radius: 8px; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--f-code); font-size: 1.35rem; font-weight: 800; }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); text-decoration: line-through; text-decoration-color: var(--bad); color: var(--ink-2); cursor: not-allowed; }
+.opt.wrong .L { background: var(--bad); color: #fff; }
+.opt.right { border-color: var(--ok); background: var(--ok-soft); }
+.opt.right .L { background: var(--ok); color: #fff; }
+.opt:disabled { cursor: default; }
+.opt.shake { animation: shake .4s; }
+@keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+.qfoot { display: flex; justify-content: space-between; align-items: center; gap: .8rem; flex-wrap: wrap; margin-top: auto; }
+.qfoot .hint { font-size: .82rem; color: var(--ink-3); }
+.kbd { font: 700 .75rem var(--f-ui); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 .35em; background: var(--surface-2); }
+
+.side { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 1rem; min-height: 0; min-width: 0; }
+.resp { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; display: grid; gap: .8rem; box-shadow: var(--shadow); }
+.resp-now { display: flex; align-items: center; gap: .9rem; }
+.resp-now .who { flex: 1; min-width: 0; }
+.resp-now .who b { display: block; font-size: 1.5rem; font-weight: 800; line-height: 1.15; }
+.resp-now .who b.none { font-size: 1.05rem; color: var(--ink-3); font-weight: 600; }
+.ring { width: 3.6rem; height: 3.6rem; position: relative; flex: none; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring .rbg { stroke: var(--line); }
+.ring .rfg { stroke: var(--teal); transition: stroke-dashoffset .25s linear, stroke .2s; }
+.ring.low .rfg { stroke: var(--bad); }
+.ring span { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; font-size: 1.05rem; }
+.ring.out span { color: var(--bad); font-size: .7rem; text-align: center; line-height: 1.1; }
+.gchips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.gchip { border: 1.5px solid var(--line); background: var(--surface-2); border-radius: 8px; padding: .32em .7em; font-weight: 700; cursor: pointer; font-size: .9rem; display: inline-flex; gap: .4em; align-items: baseline; }
+.gchip small { font-weight: 600; color: var(--ink-3); font-size: .74rem; }
+.gchip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.gchip.on small { color: inherit; opacity: .8; }
+.gchip:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
+.resp-actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.resp-actions .btn { flex: 1; min-width: 10rem; }
+
+/* ---------- Contract ---------- */
+.contract { background: var(--paper); color: var(--paper-ink); border: 1.5px solid var(--paper-line); border-radius: 16px; padding: 1.1rem 1.25rem; overflow: auto; min-height: 0; box-shadow: var(--shadow); position: relative; }
+.contract h3 { font-family: var(--f-doc); font-size: 1.12rem; text-align: center; letter-spacing: .02em; }
+.contract .no { text-align: center; font-size: .8rem; color: var(--ink-3); margin: .15rem 0 .7rem; }
+.tsteps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .25rem; margin-bottom: .8rem; }
+.tstep { text-align: center; font-size: .66rem; font-weight: 700; color: var(--ink-3); display: grid; gap: .25rem; justify-items: center; line-height: 1.2; }
+.tstep i { width: 100%; height: .38rem; border-radius: 3px; background: var(--paper-line); display: block; }
+.tstep.done { color: var(--ink); }
+.tstep.done i { background: var(--ok); }
+.tstep.later i { background: repeating-linear-gradient(90deg, var(--gold) 0 5px, transparent 5px 9px); }
+.tstep.later { color: var(--gold); }
+.clauses { display: grid; }
+.clause { display: grid; grid-template-columns: minmax(6.6rem, 38%) minmax(0, 1fr); gap: .7rem; padding: .55rem 0; border-top: 1px solid var(--paper-line); align-items: baseline; }
+.clause .k { font-size: .8rem; color: var(--ink-3); }
+.clause .k b { display: block; color: var(--paper-ink); font-size: .84rem; }
+.clause .v { font-size: .9rem; font-weight: 700; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.clause .v small { display: block; font-weight: 400; color: var(--ink-3); font-size: .76rem; }
+.clause .v.pending { color: var(--ink-3); font-weight: 500; font-style: italic; }
+.clause .v.warn small { color: var(--bad); font-weight: 600; }
+.clause.stamp .v { animation: stampIn .7s cubic-bezier(.2,1.6,.4,1); }
+.clause.flash { animation: flashRow 1.6s ease; }
+@keyframes stampIn { 0% { transform: scale(1.6); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes flashRow { 0% { background: var(--ok-soft); } 100% { background: transparent; } }
+.nego { color: var(--accent) !important; font-style: normal !important; font-weight: 800 !important; }
+.blink { animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .45; } }
+
+/* ---------- Modal ---------- */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--scrim); padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.sheet { width: min(860px, 100%); max-height: 100%; overflow: auto; background: var(--surface); color: var(--ink); border-radius: 18px; border: 1.5px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,.35); padding: 1.5rem 1.7rem 1.4rem; display: grid; gap: 1rem; animation: pop .28s cubic-bezier(.2,1.3,.4,1); }
+@keyframes pop { from { transform: translateY(14px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet.bad { border-top: 6px solid var(--bad); }
+.sheet.good { border-top: 6px solid var(--ok); }
+.sheet.info { border-top: 6px solid var(--gold); }
+.stampmark { display: inline-block; font-family: var(--f-code); font-weight: 800; font-size: 1.05rem; letter-spacing: .12em; padding: .15em .7em; border: 3px solid currentColor; border-radius: 6px; transform: rotate(-3deg); width: max-content; }
+.sheet.bad .stampmark { color: var(--bad); }
+.sheet.good .stampmark { color: var(--ok); }
+.sheet.info .stampmark { color: var(--gold); }
+.sheet h2 { font-size: 1.65rem; font-weight: 800; }
+.sheet .body { font-size: 1.04rem; color: var(--ink-2); }
+.sheet .body strong { color: var(--ink); }
+.impact { display: flex; flex-wrap: wrap; gap: .5rem; }
+.impact span { font-weight: 700; font-size: .85rem; padding: .3em .8em; border-radius: 999px; background: var(--bad-soft); color: var(--bad); border: 1px solid var(--bad); }
+.impact span.ok { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); }
+.impact span.neutral { background: var(--surface-2); color: var(--ink-2); border-color: var(--line); }
+.explain { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: .9rem 1.05rem; display: grid; gap: .45rem; font-size: .98rem; }
+.explain .eyebrow { color: var(--teal); }
+.explain .note { font-size: .9rem; color: var(--ink-2); border-top: 1px dashed var(--line); padding-top: .45rem; }
+.sheet-actions { display: flex; gap: .7rem; justify-content: flex-end; flex-wrap: wrap; }
+.src-line { font-size: .8rem; color: var(--ink-3); }
+
+/* Incoterms risk/cost diagram */
+.ico-diagram { overflow-x: auto; }
+.icd { min-width: 560px; display: grid; grid-template-columns: 4.4rem repeat(4, minmax(0, 1fr)); font-size: .78rem; }
+.icd .hd { font-weight: 700; color: var(--ink-2); text-align: center; padding: 0 .2rem .4rem; line-height: 1.25; }
+.icd .term { font-family: var(--f-code); font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; }
+.icd .row { grid-column: 2 / -1; position: relative; height: 2.2rem; border-left: 1px dashed var(--line); margin-right: 14px; }
+.icd .row::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--line); }
+.icd .cost { position: absolute; left: 0; top: calc(50% - 5px); height: 10px; border-radius: 5px; background: var(--accent); opacity: .85; }
+.icd .risk { position: absolute; top: 50%; width: 15px; height: 15px; background: var(--ink); transform: translate(-50%, -50%) rotate(45deg); border: 2px solid var(--surface); }
+.icd .hl { background: var(--ok-soft); border-radius: 8px; }
+.icd-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: .8rem; color: var(--ink-2); margin-top: .5rem; }
+.icd-legend i { display: inline-block; vertical-align: middle; margin-right: .35rem; }
+.lg-cost { width: 22px; height: 8px; border-radius: 4px; background: var(--accent); }
+.lg-risk { width: 11px; height: 11px; background: var(--ink); transform: rotate(45deg); }
+
+/* ---------- Wheel ---------- */
+.wheel-wrap { display: grid; justify-items: center; gap: 1rem; }
+.wheel-stage { position: relative; width: min(30rem, 78vw, 62vh); aspect-ratio: 1; max-width: 100%; }
+.wheel-stage canvas { width: 100%; height: 100%; display: block; }
+.pointer { position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 30px solid var(--accent); filter: drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
+.wheel-result { text-align: center; min-height: 3.6rem; }
+.wheel-result b { display: block; font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1.1; }
+.wheel-result.pop b { animation: pop .4s cubic-bezier(.2,1.6,.4,1); }
+
+/* ---------- Final & Present ---------- */
+.final { max-width: 1240px; width: 100%; margin: 0 auto; padding-block: 1.1rem 2.4rem; display: grid; gap: 1rem; }
+.final-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.final .contract { overflow: visible; }
+.draft-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; margin-bottom: .35rem; }
+.draft-stamp { font-family: var(--f-code); font-weight: 800; color: var(--accent); border: 3px solid var(--accent); padding: .05em .6em; border-radius: 6px; transform: rotate(4deg); font-size: .95rem; letter-spacing: .1em; }
+.board { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.2rem 1.3rem; display: grid; gap: .7rem; box-shadow: var(--shadow); }
+.brow { display: grid; grid-template-columns: 2rem minmax(5.5rem, auto) minmax(0, 1fr) 3rem; gap: .7rem; align-items: center; }
+.brow .rk { font-family: var(--f-code); font-size: 1.3rem; font-weight: 800; color: var(--ink-3); text-align: center; }
+.brow.top .rk { color: var(--accent); }
+.brow .nm { font-weight: 700; }
+.brow .bar { height: .7rem; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.brow .bar i { display: block; height: 100%; background: var(--teal); border-radius: 999px; }
+.brow.top .bar i { background: var(--accent); }
+.brow .sc { text-align: right; font-weight: 800; font-size: 1.1rem; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; }
+.stat { background: var(--surface-2); border-radius: 12px; padding: .7rem .8rem; border: 1px solid var(--line); }
+.stat b { display: block; font-size: 1.5rem; font-weight: 800; }
+.stat span { font-size: .78rem; color: var(--ink-3); font-weight: 600; }
+.bridge { background: var(--ink); color: var(--surface); border-radius: 16px; padding: 1.4rem 1.6rem; display: grid; gap: .6rem; }
+.bridge p { color: inherit; opacity: .85; }
+.bridge h2 { font-size: 1.3rem; }
+
+.present { flex: 1; display: grid; align-content: center; max-width: 1240px; width: 100%; margin: 0 auto; padding-block: 2rem 3rem; gap: 2rem; }
+.present-head { display: grid; gap: .6rem; }
+.present h1 { font-size: clamp(2rem, 4.4vw, 4rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+.present h1 .th { display: block; font-family: var(--f-code); color: var(--accent); font-size: 1.15em; letter-spacing: .04em; }
+.parts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .8rem; }
+.part { background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; padding: 1rem; display: grid; gap: .4rem; align-content: start; }
+.part .n { font-family: var(--f-code); font-size: 2rem; font-weight: 800; color: var(--ink-3); line-height: 1; }
+.part b { font-size: 1.02rem; }
+.part p { font-size: .84rem; color: var(--ink-2); }
+.part.key { border-color: var(--accent); }
+.part.key .n { color: var(--accent); }
+.present-foot { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.cliff { font-size: 1.15rem; max-width: 46em; }
+.cliff strong { color: var(--accent); }
+
+.toast { position: fixed; left: 50%; top: calc(4.2rem + env(safe-area-inset-top, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: .6rem 1.1rem; border-radius: 999px; font-weight: 600; z-index: 60; box-shadow: var(--shadow); max-width: calc(100% - 32px); text-align: center; }
+
+/* ---------- Responsive ---------- */
+@media (min-width: 1001px) and (min-height: 680px) {
+  .app.in-game { height: 100vh; min-height: 0; }
+  .app.in-game .screen { min-height: 0; }
+  .app.in-game .game { min-height: 0; }
+  .app.in-game .desk { overflow: hidden; }
+  .app.in-game .qcard { overflow: auto; }
+}
+@media (max-width: 1000px) {
+  .hero, .brief-grid, .final-grid { grid-template-columns: minmax(0, 1fr); }
+  .desk { grid-template-columns: minmax(0, 1fr); }
+  .side { grid-template-rows: auto auto; }
+  .parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-art { max-height: 46vh; }
+}
+@media (max-width: 640px) {
+  .opts { grid-template-columns: minmax(0, 1fr); }
+  .rt-label, .rt-country, .rt-sea { display: none; }
+  .route-now { display: block; }
+  .topbar { gap: .6rem; }
+  .prog { margin-left: 0; width: 100%; justify-content: space-between; }
+  .health { min-width: 0; flex: 1; }
+  .brand b { display: none; }
+  .kv { grid-template-columns: 7.5rem minmax(0, 1fr); }
+  .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .parts { grid-template-columns: minmax(0, 1fr); }
+  .sheet { padding: 1.2rem 1.1rem; }
+  .qcard { padding: 1rem; }
+  .tsteps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .clause { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+  .clause .v { text-align: left; }
+  .brow { grid-template-columns: 1.6rem minmax(4.6rem, auto) minmax(0, 1fr) 2.6rem; gap: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ============ INTRO ============ -->
+  <section class="screen" id="s-intro">
+    <div class="intro">
+      <div class="intro-top">
+        <div class="tag-line"><span class="cn-badge">ANMU 202611 7</span><span class="eyebrow">Nghiệp vụ ngoại thương &amp; Logistics · Nhóm 1</span></div>
+        <div class="tools">
+          <button class="btn icon-btn" data-action="theme" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          <button class="btn icon-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        </div>
+      </div>
+      <div class="hero">
+        <div>
+          <h1>Hợp đồng xuất khẩu sang Thái Lan<span class="route">CAT LAI → LAEM CHABANG</span></h1>
+          <p class="lede">Cả lớp vào vai phòng xuất khẩu của Công ty CP Thực phẩm An Nam, soạn hợp đồng bán xoài sấy dẻo cho chuỗi siêu thị Siam Retail ở Bangkok. Trả lời đúng thì điều khoản được duyệt và container đi tiếp. Trả lời sai thì hợp đồng gặp sự cố.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice">
+            <rect width="640" height="440" fill="var(--sea)"/>
+            <rect width="640" height="200" fill="var(--bg-2)"/>
+            <circle cx="520" cy="96" r="40" fill="var(--accent)" opacity=".85"/>
+            <g fill="var(--ink)" opacity=".18">
+              <rect x="30" y="120" width="14" height="80"/><rect x="20" y="112" width="70" height="8"/><rect x="80" y="112" width="6" height="40"/>
+              <rect x="120" y="140" width="10" height="60"/><rect x="110" y="134" width="56" height="6"/>
+            </g>
+            <path d="M0 200 Q 80 188 160 200 T 320 200 T 480 200 T 640 200 V440 H0Z" fill="var(--sea)"/>
+            <path d="M0 236 Q 80 226 160 236 T 320 236 T 480 236 T 640 236" fill="none" stroke="var(--sea-2)" stroke-width="3"/>
+            <path d="M0 300 Q 80 290 160 300 T 320 300 T 480 300 T 640 300" fill="none" stroke="var(--sea-2)" stroke-width="3" opacity=".7"/>
+            <path d="M0 364 Q 80 354 160 364 T 320 364 T 480 364 T 640 364" fill="none" stroke="var(--sea-2)" stroke-width="3" opacity=".5"/>
+            <g transform="translate(150 150)">
+              <rect x="40" y="0" width="56" height="34" fill="var(--c1)"/><rect x="98" y="0" width="56" height="34" fill="var(--c2)"/><rect x="156" y="0" width="56" height="34" fill="var(--c3)"/><rect x="214" y="0" width="56" height="34" fill="var(--c5)"/>
+              <rect x="40" y="36" width="56" height="34" fill="var(--c4)"/><rect x="98" y="36" width="56" height="34" fill="var(--c1)"/><rect x="156" y="36" width="56" height="34" fill="var(--c6)"/><rect x="214" y="36" width="56" height="34" fill="var(--c2)"/>
+              <rect x="272" y="-6" width="34" height="76" fill="var(--surface)"/><rect x="278" y="4" width="22" height="8" fill="var(--ink)" opacity=".6"/>
+              <path d="M0 72 H340 L318 120 H28 Z" fill="var(--ink)"/>
+              <text x="70" y="104" font-family="Big Shoulders Stencil Display, Impact, sans-serif" font-size="22" font-weight="800" fill="var(--surface)" letter-spacing="3">AN NAM · SGN</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="setup" id="setup">
+        <div class="setup-grid">
+          <div class="field">
+            <span class="lbl" id="lbl-groups">Số nhóm trong lớp</span>
+            <div class="stepper" role="group" aria-labelledby="lbl-groups">
+              <button type="button" data-action="g-minus" aria-label="Bớt một nhóm">−</button>
+              <output id="g-count" class="tnum">8</output>
+              <button type="button" data-action="g-plus" aria-label="Thêm một nhóm">+</button>
+            </div>
+            <label class="check"><input type="checkbox" id="opt-ex1" checked> Loại Nhóm 1 (nhóm đang thuyết trình)</label>
+            <span class="hint" id="g-hint">Nhóm tham gia: Nhóm 2 – Nhóm 8</span>
+          </div>
+          <div class="field">
+            <label for="opt-timer">Thời gian trả lời mỗi lượt</label>
+            <select class="sel" id="opt-timer">
+              <option value="0">Không bấm giờ</option>
+              <option value="20">20 giây</option>
+              <option value="30" selected>30 giây</option>
+              <option value="45">45 giây</option>
+              <option value="60">60 giây</option>
+            </select>
+            <label class="check"><input type="checkbox" id="opt-fair" checked> Vòng quay ưu tiên nhóm chưa được gọi</label>
+            <label class="check"><input type="checkbox" id="opt-sound" checked> Âm thanh</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Câu hỏi sẽ dùng <span class="hint">(câu Incoterms luôn bật)</span></span>
+          <div class="qpick" id="qpick"></div>
+        </div>
+        <div class="setup-actions">
+          <button class="btn btn-primary btn-lg" data-action="start">Bắt đầu
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="btn btn-lg" data-action="resume" id="btn-resume" hidden>Tiếp tục ván đang chơi</button>
+          <span class="note">Phím tắt khi chơi: <span class="kbd">A</span>–<span class="kbd">D</span> chọn đáp án · <span class="kbd">Q</span> quay nhóm · <span class="kbd">F</span> toàn màn hình</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BRIEF ============ -->
+  <section class="screen" id="s-brief" hidden>
+    <div class="brief">
+      <div class="intro-top">
+        <div class="tag-line"><span class="cn-badge">VNCLI → THLCH</span><span class="eyebrow">Lệnh xuất khẩu · Lô thử nghiệm</span></div>
+        <button class="btn btn-ghost" data-action="to-intro">← Cài đặt</button>
+      </div>
+      <div class="brief-grid">
+        <div class="order">
+          <span class="eyebrow">Hồ sơ thương vụ</span>
+          <h2>Xuất khẩu trái cây sấy dẻo sang Bangkok</h2>
+          <div class="kv" style="margin-top:.9rem">
+            <div class="k">Bên bán</div><div class="v">CTCP Thực phẩm An Nam<small>TP. Hồ Chí Minh, Việt Nam</small></div>
+            <div class="k">Bên mua</div><div class="v">Siam Retail &amp; Distribution Co., Ltd<small>Chuỗi siêu thị &amp; phân phối, Bangkok</small></div>
+            <div class="k">Mặt hàng</div><div class="v">Xoài sấy dẻo, mít sấy dẻo</div>
+            <div class="k">Lô hàng</div><div class="v">01 container 20ft (22G1)<small>khoảng 8 tấn</small></div>
+            <div class="k">Tuyến vận tải</div><div class="v">Cát Lái → Laem Chabang → Bangkok<small>Đường biển qua Vịnh Thái Lan</small></div>
+            <div class="k">Giá sàn có lãi</div><div class="v tnum">5,20 USD/kg</div>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <div><h3>Soạn hợp đồng qua <span id="brief-n">6</span> bước</h3><p>Mỗi câu hỏi là một điều khoản. Trả lời đúng: điều khoản được đóng dấu duyệt và container đi thêm một chặng.</p></div></div>
+          <div class="rule"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
+            <div><h3>Chọn sai là có sự cố</h3><p>Mỗi đáp án sai kéo theo một tình huống thật: kẹt cảng, mất tiền, tranh chấp. Sức khỏe hợp đồng sẽ giảm.</p></div></div>
+          <div class="rule"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v6.5M12 14.5V21M3 12h6.5M14.5 12H21"/></svg></div>
+            <div><h3>Ai trả lời?</h3><p>Nhóm nào giơ tay thì bấm chọn nhóm đó. Không ai giơ tay thì quay bánh lái để chọn ngẫu nhiên.</p>
+              <div class="pts"><span>Lượt 1: 10 điểm</span><span>Lượt 2: 7</span><span>Lượt 3: 5</span><span>Sau đó: 3</span></div></div></div>
+        </div>
+      </div>
+      <div class="setup-actions">
+        <button class="btn btn-primary btn-lg" data-action="go-game">Mở bản nháp hợp đồng
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section class="screen" id="s-game" hidden>
+    <div class="game">
+      <header class="topbar">
+        <div class="brand"><span class="cn-badge">ANMU 202611 7</span><b>Hợp đồng Sài Gòn – Bangkok</b></div>
+        <div class="prog">
+          <span class="eyebrow tnum" id="prog-label">Câu 1/6</span>
+          <div class="pips" id="pips"></div>
+        </div>
+        <div class="health" title="Sức khỏe hợp đồng">
+          <span class="eyebrow">Hợp đồng</span>
+          <div class="bar"><i id="health-bar"></i></div>
+          <b class="tnum" id="health-val">100%</b>
+        </div>
+        <div class="tools">
+          <button class="btn icon-btn" data-action="sound" id="btn-sound" title="Bật/tắt âm thanh" aria-label="Bật/tắt âm thanh"></button>
+          <button class="btn icon-btn" data-action="theme" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          <button class="btn icon-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          <button class="btn icon-btn" data-action="ask-restart" title="Chơi lại" aria-label="Chơi lại"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+        </div>
+      </header>
+
+      <div class="routebox" id="routebox"></div>
+
+      <div class="desk">
+        <article class="qcard" id="qcard" aria-live="polite"></article>
+        <aside class="side">
+          <div class="resp" id="resp"></div>
+          <div class="contract" id="contract"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL ============ -->
+  <section class="screen" id="s-final" hidden>
+    <div class="final" id="final"></div>
+  </section>
+
+  <!-- ============ PRESENT ============ -->
+  <section class="screen" id="s-present" hidden>
+    <div class="present" id="present"></div>
+  </section>
+</div>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="sheet" id="sheet"></div></div>
+<div class="modal" id="wheel" hidden role="dialog" aria-modal="true" aria-label="Vòng quay chọn nhóm">
+  <div class="sheet info" style="width:min(640px,100%)">
+    <div class="wheel-wrap">
+      <span class="eyebrow">Bánh lái may mắn</span>
+      <div class="wheel-stage"><canvas id="wheel-canvas" width="600" height="600"></canvas><div class="pointer"></div></div>
+      <div class="wheel-result" id="wheel-result"><span class="eyebrow" id="wheel-sub">Bấm quay để chọn một nhóm</span></div>
+      <div class="sheet-actions" style="justify-content:center">
+        <button class="btn" data-action="wheel-close">Đóng</button>
+        <button class="btn btn-primary btn-lg" data-action="wheel-spin" id="btn-spin">Quay</button>
+        <button class="btn btn-primary btn-lg" data-action="wheel-accept" id="btn-accept" hidden>Mời nhóm trả lời</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+"use strict";
+
+/* ===================== DATA ===================== */
+var STAGES = ["Kho An Nam", "Cảng Cát Lái", "Thông quan XK", "Xếp lên tàu", "Vịnh Thái Lan", "Laem Chabang", "Kho Siam Retail"];
+
+var QUESTIONS = [
+  {
+    id: "offer", stage: "Bước 1 · Gửi chào hàng", chapter: "Chương 2 · Giao dịch trực tiếp",
+    scenario: "Siam Retail gửi email <strong>hỏi giá (Inquiry)</strong> xoài sấy dẻo, đồng thời hỏi thêm vài nhà cung cấp ở Philippines và Indonesia. An Nam muốn gửi một thư chào giá <strong>chỉ dành riêng cho Siam Retail</strong>, ghi rõ: “Chào hàng có hiệu lực 15 ngày”. Nếu Siam Retail chấp nhận hoàn toàn trong thời hạn đó thì hợp đồng coi như được ký kết.",
+    question: "An Nam đang gửi loại thư gì?",
+    options: [
+      { t: "Chào hàng tự do (Free offer)", c: { title: "Lời chào không ai tin", tag: "Mất uy tín", dmg: 20,
+        text: "Chào hàng tự do không ràng buộc trách nhiệm, thường ghi “Offer without engagement” và gửi cho nhiều khách cùng lúc. Siam Retail hiểu rằng An Nam có thể bán lô hàng cho người khác bất cứ lúc nào, nên ưu tiên nhà cung cấp Indonesia đã cam kết giữ giá." } },
+      { t: "Chào hàng cố định (Firm offer)", correct: true },
+      { t: "Đơn đặt hàng (Order)", c: { title: "Nhầm vai người mua", tag: "Sai vai trò", dmg: 15,
+        text: "Đặt hàng là lời đề nghị ký kết hợp đồng từ phía <strong>người mua</strong>. An Nam là người bán mà gửi “đơn đặt hàng” khiến Siam Retail bối rối và nghi ngờ tính chuyên nghiệp của đối tác Việt Nam ngay từ email đầu tiên." } },
+      { t: "Hoàn giá (Counter-offer)", c: { title: "Hoàn giá khi chưa có giá", tag: "Sai quy trình", dmg: 15,
+        text: "Hoàn giá là đề nghị mới khi đã nhận chào hàng nhưng không chấp nhận toàn bộ. Siam Retail mới hỏi giá, chưa có lời chào nào để “hoàn”. Thư của An Nam không có giá trị như một lời chào hàng, Siam Retail phải hỏi lại và giao dịch chậm mất một tuần." } }
+    ],
+    explain: "Chào hàng cố định nêu rõ thời hạn hiệu lực, ràng buộc trách nhiệm người bán và chỉ chào một lô hàng cho một đối tác. Trong thời hạn hiệu lực, nếu người mua chấp nhận hoàn toàn thì hợp đồng coi như được ký kết.",
+    source: "Chương 2 · B2. Chào hàng (Offer/Quotation)",
+    fill: { key: "basis", v: "Chào hàng cố định số 01/AN", s: "Hiệu lực 15 ngày · chỉ chào cho Siam Retail" },
+    tstep: "offer"
+  },
+  {
+    id: "incoterms", stage: "Bước 2 · Điều kiện giao hàng", chapter: "Chương 1 · Incoterms® 2020", star: true,
+    scenario: "Siam Retail đã có hãng tàu và công ty bảo hiểm quen ở Bangkok. Hai bên thống nhất chia trách nhiệm như sau:<ul><li>An Nam làm thủ tục <strong>thông quan xuất khẩu</strong> tại Việt Nam.</li><li>An Nam chịu mọi chi phí và rủi ro cho đến khi hàng được <strong>xếp lên con tàu do Siam Retail chỉ định tại cảng Cát Lái</strong>.</li><li>Siam Retail tự thuê tàu, trả cước biển và mua bảo hiểm cho chặng Cát Lái → Laem Chabang.</li></ul>",
+    question: "Điều khoản giao hàng nên ghi theo điều kiện Incoterms® 2020 nào?",
+    options: [
+      { t: "EXW — Kho An Nam, TP.HCM", c: { title: "Container kẹt ở kho", tag: "Kẹt thông quan", dmg: 25,
+        text: "Theo EXW, người bán không phải thông quan xuất khẩu, cũng không phải xếp hàng lên xe: nghĩa vụ tối thiểu. Nhưng Siam Retail là doanh nghiệp Thái, không thể tự làm thủ tục xuất khẩu tại Việt Nam. Container nằm chờ ở kho, hãng tàu chuyển lô hàng sang chuyến sau, phát sinh phí lưu container." } },
+      { t: "FOB — Cảng Cát Lái", correct: true },
+      { t: "CIF — Cảng Laem Chabang", c: { title: "Gánh cước và bảo hiểm thay khách", tag: "Đội chi phí", dmg: 20,
+        text: "Theo CIF, An Nam phải thuê tàu, trả cước tới Laem Chabang và mua bảo hiểm (tối thiểu điều kiện C). Giá chào lại tính theo kiểu “giao lên tàu”, nên cước và phí bảo hiểm đội lên mà không ai trả. Lô hàng lỗ, còn Siam Retail phải hủy booking với hãng tàu quen." } },
+      { t: "DDP — Kho Siam Retail, Bangkok", c: { title: "Ôm trọn rủi ro đến tận Bangkok", tag: "Trách nhiệm tối đa", dmg: 30,
+        text: "DDP là điều kiện người bán chịu trách nhiệm lớn nhất: An Nam phải thông quan nhập khẩu tại Thái Lan, nộp thuế và VAT 7%, chở hàng tận kho người mua. Không có pháp nhân tại Thái, hồ sơ nhập khẩu bị kẹt ở hải quan Laem Chabang, phí lưu bãi tăng từng ngày." } }
+    ],
+    explain: "FOB (Free On Board, giao hàng trên tàu): người bán thông quan xuất khẩu và giao hàng lên con tàu do người mua chỉ định tại cảng xếp hàng. Rủi ro và chi phí chuyển sang người mua khi hàng đã ở trên tàu. Người mua thuê tàu, trả cước và tự quyết định mua bảo hiểm.",
+    note: "Lưu ý theo Chương 1: hàng đóng container thường được giao cho người chuyên chở tại bãi trước khi lên tàu. Khi đó nên chuyển FOB → FCA, CFR → CPT, CIF → CIP.",
+    source: "Chương 1 · Incoterms® 2020, nhóm vận tải đường biển (FAS, FOB, CFR, CIF)",
+    fill: { key: "delivery", v: "FOB Cảng Cát Lái, Việt Nam", s: "Incoterms® 2020 · rủi ro chuyển khi hàng lên tàu" },
+    diagram: "incoterms"
+  },
+  {
+    id: "payment", stage: "Bước 3 · Điều khoản thanh toán", chapter: "Chương 3 · Thanh toán quốc tế",
+    scenario: "Đây là lần đầu An Nam làm ăn với Siam Retail. Lô hàng thử nghiệm trị giá khoảng 40.000 USD. Ban giám đốc yêu cầu: “Phải có <strong>một ngân hàng đứng ra cam kết trả tiền</strong>, miễn là chúng ta xuất trình bộ chứng từ hợp lệ.”",
+    question: "Hợp đồng nên chọn phương thức thanh toán nào?",
+    options: [
+      { t: "Chuyển tiền T/T, trả sau 60 ngày kể từ khi nhận hàng", c: { title: "Hàng đã đi, tiền chưa về", tag: "Chôn vốn", dmg: 25,
+        text: "Chuyển tiền phụ thuộc hoàn toàn vào thiện chí người mua. Hàng giao xong, 60 ngày sau Siam Retail báo đang “tái cơ cấu dòng tiền” và xin lùi thanh toán. Khoảng 40.000 USD của An Nam bị chiếm dụng mà không ngân hàng nào bảo đảm." } },
+      { t: "Nhờ thu kèm chứng từ D/A (chấp nhận trả tiền đổi chứng từ)", c: { title: "Ký chấp nhận rồi… không trả", tag: "Rủi ro D/A", dmg: 20,
+        text: "Với D/A, ngân hàng thu hộ giao chứng từ ngay khi người mua ký chấp nhận hối phiếu: Siam Retail nhận hàng trước, trả tiền sau. Ngân hàng chỉ thu hộ, không cam kết trả tiền. Đến hạn mà Siam Retail không thanh toán, An Nam phải tự đi đòi nợ ở nước ngoài." } },
+      { t: "Tín dụng chứng từ: L/C không hủy ngang, trả ngay (at sight)", correct: true },
+      { t: "Nhờ thu trơn (Clean collection)", c: { title: "Chứng từ gửi thẳng, tiền treo lơ lửng", tag: "Không bảo đảm", dmg: 25,
+        text: "Nhờ thu trơn: An Nam gửi thẳng bộ chứng từ cho người mua, chỉ nhờ ngân hàng thu hộ hối phiếu. Siam Retail có chứng từ để nhận hàng mà chưa cần trả tiền. Nhận hàng và thanh toán bị tách rời, quyền lợi người bán không được bảo đảm." } }
+    ],
+    explain: "Với L/C, ngân hàng phát hành phía người mua cam kết trả tiền khi người bán xuất trình bộ chứng từ phù hợp với L/C. L/C không hủy ngang không thể bị sửa đổi hay hủy bỏ nếu người thụ hưởng không đồng ý, nên rất hợp với đối tác mới.",
+    note: "Mặt trái: chỉ một sai sót nhỏ trong bộ chứng từ cũng có thể khiến ngân hàng từ chối thanh toán. Câu tiếp theo sẽ cho thấy điều đó.",
+    source: "Chương 3 · Phương thức tín dụng chứng từ (L/C), UCP 600",
+    fill: { key: "payment", v: "L/C không hủy ngang, trả ngay", s: "At sight · áp dụng UCP 600" }
+  },
+  {
+    id: "co", stage: "Bước 4 · Bộ chứng từ", chapter: "Chương 3 · Chứng từ thanh toán L/C",
+    scenario: "Siam Retail muốn lô hàng được hưởng <strong>thuế nhập khẩu 0%</strong> theo Hiệp định Thương mại Hàng hóa ASEAN (ATIGA). L/C cũng yêu cầu bộ chứng từ gồm hóa đơn thương mại, phiếu đóng gói, vận đơn đường biển và <strong>giấy chứng nhận xuất xứ</strong> phù hợp.",
+    question: "An Nam cần xin giấy chứng nhận xuất xứ (C/O) mẫu nào?",
+    options: [
+      { t: "C/O Form E", c: { title: "Sai mẫu C/O, thuế quay lại", tag: "Mất ưu đãi thuế", dmg: 25,
+        text: "Form E dành cho hàng ASEAN – Trung Quốc. Hải quan Thái không chấp nhận để hưởng ưu đãi ATIGA, nên lô xoài sấy chịu thuế nhập khẩu thông thường và giá về Bangkok tăng vọt. Ngân hàng còn thấy chứng từ không đúng yêu cầu của L/C và từ chối thanh toán." } },
+      { t: "C/O Form D", correct: true },
+      { t: "C/O Form B", c: { title: "C/O không ưu đãi", tag: "Mất ưu đãi thuế", dmg: 20,
+        text: "Form B là C/O không ưu đãi: chỉ chứng minh hàng có xuất xứ Việt Nam, không đem lại thuế suất 0%. Siam Retail phải nộp thuế nhập khẩu thông thường và đòi An Nam giảm giá để bù lại." } },
+      { t: "Không cần, hàng trong khối ASEAN tự động được 0%", c: { title: "Thiếu chứng từ, L/C bị từ chối", tag: "Bộ chứng từ bất hợp lệ", dmg: 30,
+        text: "Ưu đãi thuế không tự động có, phải có C/O hợp lệ. Thiếu C/O, bộ chứng từ không khớp L/C (“các chứng từ không đủ”) nên ngân hàng từ chối thanh toán. Hàng nằm ở cảng Laem Chabang chờ bổ sung giấy tờ." } }
+    ],
+    explain: "C/O Form D là giấy chứng nhận xuất xứ ưu đãi dùng cho hàng hóa trao đổi giữa các nước ASEAN. Có Form D hợp lệ, hàng Việt Nam được hưởng thuế nhập khẩu 0% vào Thái Lan theo ATIGA.",
+    note: "Dù thuế nhập khẩu 0%, hàng vẫn chịu VAT 7% tại Thái Lan. Thực phẩm còn cần giấy phép của Cục Quản lý Thực phẩm và Dược phẩm Thái Lan (FDA) để thông quan.",
+    source: "Chương 3 · Chứng từ thanh toán (Certificate of Origin) · Tiểu luận Nhóm 1, mục 4.1.2",
+    fill: { key: "docs", v: "C/O Form D (ATIGA) + giấy phép FDA Thái", s: "Invoice · Packing List · B/L sạch, đã xếp hàng" }
+  },
+  {
+    id: "counter", stage: "Bước 5 · Siam Retail phản hồi", chapter: "Chương 2 · Hoàn giá và chấp nhận",
+    scenario: "Ngày thứ 10, khi chào hàng cố định vẫn còn hiệu lực, Siam Retail trả lời: “Chúng tôi <strong>đồng ý</strong> mua lô hàng theo các điều kiện trên, <strong>nhưng với giá 4,80 USD/kg</strong> FOB Cát Lái.” Giá sàn có lãi của An Nam là 5,20 USD/kg.",
+    question: "Về mặt nghiệp vụ, thư trả lời này là gì?",
+    options: [
+      { t: "Chấp nhận (Acceptance): hợp đồng đã ký kết với giá 4,80 USD/kg", c: { title: "Bán dưới giá sàn", tag: "Hụt lợi nhuận", dmg: 25,
+        text: "Chấp nhận chỉ có hiệu lực khi đồng ý <strong>hoàn toàn và vô điều kiện</strong>. An Nam tưởng hợp đồng đã thành và cho đóng hàng ở giá 4,80, thấp hơn giá sàn 0,40 USD/kg: hụt khoảng 3.200 USD so với mức có lãi cho 8 tấn." } },
+      { t: "Chấp nhận: hợp đồng đã ký kết với giá 5,20 USD/kg vì chào hàng còn hiệu lực", c: { title: "Giao hàng rồi mới cãi giá", tag: "Tranh chấp", dmg: 30,
+        text: "Siam Retail chưa hề đồng ý giá 5,20. An Nam xuất hàng rồi đòi thanh toán theo giá chào, hai bên tranh chấp, bộ chứng từ bị treo ở ngân hàng, còn đối tác Thái cảm thấy bị ép và mất mặt." } },
+      { t: "Hoàn giá (Counter-offer): chào hàng cũ coi như bị hủy, hai bên phải thương lượng tiếp", correct: true },
+      { t: "Chỉ là hỏi giá, không ràng buộc, không cần trả lời", c: { title: "Im lặng là mất khách", tag: "Mất cơ hội", dmg: 20,
+        text: "Đây là một đề nghị mới với điều kiện cụ thể, không phải hỏi giá. An Nam im lặng, Siam Retail hiểu là bị từ chối và ký với nhà cung cấp khác. Cơ hội vào chuỗi siêu thị Bangkok khép lại." } }
+    ],
+    explain: "Hoàn giá là đề nghị mới khi một bên không chấp nhận hoàn toàn các điều khoản của chào hàng. Khi hoàn giá, chào giá trước coi như đã hủy, và thường phải qua nhiều lần hoàn giá mới đi đến thỏa thuận chung. Đây chính là lúc cần đàm phán.",
+    source: "Chương 2 · B3. Hoàn giá & B5. Chấp nhận",
+    fill: { key: "price", v: "4,80 ↔ 5,20 USD/kg", s: "Siam Retail hoàn giá · giá sàn An Nam" },
+    tstep: "counter"
+  },
+  {
+    id: "nego", stage: "Bước 6 · Lên bàn đàm phán", chapter: "Dẫn vào bài thuyết trình",
+    scenario: "Buổi gặp tại Bangkok. Phó Chủ tịch phụ trách mua hàng của Siam Retail mỉm cười, nhắc lại mức <strong>4,80 USD/kg</strong>. Giá sàn có lãi của An Nam là <strong>5,20 USD/kg</strong>. Cả phòng họp chờ trưởng đoàn Việt Nam lên tiếng.",
+    question: "Trưởng đoàn An Nam nên phản hồi thế nào?",
+    options: [
+      { t: "Đồng ý ngay 4,80 USD/kg để giữ khách, lỗ một chút cũng được", c: { title: "Mềm dẻo quá hóa thiệt", tag: "Đàm phán mềm dẻo", dmg: 20,
+        text: "Liên tục lùi bước trước sức ép là nhược điểm của kiểu đàm phán mềm dẻo. An Nam bán dưới giá sàn, và đối tác sẽ lấy 4,80 làm mốc để ép giá cho các đơn sau." } },
+      { t: "Phản bác thẳng: “Giá đó vô lý! Không 5,20 thì thôi.”", c: { title: "Đối tác mất mặt, lặng lẽ rút lui", tag: "Đàm phán cứng rắn", dmg: 30,
+        text: "Người Thái rất sợ mất mặt trước đông người và hiếm khi nói “không” (kreng jai). Họ vẫn mỉm cười, nói “sẽ xem xét lại”… rồi không liên lạc nữa." } },
+      { t: "Thể hiện sự thấu hiểu, giải thích chi phí kiểm định FDA, rồi đưa ra phương án đổi giá lấy sản lượng hoặc thanh toán sớm", correct: true },
+      { t: "Đồng ý 4,80 USD/kg nhưng âm thầm giảm chất lượng để bù lỗ", c: { title: "Từ khiếu nại đến trọng tài", tag: "Vi phạm hợp đồng", dmg: 35,
+        text: "Hàng không đúng phẩm chất đã thỏa thuận, Siam Retail khiếu nại và đòi bồi thường. Tranh chấp có thể kéo đến trọng tài thương mại. Mất tiền, mất uy tín, mất luôn thị trường Thái." } }
+    ],
+    explain: "Đây là đàm phán theo nguyên tắc: tách con người khỏi vấn đề, dựa trên tiêu chuẩn khách quan, hướng tới hai bên cùng có lợi (win-win). Giữ thể diện cho đối tác Thái nhưng vẫn giữ vững giới hạn lợi nhuận.",
+    note: "Vậy cuối cùng An Nam chốt được mức giá nào? Câu trả lời nằm trong phần thuyết trình.",
+    source: "Nhóm 1 · Nghệ thuật đàm phán với Thái Lan",
+    fill: { key: "price", v: "Đang đàm phán…", s: "4,80 (Siam Retail) ↔ 5,20 (giá sàn An Nam)", nego: true }
+  }
+];
+
+var CLAUSES = [
+  { key: "parties", k: "Các bên", d: "Seller → Buyer", v: "An Nam → Siam Retail", s: "TP.HCM, Việt Nam → Bangkok, Thái Lan", fixed: true },
+  { key: "goods", k: "Điều 1–2 · Hàng hóa", d: "Commodity & Quantity", v: "Xoài, mít sấy dẻo", s: "~8 tấn · 01 container 20ft", fixed: true },
+  { key: "price", k: "Điều 3 · Giá cả", d: "Price" },
+  { key: "delivery", k: "Điều 4 · Giao hàng", d: "Delivery" },
+  { key: "payment", k: "Điều 5 · Thanh toán", d: "Payment" },
+  { key: "docs", k: "Điều 6 · Chứng từ", d: "Documents" },
+  { key: "basis", k: "Cơ sở giao kết", d: "Offer" }
+];
+
+var TSTEPS = [
+  { id: "inquiry", t: "Hỏi giá" }, { id: "offer", t: "Chào hàng" }, { id: "counter", t: "Hoàn giá" },
+  { id: "order", t: "Đặt hàng" }, { id: "accept", t: "Chấp nhận" }, { id: "confirm", t: "Xác nhận" }
+];
+
+var POINTS = [10, 7, 5, 3];
+var LETTERS = ["A", "B", "C", "D"];
+var STORE_SETTINGS = "sgnbkk.settings.v1";
+var STORE_GAME = "sgnbkk.game.v1";
+
+/* ===================== STATE ===================== */
+var S = {
+  screen: "intro",
+  settings: { groupCount: 8, excludeG1: true, timer: 30, fair: true, sound: true, enabled: QUESTIONS.map(function () { return true; }) },
+  game: null
+};
+var timerHandle = null;
+var spinning = false;
+
+function fast() { return window.__FAST === true; }
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+function store(key, val) { try { if (val === null) localStorage.removeItem(key); else localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* storage unavailable */ } }
+function load(key) { try { var r = localStorage.getItem(key); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+
+function groupIds(settings) {
+  var ids = [];
+  var start = settings.excludeG1 ? 2 : 1;
+  for (var i = start; i <= settings.groupCount; i++) ids.push(i);
+  return ids;
+}
+
+/* ===================== SOUND ===================== */
+var actx = null;
+function audio() {
+  if (!S.settings.sound || fast()) return null;
+  try {
+    if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; actx = new C(); }
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  } catch (e) { return null; }
+}
+function tone(freq, dur, type, vol, when, slideTo) {
+  var a = audio(); if (!a) return;
+  try {
+    var t = a.currentTime + (when || 0);
+    var o = a.createOscillator(), g = a.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.1, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination);
+    o.start(t); o.stop(t + dur + 0.03);
+  } catch (e) { /* ignore audio errors */ }
+}
+var SFX = {
+  tick: function () { tone(1250, 0.03, "square", 0.035); },
+  ok: function () { [523, 659, 784, 1047].forEach(function (f, i) { tone(f, 0.2, "triangle", 0.12, i * 0.09); }); },
+  bad: function () { tone(190, 0.38, "sawtooth", 0.07, 0, 95); tone(150, 0.42, "sawtooth", 0.05, 0.12, 70); },
+  horn: function () { tone(98, 1.0, "sawtooth", 0.05); tone(147, 1.0, "sawtooth", 0.035); },
+  pick: function () { tone(880, 0.12, "triangle", 0.1); tone(1320, 0.18, "triangle", 0.08, 0.09); },
+  timeout: function () { tone(440, 0.14, "square", 0.05); tone(440, 0.14, "square", 0.05, 0.2); tone(330, 0.32, "square", 0.05, 0.4); },
+  stamp: function () { tone(120, 0.12, "square", 0.08); tone(80, 0.18, "sine", 0.12, 0.02); }
+};
+
+/* ===================== SCREENS ===================== */
+function show(name) {
+  S.screen = name;
+  ["intro", "brief", "game", "final", "present"].forEach(function (n) { $("s-" + n).hidden = (n !== name); });
+  $("app").classList.toggle("in-game", name === "game");
+  if (name !== "game") stopTimer();
+  $("toast").hidden = true;
+  try { window.scrollTo(0, 0); } catch (e) {}
+  saveGame();
+}
+
+/* ---------- Intro ---------- */
+function updateIntroHints() {
+  var st = S.settings;
+  $("g-count").textContent = st.groupCount;
+  var ids = groupIds(st);
+  $("g-hint").textContent = ids.length >= 2
+    ? "Nhóm tham gia: Nhóm " + ids[0] + " – Nhóm " + ids[ids.length - 1] + " (" + ids.length + " nhóm)"
+    : "Cần ít nhất 2 nhóm tham gia";
+}
+function renderIntro() {
+  var st = S.settings;
+  $("opt-ex1").checked = st.excludeG1;
+  $("opt-timer").value = String(st.timer);
+  $("opt-fair").checked = st.fair;
+  $("opt-sound").checked = st.sound;
+  updateIntroHints();
+  var html = QUESTIONS.map(function (q, i) {
+    var locked = q.id === "incoterms";
+    return '<label class="check"><input type="checkbox" id="q-en-' + q.id + '" data-q="' + i + '"' + (st.enabled[i] ? " checked" : "") + (locked ? " disabled" : "") + "> " +
+      esc(q.stage.replace(/^Bước \d+ · /, "")) + "<small>" + esc(q.chapter.split(" · ")[0]) + "</small></label>";
+  }).join("");
+  $("qpick").innerHTML = html;
+  var saved = load(STORE_GAME);
+  var canResume = !!(saved && saved.game && saved.screen && saved.screen !== "intro");
+  $("btn-resume").hidden = !canResume;
+  if (canResume) $("btn-resume").textContent = "Tiếp tục ván đang chơi (" + resumeLabel(saved) + ")";
+}
+function resumeLabel(saved) {
+  var g = saved.game;
+  if (saved.screen === "final" || saved.screen === "present") return "đã xong";
+  return "câu " + Math.min(g.qi + 1, g.order.length) + "/" + g.order.length;
+}
+function readSettingsFromForm() {
+  var st = S.settings;
+  st.excludeG1 = $("opt-ex1").checked;
+  st.timer = parseInt($("opt-timer").value, 10) || 0;
+  st.fair = $("opt-fair").checked;
+  st.sound = $("opt-sound").checked;
+  var boxes = document.querySelectorAll("#qpick input[data-q]");
+  for (var i = 0; i < boxes.length; i++) {
+    var idx = parseInt(boxes[i].getAttribute("data-q"), 10);
+    st.enabled[idx] = QUESTIONS[idx].id === "incoterms" ? true : boxes[i].checked;
+  }
+  clampGroups();
+  store(STORE_SETTINGS, st);
+}
+function clampGroups() {
+  var st = S.settings;
+  var min = st.excludeG1 ? 3 : 2;
+  st.groupCount = Math.max(min, Math.min(20, st.groupCount | 0));
+}
+
+/* ---------- Start ---------- */
+function startGame() {
+  readSettingsFromForm();
+  var st = S.settings;
+  var order = [];
+  st.enabled.forEach(function (on, i) { if (on) order.push(i); });
+  var groups = groupIds(st).map(function (id) { return { id: id, score: 0, right: 0, wrong: 0 }; });
+  var g = {
+    order: order, qi: 0, health: 100, groups: groups, called: [],
+    filled: {}, tsteps: { inquiry: "done", order: "later", accept: "later", confirm: "later" },
+    incidents: [], log: [],
+    at: freshAttempt(), answered: 0
+  };
+  // Questions that are switched off: fill their clause up front, unless an enabled question writes the same clause later.
+  QUESTIONS.forEach(function (q, i) {
+    if (st.enabled[i]) return;
+    if (q.tstep) g.tsteps[q.tstep] = "done";
+    var laterSameKey = QUESTIONS.some(function (q2, j) { return st.enabled[j] && q2.fill.key === q.fill.key; });
+    if (!laterSameKey) applyFill(g, q, false, true);
+  });
+  S.game = g;
+  lastVX = null;
+  $("brief-n").textContent = order.length;
+  show("brief");
+  SFX.horn();
+}
+function freshAttempt() { return { group: null, tried: [], triedGroups: [], tries: 0, resolved: false, revealed: false, timerEnd: 0 }; }
+
+function applyFill(g, q, revealed, auto) {
+  var f = q.fill;
+  g.filled[f.key] = { v: f.v, s: f.s, nego: !!f.nego, warn: !!revealed, auto: !!auto };
+  if (q.tstep) g.tsteps[q.tstep] = "done";
+}
+
+/* ===================== GAME RENDER ===================== */
+function curQ() { var g = S.game; return QUESTIONS[g.order[g.qi]]; }
+
+function renderGame(opts) {
+  opts = opts || {};
+  renderHeader();
+  renderRoute();
+  renderQuestion();
+  renderResp();
+  renderContract(opts.stampKey);
+}
+
+function renderHeader() {
+  var g = S.game;
+  $("prog-label").textContent = "Câu " + Math.min(g.qi + 1, g.order.length) + "/" + g.order.length;
+  $("pips").innerHTML = g.order.map(function (qidx, i) {
+    var cls = "pip";
+    var entry = g.log.filter(function (l) { return l.q === qidx && l.final; })[0];
+    if (entry) cls += entry.cleanFirst ? " done" : " warn";
+    else if (i === g.qi) cls += " now";
+    return '<span class="' + cls + '"></span>';
+  }).join("");
+  var h = Math.max(0, Math.round(g.health));
+  $("health-val").textContent = h + "%";
+  var bar = $("health-bar");
+  bar.style.width = h + "%";
+  bar.style.background = h >= 70 ? "var(--ok)" : h >= 40 ? "var(--gold)" : "var(--bad)";
+  renderSoundBtn();
+}
+
+function renderSoundBtn() {
+  var on = S.settings.sound;
+  $("btn-sound").innerHTML = on
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
+}
+
+var NODE_X = [70, 245, 415, 585, 780, 975, 1140];
+function vehicleX(g) {
+  var total = g.order.length || 1;
+  var p = Math.min(1, g.answered / total) * (NODE_X.length - 1);
+  var i = Math.floor(p), f = p - i;
+  if (i >= NODE_X.length - 1) return NODE_X[NODE_X.length - 1];
+  return NODE_X[i] + (NODE_X[i + 1] - NODE_X[i]) * f;
+}
+var lastVX = null;
+var ROUTE_LEN = NODE_X[6] - NODE_X[0];
+function renderRoute() {
+  var g = S.game;
+  var x = vehicleX(g);
+  var from = (lastVX == null || fast()) ? x : lastVX;
+  lastVX = x;
+  var onShip = x > NODE_X[3] + 1 && x < NODE_X[5] + 1;
+  var reachedIdx = 0;
+  NODE_X.forEach(function (nx, i) { if (x >= nx - 1) reachedIdx = i; });
+  var nodes = NODE_X.map(function (nx, i) {
+    var reached = x >= nx - 1;
+    return '<g><circle cx="' + nx + '" cy="78" r="' + (i === reachedIdx ? 11 : 8) + '" fill="' + (reached ? "var(--accent)" : "var(--surface)") + '" stroke="var(--ink)" stroke-width="2.5"/>' +
+      '<text x="' + nx + '" y="128" text-anchor="middle" class="rt-label' + (i === reachedIdx ? " on" : "") + '">' + esc(STAGES[i]) + "</text></g>";
+  }).join("");
+  var incid = g.incidents.map(function (inc, k) {
+    var ix = inc.x + ((k % 3) - 1) * 14;
+    return '<g transform="translate(' + ix + ' 40)"><path d="M0 -12 L11 8 H-11 Z" fill="var(--bad)" stroke="var(--surface)" stroke-width="2"/><text x="0" y="5" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">!</text></g>';
+  }).join("");
+  var truck = '<g id="truck"' + (onShip ? ' visibility="hidden"' : "") + '>' +
+    '<rect x="-34" y="-30" width="46" height="24" rx="2" fill="var(--c1)" stroke="var(--ink)" stroke-width="2"/>' +
+    '<path d="M-28 -26v16M-21 -26v16M-14 -26v16M-7 -26v16M0 -26v16" stroke="var(--surface)" stroke-width="1.6" opacity=".7"/>' +
+    '<path d="M14 -22h10l8 9v7H14z" fill="var(--c3)" stroke="var(--ink)" stroke-width="2"/>' +
+    '<circle cx="-22" cy="0" r="5.5" fill="var(--ink)"/><circle cx="22" cy="0" r="5.5" fill="var(--ink)"/></g>';
+  var ship = '<g id="ship"' + (onShip ? "" : ' visibility="hidden"') + '>' +
+    '<rect x="-36" y="-34" width="18" height="12" fill="var(--c1)"/><rect x="-17" y="-34" width="18" height="12" fill="var(--c2)"/><rect x="2" y="-34" width="18" height="12" fill="var(--c5)"/>' +
+    '<rect x="-36" y="-21" width="18" height="12" fill="var(--c3)"/><rect x="-17" y="-21" width="18" height="12" fill="var(--c4)"/><rect x="2" y="-21" width="18" height="12" fill="var(--c1)"/>' +
+    '<rect x="22" y="-40" width="12" height="31" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>' +
+    '<path d="M-46 -8 H44 L36 8 H-38 Z" fill="var(--ink)"/></g>';
+  var svg =
+    '<svg viewBox="0 0 1200 146" role="img" aria-label="Hành trình container: ' + esc(STAGES[reachedIdx]) + '">' +
+      '<rect width="1200" height="146" fill="var(--sea)"/>' +
+      '<path d="M0 0 H640 Q 655 73 640 146 H0 Z" fill="var(--land)"/>' +
+      '<path d="M1210 0 H1045 Q 1030 73 1045 146 H1210 Z" fill="var(--land)"/>' +
+      '<path d="M690 30 q 20 -8 40 0 t 40 0 M820 112 q 20 -8 40 0 t 40 0 M930 26 q 18 -7 36 0" fill="none" stroke="var(--sea-2)" stroke-width="2.5"/>' +
+      '<text x="20" y="24" class="rt-country">VIỆT NAM</text>' +
+      '<text x="1180" y="24" text-anchor="end" class="rt-country">THÁI LAN</text>' +
+      '<text x="842" y="24" text-anchor="middle" class="rt-sea">VỊNH THÁI LAN</text>' +
+      '<line x1="' + NODE_X[0] + '" y1="78" x2="' + NODE_X[6] + '" y2="78" stroke="var(--ink)" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" opacity=".55"/>' +
+      '<line id="prog-line" x1="' + NODE_X[0] + '" y1="78" x2="' + NODE_X[6] + '" y2="78" stroke="var(--accent)" stroke-width="5" stroke-dasharray="' + ROUTE_LEN + " " + (ROUTE_LEN + 20) + '" style="stroke-dashoffset:' + (ROUTE_LEN - (from - NODE_X[0])) + '"/>' +
+      nodes + incid +
+      '<g id="vehicle" style="transform: translate(' + from + 'px, 70px)">' + truck + ship + "</g>" +
+    "</svg>" +
+    '<div class="route-now">Container đang ở: <b>' + esc(STAGES[reachedIdx]) + "</b></div>";
+  $("routebox").innerHTML = svg;
+  if (from !== x) {
+    var v = $("vehicle"), pl = $("prog-line");
+    if (v) { void v.getBoundingClientRect(); v.style.transform = "translate(" + x + "px, 70px)"; }
+    if (pl) pl.style.strokeDashoffset = String(ROUTE_LEN - (x - NODE_X[0]));
+  }
+}
+
+function renderQuestion() {
+  var g = S.game, q = curQ(), at = g.at;
+  var opts = q.options.map(function (o, i) {
+    var cls = "opt";
+    var tried = at.tried.indexOf(i) >= 0;
+    if (tried) cls += " wrong";
+    if (at.resolved && o.correct) cls += " right";
+    var dis = tried || at.resolved;
+    return '<button class="' + cls + '" data-action="answer" data-i="' + i + '" id="opt-' + i + '"' + (dis ? " disabled" : "") + '>' +
+      '<span class="L">' + LETTERS[i] + "</span><span>" + esc(o.t) + "</span></button>";
+  }).join("");
+  var foot = at.resolved
+    ? '<span class="hint">Điều khoản đã được ghi vào hợp đồng.</span><button class="btn btn-primary btn-lg" data-action="next" id="btn-next">' + (g.qi + 1 >= g.order.length ? "Xem hợp đồng hoàn chỉnh" : "Câu tiếp theo") + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'
+    : '<span class="hint">Chọn nhóm trả lời ở khung bên phải, rồi bấm đáp án nhóm đưa ra. Phím <span class="kbd">A</span>–<span class="kbd">D</span>.</span>';
+  $("qcard").innerHTML =
+    '<div class="qmeta">' + (q.star ? '<span class="chip hot">Câu hỏi Incoterms</span>' : "") +
+      '<span class="chip src">' + esc(q.chapter) + "</span></div>" +
+    '<h2 class="qstage">' + esc(q.stage) + "</h2>" +
+    '<div class="scenario">' + q.scenario + "</div>" +
+    '<p class="qtext">' + esc(q.question) + "</p>" +
+    '<div class="opts">' + opts + "</div>" +
+    '<div class="qfoot">' + foot + "</div>";
+}
+
+function groupById(id) { var gs = S.game.groups; for (var i = 0; i < gs.length; i++) if (gs[i].id === id) return gs[i]; return null; }
+
+function renderResp() {
+  var g = S.game, at = g.at;
+  var who = at.group != null
+    ? '<b>Nhóm ' + at.group + "</b>"
+    : (at.resolved ? '<b class="none">Đã có đáp án cho câu này</b>' : '<b class="none">Chưa chọn nhóm trả lời</b>');
+  var chips = g.groups.map(function (gr) {
+    var tried = at.triedGroups.indexOf(gr.id) >= 0;
+    var on = at.group === gr.id;
+    return '<button class="gchip' + (on ? " on" : "") + '" data-action="pick" data-g="' + gr.id + '" id="gchip-' + gr.id + '"' + ((tried || at.resolved) ? " disabled" : "") + '>N' + gr.id + ' <small class="tnum">' + gr.score + "đ</small></button>";
+  }).join("");
+  var cands = spinCandidates();
+  $("resp").innerHTML =
+    '<div class="resp-now"><div class="who"><span class="eyebrow">Đang trả lời</span>' + who + "</div>" + ringHTML() + "</div>" +
+    '<div><span class="eyebrow">Nhóm giơ tay, bấm để chọn</span><div class="gchips" style="margin-top:.4rem">' + chips + "</div></div>" +
+    '<div class="resp-actions"><button class="btn btn-primary" data-action="wheel-open" id="btn-wheel"' + ((at.resolved || !cands.length) ? " disabled" : "") + '>' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2"/><path d="M12 1.5v4.3M12 18.2v4.3M1.5 12h4.3M18.2 12h4.3M4.6 4.6l3 3M16.4 16.4l3 3M4.6 19.4l3-3M16.4 7.6l3-3"/></svg>' +
+      "Quay ngẫu nhiên</button></div>";
+  updateRing();
+}
+
+function ringHTML() {
+  return '<div class="ring" id="ring"' + (S.settings.timer ? "" : " hidden") + '><svg viewBox="0 0 40 40"><circle class="rbg" cx="20" cy="20" r="17" fill="none" stroke-width="4"/>' +
+    '<circle class="rfg" id="ring-fg" cx="20" cy="20" r="17" fill="none" stroke-width="4" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="0"/></svg><span id="ring-t" class="tnum">' + S.settings.timer + "</span></div>";
+}
+
+function renderContract(stampKey, target) {
+  var g = S.game;
+  var box = target || $("contract");
+  var steps = TSTEPS.map(function (t) {
+    var st = g.tsteps[t.id] || "";
+    return '<div class="tstep ' + st + '"><i></i>' + esc(t.t) + "</div>";
+  }).join("");
+  var qOfKey = {};
+  g.order.forEach(function (qidx, i) { var k = QUESTIONS[qidx].fill.key; if (!(k in qOfKey)) qOfKey[k] = i + 1; });
+  var rows = CLAUSES.map(function (c) {
+    var val;
+    if (c.fixed) val = '<div class="v">' + esc(c.v) + (c.s ? "<small>" + esc(c.s) + "</small>" : "") + "</div>";
+    else if (g.filled[c.key]) {
+      var f = g.filled[c.key];
+      var sub = f.s || "";
+      var warn = f.warn ? "<small>Điền sau sự cố · không nhóm nào trả lời đúng</small>" : "";
+      val = '<div class="v' + (f.warn ? " warn" : "") + '"><span class="' + (f.nego ? "nego blink" : "") + '">' + esc(f.v) + "</span>" + (sub ? "<small>" + esc(sub) + "</small>" : "") + warn + "</div>";
+    } else {
+      val = '<div class="v pending">……… <small>chờ câu ' + (qOfKey[c.key] || "?") + "</small></div>";
+    }
+    return '<div class="clause' + (stampKey === c.key ? " stamp flash" : "") + '" data-key="' + c.key + '"><div class="k"><b>' + esc(c.k) + "</b>" + esc(c.d) + "</div>" + val + "</div>";
+  }).join("");
+  box.innerHTML =
+    '<span class="eyebrow">Bản nháp</span><h3>HỢP ĐỒNG MUA BÁN HÀNG HÓA QUỐC TẾ</h3>' +
+    '<div class="no tnum">Số: 01/2026/AN-SR · Sales Contract</div>' +
+    '<div class="eyebrow" style="margin-bottom:.35rem">Tiến trình giao dịch (Chương 2)</div>' +
+    '<div class="tsteps">' + steps + "</div>" +
+    '<div class="clauses">' + rows + "</div>";
+  if (stampKey) {
+    var row = box.querySelector('.clause[data-key="' + stampKey + '"]');
+    if (row && row.scrollIntoView && !fast()) { try { row.scrollIntoView({ block: "nearest", behavior: "smooth" }); } catch (e) {} }
+  }
+}
+
+/* ===================== TIMER ===================== */
+function startTimer() {
+  stopTimer();
+  var secs = S.settings.timer;
+  if (!secs) return;
+  S.game.at.timerEnd = Date.now() + secs * 1000;
+  S.game.at.timedOut = false;
+  timerHandle = setInterval(updateRing, 200);
+  updateRing();
+}
+function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandle = null; } }
+function updateRing() {
+  var ring = $("ring"); if (!ring || !S.game) return;
+  var secs = S.settings.timer;
+  var at = S.game.at;
+  var fg = $("ring-fg"), t = $("ring-t");
+  if (!secs) { ring.hidden = true; return; }
+  ring.hidden = false;
+  if (!at.timerEnd || at.resolved) {
+    fg.setAttribute("stroke-dashoffset", "0");
+    t.textContent = at.resolved ? "✓" : secs;
+    ring.classList.remove("low", "out");
+    return;
+  }
+  var left = Math.max(0, (at.timerEnd - Date.now()) / 1000);
+  fg.setAttribute("stroke-dashoffset", String(106.8 * (1 - left / secs)));
+  ring.classList.toggle("low", left <= 5);
+  if (left <= 0) {
+    ring.classList.add("out");
+    t.textContent = "Hết giờ";
+    if (!at.timedOut) { at.timedOut = true; SFX.timeout(); }
+    stopTimer();
+  } else {
+    ring.classList.remove("out");
+    t.textContent = Math.ceil(left);
+  }
+}
+
+/* ===================== ACTIONS ===================== */
+function pickGroup(id) {
+  var g = S.game, at = g.at;
+  if (at.resolved || at.triedGroups.indexOf(id) >= 0 || !groupById(id)) return;
+  at.group = id;
+  if (g.called.indexOf(id) < 0) g.called.push(id);
+  SFX.pick();
+  renderResp();
+  startTimer();
+  saveGame();
+}
+
+function answer(i) {
+  var g = S.game, at = g.at, q = curQ();
+  if (!g || at.resolved || at.tried.indexOf(i) >= 0 || !q.options[i]) return;
+  stopTimer();
+  var o = q.options[i];
+  var gr = at.group != null ? groupById(at.group) : null;
+  if (o.correct) {
+    var pts = gr ? POINTS[Math.min(at.tries, POINTS.length - 1)] : 0;
+    if (gr) { gr.score += pts; gr.right += 1; }
+    at.resolved = true;
+    var cleanFirst = at.tries === 0;
+    g.log.push({ q: g.order[g.qi], group: at.group, opt: i, correct: true, final: true, cleanFirst: cleanFirst });
+    g.answered += 1;
+    applyFill(g, q, false, false);
+    SFX.ok(); setTimeout(SFX.stamp, fast() ? 0 : 450);
+    renderGame({ stampKey: q.fill.key });
+    showResult(q, { kind: "good", group: at.group, pts: pts });
+  } else {
+    at.tried.push(i);
+    at.tries += 1;
+    if (at.group != null && at.triedGroups.indexOf(at.group) < 0) at.triedGroups.push(at.group);
+    if (gr) gr.wrong += 1;
+    var dmg = o.c.dmg;
+    g.health = Math.max(0, g.health - dmg);
+    g.incidents.push({ q: g.order[g.qi], opt: i, x: vehicleX(g) });
+    g.log.push({ q: g.order[g.qi], group: at.group, opt: i, correct: false });
+    SFX.bad();
+    var wrongGroup = at.group;
+    at.group = null;
+    at.timerEnd = 0;
+    renderGame();
+    var btn = $("opt-" + i); if (btn) { btn.classList.add("shake"); }
+    showIncident(q, o, i, wrongGroup);
+  }
+  saveGame();
+}
+
+function reveal() {
+  var g = S.game, at = g.at, q = curQ();
+  if (at.resolved) return;
+  at.resolved = true; at.revealed = true; at.group = null; at.timerEnd = 0;
+  stopTimer();
+  g.log.push({ q: g.order[g.qi], group: null, opt: -1, correct: false, final: true, cleanFirst: false });
+  g.answered += 1;
+  applyFill(g, q, true, false);
+  SFX.stamp();
+  renderGame({ stampKey: q.fill.key });
+  showResult(q, { kind: "reveal" });
+  saveGame();
+}
+
+function next() {
+  var g = S.game;
+  if (!g.at.resolved) return;
+  closeModal();
+  if (g.qi + 1 >= g.order.length) {
+    // The price is always left open for the negotiation part of the presentation.
+    var p = g.filled.price || {};
+    g.filled.price = { v: "Đang đàm phán…", s: "4,80 (Siam Retail) ↔ 5,20 (giá sàn An Nam)", nego: true, warn: !!p.warn };
+    g.done = true;
+    renderFinal(); show("final"); SFX.horn(); return;
+  }
+  g.qi += 1;
+  g.at = freshAttempt();
+  renderGame();
+  saveGame();
+  var first = $("qcard"); if (first && !fast()) { try { first.scrollTop = 0; } catch (e) {} }
+}
+
+/* ===================== MODALS ===================== */
+var modalPrimary = null;
+function openModal(html, kind, primary) {
+  var sheet = $("sheet");
+  sheet.className = "sheet " + (kind || "");
+  sheet.innerHTML = html;
+  $("modal").hidden = false;
+  modalPrimary = primary || null;
+  var focusEl = sheet.querySelector("[data-primary]") || sheet.querySelector("button");
+  if (focusEl) { try { focusEl.focus({ preventScroll: true }); } catch (e) {} }
+}
+function closeModal() { $("modal").hidden = true; modalPrimary = null; }
+
+function showIncident(q, o, i, groupId) {
+  var c = o.c;
+  var left = q.options.filter(function (op, k) { return S.game.at.tried.indexOf(k) < 0; }).length;
+  var others = spinCandidates().length + S.game.groups.filter(function (gr) { return S.game.at.triedGroups.indexOf(gr.id) < 0; }).length;
+  var canRetry = left > 1 && others > 0;
+  var html =
+    '<span class="stampmark">SỰ CỐ HỢP ĐỒNG</span>' +
+    '<div><span class="eyebrow">' + (groupId != null ? "Nhóm " + groupId + " chọn " : "Đáp án ") + LETTERS[i] + " · " + esc(o.t) + "</span>" +
+    '<h2 id="modal-title" style="margin-top:.3rem">' + esc(c.title) + "</h2></div>" +
+    '<p class="body">' + c.text + "</p>" +
+    '<div class="impact"><span>Sức khỏe hợp đồng −' + c.dmg + "%</span><span>" + esc(c.tag) + '</span><span class="neutral">Còn lại: ' + Math.round(S.game.health) + "%</span></div>" +
+    '<div class="sheet-actions">' +
+      '<button class="btn" data-action="reveal">Xem đáp án đúng</button>' +
+      (canRetry ? '<button class="btn btn-primary btn-lg" data-action="retry" data-primary>Mời nhóm khác trả lời</button>' : "") +
+    "</div>";
+  openModal(html, "bad", canRetry ? "retry" : "reveal");
+}
+
+function showResult(q, info) {
+  var correctIdx = 0; q.options.forEach(function (o, k) { if (o.correct) correctIdx = k; });
+  var head = info.kind === "good"
+    ? '<span class="stampmark">ĐIỀU KHOẢN ĐƯỢC DUYỆT</span><div><span class="eyebrow">Đáp án ' + LETTERS[correctIdx] + "</span><h2 id=\"modal-title\" style=\"margin-top:.3rem\">" + esc(q.options[correctIdx].t) + "</h2></div>"
+    : '<span class="stampmark">ĐÁP ÁN ĐÚNG</span><div><span class="eyebrow">Đáp án ' + LETTERS[correctIdx] + "</span><h2 id=\"modal-title\" style=\"margin-top:.3rem\">" + esc(q.options[correctIdx].t) + "</h2></div>";
+  var impact = info.kind === "good"
+    ? '<div class="impact">' + (info.group != null ? '<span class="ok">Nhóm ' + info.group + " +" + info.pts + " điểm</span>" : '<span class="neutral">Chưa chọn nhóm nên không tính điểm</span>') + '<span class="ok">Container đi thêm một chặng</span></div>'
+    : '<div class="impact"><span class="neutral">Không nhóm nào được điểm</span><span>Điều khoản ghi kèm cảnh báo sự cố</span></div>';
+  var diagram = q.diagram === "incoterms" ? incotermsDiagram() : "";
+  var isLast = S.game.qi + 1 >= S.game.order.length;
+  var html = head + impact +
+    '<div class="explain"><span class="eyebrow">Vì sao?</span><p>' + esc(q.explain) + "</p>" + diagram +
+      (q.note ? '<p class="note">' + esc(q.note) + "</p>" : "") + "</div>" +
+    '<p class="src-line">Nguồn: ' + esc(q.source) + "</p>" +
+    '<div class="sheet-actions"><button class="btn" data-action="close-modal">Xem lại câu hỏi</button>' +
+    '<button class="btn btn-primary btn-lg" data-action="next" data-primary>' + (isLast ? "Xem hợp đồng hoàn chỉnh" : "Câu tiếp theo") + "</button></div>";
+  openModal(html, info.kind === "good" ? "good" : "info", "next");
+}
+
+function incotermsDiagram() {
+  // 4 checkpoints → positions in % of the track
+  var P = [0, 36, 72, 100];
+  var rows = [
+    { t: "EXW", cost: 0, risk: 0 },
+    { t: "FOB", cost: 36, risk: 36, hl: true },
+    { t: "CIF", cost: 72, risk: 36 },
+    { t: "DDP", cost: 100, risk: 100 }
+  ];
+  var hd = ["Kho người bán", "Lên tàu tại Cát Lái", "Cảng Laem Chabang", "Kho người mua"];
+  var html = '<div class="ico-diagram"><div class="icd"><div></div>' + hd.map(function (h) { return '<div class="hd">' + h + "</div>"; }).join("");
+  rows.forEach(function (r) {
+    var risk = Math.max(1.2, Math.min(98.8, r.risk));
+    html += '<div class="term' + (r.hl ? " hl" : "") + '" style="padding-left:.35rem">' + r.t + "</div>" +
+      '<div class="row' + (r.hl ? " hl" : "") + '"><span class="cost" style="width:' + Math.max(2, r.cost) + '%"></span><span class="risk" style="left:' + risk + '%"></span></div>';
+  });
+  html += '</div><div class="icd-legend"><span><i class="lg-cost"></i>Người bán trả chi phí đến đây</span><span><i class="lg-risk"></i>Rủi ro chuyển sang người mua</span></div></div>';
+  return html;
+}
+
+function askRestart() {
+  openModal('<span class="stampmark" style="color:var(--gold)">CHƠI LẠI?</span><h2 id="modal-title">Bắt đầu lại từ màn hình cài đặt</h2><p class="body">Điểm và tiến trình của ván hiện tại sẽ bị xóa.</p>' +
+    '<div class="sheet-actions"><button class="btn" data-action="close-modal" data-primary>Ở lại ván này</button><button class="btn btn-primary" data-action="restart">Chơi lại</button></div>', "info");
+}
+function restart() {
+  closeModal(); closeWheel(true);
+  S.game = null;
+  store(STORE_GAME, null);
+  renderIntro();
+  show("intro");
+}
+
+/* ===================== WHEEL ===================== */
+var wheel = { angle: 0, cands: [], picked: null, raf: 0, token: 0, safety: 0 };
+
+function spinCandidates() {
+  var g = S.game; if (!g) return [];
+  var at = g.at;
+  if (at.resolved) return [];
+  var avail = g.groups.filter(function (gr) { return at.triedGroups.indexOf(gr.id) < 0; }).map(function (gr) { return gr.id; });
+  if (S.settings.fair) {
+    var fresh = avail.filter(function (id) { return g.called.indexOf(id) < 0; });
+    if (fresh.length) return fresh;
+  }
+  return avail;
+}
+
+function openWheel() {
+  var g = S.game; if (!g || g.at.resolved) return;
+  var cands = spinCandidates();
+  if (!cands.length) { toast("Tất cả các nhóm đã trả lời câu này. Bấm Xem đáp án đúng."); return; }
+  wheel.cands = cands; wheel.picked = null;
+  $("wheel").hidden = false;
+  $("btn-spin").hidden = false; $("btn-spin").disabled = false;
+  $("btn-accept").hidden = true;
+  $("wheel-result").className = "wheel-result";
+  $("wheel-result").innerHTML = '<span class="eyebrow" id="wheel-sub">' + cands.length + " nhóm trên bánh lái" + (S.settings.fair && cands.length < g.groups.length ? " · ưu tiên nhóm chưa được gọi" : "") + "</span>";
+  drawWheel();
+  try { $("btn-spin").focus({ preventScroll: true }); } catch (e) {}
+}
+function closeWheel(force) {
+  if (spinning && !force) return;
+  if (wheel.raf) cancelAnimationFrame(wheel.raf);
+  clearTimeout(wheel.safety);
+  wheel.token++;
+  spinning = false;
+  $("wheel").hidden = true;
+}
+
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || "#888"; }
+
+function drawWheel() {
+  var cv = $("wheel-canvas"); if (!cv) return;
+  var dpr = Math.min(2, window.devicePixelRatio || 1);
+  var size = 600;
+  if (cv.width !== size * dpr) { cv.width = size * dpr; cv.height = size * dpr; }
+  var ctx = cv.getContext("2d"); if (!ctx) return;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, size, size);
+  var cx = size / 2, cy = size / 2, R = 232;
+  var n = wheel.cands.length || 1, seg = Math.PI * 2 / n;
+  var cols = ["--c1", "--c2", "--c3", "--c4", "--c5", "--c6"].map(cssVar);
+  var ink = cssVar("--ink"), surface = cssVar("--surface");
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(wheel.angle);
+  // helm handles
+  for (var h = 0; h < 8; h++) {
+    ctx.save(); ctx.rotate(h * Math.PI / 4);
+    ctx.fillStyle = ink;
+    ctx.fillRect(-7, -R - 50, 14, 52);
+    ctx.beginPath(); ctx.arc(0, -R - 52, 13, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  ctx.beginPath(); ctx.arc(0, 0, R + 12, 0, Math.PI * 2); ctx.fillStyle = ink; ctx.fill();
+  for (var i = 0; i < n; i++) {
+    var a0 = -Math.PI / 2 + i * seg;
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, a0, a0 + seg); ctx.closePath();
+    var col = cols[i % cols.length];
+    if (n % cols.length === 1 && i === n - 1 && n > 1) col = cols[(i + 2) % cols.length];
+    ctx.fillStyle = col; ctx.fill();
+    ctx.lineWidth = 3; ctx.strokeStyle = ink; ctx.stroke();
+    if (wheel.picked === wheel.cands[i] && !spinning) { ctx.fillStyle = "rgba(255,255,255,.28)"; ctx.fill(); }
+    ctx.save(); ctx.rotate(a0 + seg / 2);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    var fs = n > 14 ? 22 : n > 9 ? 28 : 34;
+    ctx.font = "800 " + fs + "px 'Be Vietnam Pro', system-ui, sans-serif";
+    ctx.fillText("Nhóm " + wheel.cands[i], R - 18, 0);
+    ctx.restore();
+  }
+  ctx.beginPath(); ctx.arc(0, 0, 46, 0, Math.PI * 2); ctx.fillStyle = surface; ctx.fill();
+  ctx.lineWidth = 6; ctx.strokeStyle = ink; ctx.stroke();
+  ctx.restore();
+  ctx.fillStyle = ink; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.font = "800 22px 'Big Shoulders Stencil Display', Impact, sans-serif";
+  ctx.fillText("GO", cx, cy + 1);
+}
+
+function spinWheel() {
+  if (spinning || !wheel.cands.length) return;
+  var n = wheel.cands.length, seg = Math.PI * 2 / n;
+  var k = Math.floor(Math.random() * n);
+  var jitter = (Math.random() * 0.6 + 0.2) * seg;
+  var target = -(k * seg + jitter);
+  var TWO = Math.PI * 2;
+  var startA = wheel.angle;
+  var base = startA + TWO * (fast() ? 1 : 6);
+  var endA = base + (((target - base) % TWO) + TWO) % TWO;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var dur = fast() ? 0 : (reduce ? 1200 : 4400);
+  spinning = true;
+  $("btn-spin").disabled = true;
+  $("wheel-result").className = "wheel-result";
+  $("wheel-result").innerHTML = '<span class="eyebrow">Đang quay…</span>';
+  var lastSeg = Math.floor(startA / seg);
+  var token = ++wheel.token;
+  if (!dur) { wheel.angle = endA; finishSpin(k, token); return; }
+  var t0 = performance.now();
+  function frame(now) {
+    if (token !== wheel.token || !spinning) return;
+    var p = Math.min(1, (now - t0) / dur);
+    var e = 1 - Math.pow(1 - p, 4);
+    wheel.angle = startA + (endA - startA) * e;
+    var s = Math.floor(wheel.angle / seg);
+    if (s !== lastSeg) { lastSeg = s; SFX.tick(); }
+    drawWheel();
+    if (p < 1) wheel.raf = requestAnimationFrame(frame);
+    else finishSpin(k, token);
+  }
+  wheel.raf = requestAnimationFrame(frame);
+  // Backup: animation frames pause in background tabs, so always land the result on time.
+  clearTimeout(wheel.safety);
+  wheel.safety = setTimeout(function () {
+    if (token !== wheel.token || !spinning) return;
+    if (wheel.raf) cancelAnimationFrame(wheel.raf);
+    wheel.angle = endA;
+    finishSpin(k, token);
+  }, dur + 300);
+}
+function finishSpin(k, token) {
+  if (token !== wheel.token || !spinning) return;
+  clearTimeout(wheel.safety);
+  spinning = false;
+  wheel.angle = wheel.angle % (Math.PI * 2);
+  wheel.picked = wheel.cands[k];
+  drawWheel();
+  SFX.pick();
+  $("wheel-result").className = "wheel-result pop";
+  $("wheel-result").innerHTML = '<span class="eyebrow">Mời lên trả lời</span><b>Nhóm ' + wheel.picked + "</b>";
+  $("btn-spin").hidden = true;
+  $("btn-accept").hidden = false;
+  $("btn-accept").textContent = "Nhóm " + wheel.picked + " trả lời";
+  try { $("btn-accept").focus({ preventScroll: true }); } catch (e) {}
+}
+function acceptSpin() {
+  if (wheel.picked == null) return;
+  var id = wheel.picked;
+  closeWheel(true);
+  pickGroup(id);
+}
+
+/* ===================== FINAL & PRESENT ===================== */
+function rankedGroups() {
+  return S.game.groups.slice().sort(function (a, b) { return b.score - a.score || b.right - a.right || a.wrong - b.wrong || a.id - b.id; });
+}
+function healthVerdict(h) {
+  if (h >= 80) return "Hợp đồng chắc chắn";
+  if (h >= 50) return "Hợp đồng còn rủi ro";
+  return "Hợp đồng nhiều lỗ hổng";
+}
+function renderFinal() {
+  var g = S.game;
+  var ranked = rankedGroups();
+  var max = Math.max(1, ranked[0] ? ranked[0].score : 1);
+  var topScore = ranked[0] ? ranked[0].score : 0;
+  var board = ranked.map(function (gr, i) {
+    var top = gr.score === topScore && topScore > 0;
+    return '<div class="brow' + (top ? " top" : "") + '"><span class="rk">' + (i + 1) + '</span><span class="nm">Nhóm ' + gr.id + '</span><span class="bar"><i style="width:' + (gr.score / max * 100) + '%"></i></span><span class="sc tnum">' + gr.score + "</span></div>";
+  }).join("");
+  var firstTry = g.log.filter(function (l) { return l.final && l.cleanFirst; }).length;
+  var winners = ranked.filter(function (gr) { return gr.score === topScore && topScore > 0; }).map(function (gr) { return "Nhóm " + gr.id; });
+  $("final").innerHTML =
+    '<div class="intro-top"><div class="tag-line"><span class="cn-badge">THBKK · ARRIVED</span><span class="eyebrow">Container đã tới kho Siam Retail, Bangkok</span></div>' +
+      '<button class="btn btn-ghost" data-action="ask-restart">Chơi lại</button></div>' +
+    '<div class="final-grid">' +
+      '<div class="contract" id="contract-final"></div>' +
+      '<div style="display:grid;gap:1rem">' +
+        '<div class="bridge"><span class="eyebrow" style="color:inherit;opacity:.7">Còn một ô trống</span>' +
+          "<h2>Điều 3 · Giá cả: 4,80 hay 5,20 USD/kg?</h2>" +
+          "<p>Mọi điều khoản đã sẵn sàng, nhưng hợp đồng chỉ có hiệu lực khi hai bên chấp nhận và xác nhận. Để Siam Retail thật sự gật đầu, An Nam cần nghệ thuật đàm phán.</p>" +
+          '<div class="setup-actions" style="margin-top:.3rem"><button class="btn btn-primary btn-lg" data-action="present">Bước vào bàn đàm phán <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>' +
+        "</div>" +
+        '<div class="board"><span class="eyebrow">Bảng điểm</span>' +
+          (winners.length ? '<h2 style="font-size:1.4rem">' + esc(winners.join(", ")) + (winners.length > 1 ? " đồng dẫn đầu" : " dẫn đầu") + "</h2>" : '<h2 style="font-size:1.25rem">Chưa nhóm nào ghi điểm</h2>') +
+          board + "</div>" +
+        '<div class="stats">' +
+          '<div class="stat"><b class="tnum">' + Math.round(g.health) + '%</b><span>' + esc(healthVerdict(g.health)) + "</span></div>" +
+          '<div class="stat"><b class="tnum">' + g.incidents.length + "</b><span>Sự cố đã xảy ra</span></div>" +
+          '<div class="stat"><b class="tnum">' + firstTry + "/" + g.order.length + "</b><span>Câu đúng ngay lượt đầu</span></div>" +
+        "</div>" +
+      "</div>" +
+    "</div>";
+  var fin = $("contract-final");
+  renderContract(null, fin);
+  var eb = fin.querySelector(".eyebrow");
+  if (eb) eb.outerHTML = '<div class="draft-head"><span class="eyebrow">Bản nháp</span><span class="draft-stamp">CHỜ ĐÀM PHÁN</span></div>';
+}
+
+function renderPresent() {
+  var parts = [
+    { n: "01", t: "Tổng quan về đàm phán", d: "Nguyên tắc, sai lầm và ba kiểu đàm phán" },
+    { n: "02", t: "Trước khi đàm phán", d: "Văn hóa Thái, xác minh DBD, Form D, FDA, nhân sự" },
+    { n: "03", t: "Trong khi đàm phán", d: "Ứng xử, năm bước và ví dụ xoài sấy dẻo An Nam", key: true },
+    { n: "04", t: "Sau khi đàm phán", d: "Giữ chữ tín, xử lý thất bại, giải quyết tranh chấp" },
+    { n: "05", t: "Kết luận và bài học", d: "Ba giai đoạn, một chữ tín" }
+  ];
+  $("present").innerHTML =
+    '<div class="intro-top"><div class="tag-line"><span class="cn-badge">NHÓM 1</span><span class="eyebrow">Nghiệp vụ ngoại thương · Phần thuyết trình</span></div>' +
+      '<div class="tools"><button class="btn btn-ghost" data-action="back-final">← Bảng điểm</button>' +
+      '<button class="btn icon-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>' +
+    '<div class="present-head"><span class="eyebrow">Nghệ thuật đàm phán với các nước ASEAN</span>' +
+      '<h1>Bàn đàm phán ở Bangkok<span class="th">THAILAND</span></h1></div>' +
+    '<div class="parts">' + parts.map(function (p) {
+      return '<div class="part' + (p.key ? " key" : "") + '"><span class="n">' + p.n + "</span><b>" + esc(p.t) + "</b><p>" + esc(p.d) + "</p></div>";
+    }).join("") + "</div>" +
+    '<div class="present-foot"><p class="cliff">Siam Retail đề nghị <strong>4,80</strong>, An Nam cần ít nhất <strong>5,20 USD/kg</strong>. Ô giá cả trong hợp đồng sẽ được điền ở <strong>Phần 03</strong>.</p>' +
+      '<button class="btn" data-action="ask-restart">Chơi lại</button></div>';
+}
+
+/* ===================== PERSISTENCE ===================== */
+function saveGame() {
+  if (!S.game) return;
+  store(STORE_GAME, { screen: S.screen, game: S.game });
+}
+function resumeGame() {
+  var saved = load(STORE_GAME);
+  if (!saved || !saved.game) { toast("Không tìm thấy ván đang chơi."); return; }
+  var g = saved.game;
+  if (!g.order || !g.groups || !g.at || typeof g.qi !== "number") { store(STORE_GAME, null); renderIntro(); toast("Ván cũ không đọc được, hãy bắt đầu ván mới."); return; }
+  S.game = g;
+  lastVX = null;
+  g.at.timerEnd = 0;
+  if (saved.screen === "final") { renderFinal(); show("final"); }
+  else if (saved.screen === "present") { renderPresent(); show("present"); }
+  else if (saved.screen === "brief") { $("brief-n").textContent = g.order.length; show("brief"); }
+  else { show("game"); renderGame(); }
+}
+
+/* ===================== MISC ===================== */
+var toastT = 0;
+function toast(msg) {
+  var t = $("toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 2600);
+}
+function toggleTheme() {
+  var root = document.documentElement;
+  var cur = root.getAttribute("data-theme");
+  var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var isDark = cur ? cur === "dark" : sysDark;
+  root.setAttribute("data-theme", isDark ? "light" : "dark");
+  store("sgnbkk.theme", root.getAttribute("data-theme"));
+  if (!$("wheel").hidden) drawWheel();
+}
+function toggleFullscreen() {
+  try {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () { toast("Trình duyệt không cho bật toàn màn hình. Thử phím F11."); });
+    else toast("Trình duyệt không hỗ trợ toàn màn hình. Thử phím F11.");
+  } catch (e) { toast("Không bật được toàn màn hình. Thử phím F11."); }
+}
+
+/* ===================== EVENTS ===================== */
+document.addEventListener("click", function (ev) {
+  var el = ev.target.closest ? ev.target.closest("[data-action]") : null;
+  if (!el || el.disabled) return;
+  var a = el.getAttribute("data-action");
+  switch (a) {
+    case "g-minus": S.settings.groupCount -= 1; clampGroups(); store(STORE_SETTINGS, S.settings); updateIntroHints(); break;
+    case "g-plus": S.settings.groupCount += 1; clampGroups(); store(STORE_SETTINGS, S.settings); updateIntroHints(); break;
+    case "start": startGame(); break;
+    case "resume": resumeGame(); break;
+    case "to-intro": renderIntro(); show("intro"); break;
+    case "go-game": show("game"); renderGame(); break;
+    case "pick": pickGroup(parseInt(el.getAttribute("data-g"), 10)); break;
+    case "answer": answer(parseInt(el.getAttribute("data-i"), 10)); break;
+    case "retry": closeModal(); renderResp(); toast("Chọn nhóm giơ tay hoặc quay ngẫu nhiên."); break;
+    case "reveal": closeModal(); reveal(); break;
+    case "next": next(); break;
+    case "close-modal": closeModal(); break;
+    case "wheel-open": openWheel(); break;
+    case "wheel-spin": spinWheel(); break;
+    case "wheel-accept": acceptSpin(); break;
+    case "wheel-close": closeWheel(); break;
+    case "present": renderPresent(); show("present"); break;
+    case "back-final": renderFinal(); show("final"); break;
+    case "ask-restart": askRestart(); break;
+    case "restart": restart(); break;
+    case "theme": toggleTheme(); break;
+    case "fullscreen": toggleFullscreen(); break;
+    case "sound": S.settings.sound = !S.settings.sound; store(STORE_SETTINGS, S.settings); renderSoundBtn(); break;
+  }
+});
+document.addEventListener("change", function (ev) {
+  if (ev.target && ev.target.closest && ev.target.closest("#setup")) { readSettingsFromForm(); updateIntroHints(); }
+});
+$("modal").addEventListener("click", function (ev) { if (ev.target === $("modal") && modalPrimary !== "next" && modalPrimary !== "retry" && modalPrimary !== "reveal") closeModal(); });
+$("wheel").addEventListener("click", function (ev) { if (ev.target === $("wheel")) closeWheel(); });
+
+document.addEventListener("keydown", function (ev) {
+  if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  var tag = (ev.target && ev.target.tagName) || "";
+  if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
+  var k = ev.key;
+  if (k === "f" || k === "F") { toggleFullscreen(); return; }
+  if (!$("wheel").hidden) {
+    if (k === "Escape") closeWheel();
+    else if ((k === "Enter" || k === " ") && document.activeElement && document.activeElement.tagName === "BUTTON") return;
+    else if (k === "Enter" || k === " ") { ev.preventDefault(); if (!$("btn-accept").hidden) acceptSpin(); else spinWheel(); }
+    return;
+  }
+  if (!$("modal").hidden) {
+    if (k === "Escape" && modalPrimary !== "next" && modalPrimary !== "retry" && modalPrimary !== "reveal") closeModal();
+    return;
+  }
+  if (S.screen !== "game" || !S.game) return;
+  var map = { a: 0, b: 1, c: 2, d: 3, "1": 0, "2": 1, "3": 2, "4": 3 };
+  var lk = k.toLowerCase();
+  if (lk in map) { answer(map[lk]); return; }
+  if (lk === "q" || lk === "s") { openWheel(); return; }
+  if (k === "Enter" && S.game.at.resolved && !(document.activeElement && document.activeElement.tagName === "BUTTON")) next();
+});
+
+window.addEventListener("resize", function () { if (!$("wheel").hidden) drawWheel(); });
+
+/* ===================== BOOT ===================== */
+(function boot() {
+  var savedTheme = load("sgnbkk.theme");
+  if (savedTheme === "dark" || savedTheme === "light") document.documentElement.setAttribute("data-theme", savedTheme);
+  var st = load(STORE_SETTINGS);
+  if (st && typeof st === "object") {
+    if (typeof st.groupCount === "number") S.settings.groupCount = st.groupCount;
+    if (typeof st.excludeG1 === "boolean") S.settings.excludeG1 = st.excludeG1;
+    if (typeof st.timer === "number") S.settings.timer = st.timer;
+    if (typeof st.fair === "boolean") S.settings.fair = st.fair;
+    if (typeof st.sound === "boolean") S.settings.sound = st.sound;
+    if (Array.isArray(st.enabled) && st.enabled.length === QUESTIONS.length) S.settings.enabled = st.enabled.map(Boolean);
+    S.settings.enabled[1] = true;
+  }
+  clampGroups();
+  renderIntro();
+  show("intro");
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!$("wheel").hidden) drawWheel(); });
+})();
+
+// Read-only hooks for automated play-testing.
+window.__game = {
+  state: function () { return JSON.parse(JSON.stringify({ screen: S.screen, settings: S.settings, game: S.game })); },
+  questions: QUESTIONS.length,
+  correctIndex: function (qidx) { var r = -1; QUESTIONS[qidx].options.forEach(function (o, i) { if (o.correct) r = i; }); return r; },
+  isSpinning: function () { return spinning; }
+};
+})();
+</script>
+</body>
+</html>
