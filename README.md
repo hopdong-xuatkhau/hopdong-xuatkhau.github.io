@@ -9,9 +9,9 @@ Trò chơi lớp học môn **Nghiệp vụ ngoại thương & Logistics** (Nhó
 1. Ở màn hình đầu, chọn số nhóm trong lớp (mặc định loại Nhóm 1 vì đang thuyết trình), thời gian trả lời và các câu hỏi muốn dùng.
 2. Mỗi câu hỏi là một điều khoản của hợp đồng. Nhóm nào giơ tay thì bấm chọn nhóm đó; không ai giơ tay thì bấm **Quay ngẫu nhiên**.
 3. Bấm đáp án nhóm đưa ra:
-   - **Đúng:** điều khoản được đóng dấu vào hợp đồng, container đi thêm một chặng, nhóm được cộng điểm (10 / 7 / 5 / 3 theo lượt).
+   - **Đúng:** điều khoản được ghi vào hợp đồng (Sales Contract song ngữ Anh – Việt) và container đi thêm một chặng.
    - **Sai:** hiện ra sự cố xảy ra với hợp đồng (kẹt cảng, mất tiền, tranh chấp…), sức khỏe hợp đồng giảm. Có thể mời nhóm khác trả lời hoặc xem đáp án.
-4. Hết câu hỏi: bảng điểm, hợp đồng bản nháp, rồi bấm **Bước vào bàn đàm phán** để chuyển sang bài thuyết trình.
+4. Hết câu hỏi: màn hình chỉ đóng dấu **HỢP ĐỒNG HỢP LỆ** (sức khỏe từ 50%) hoặc **KHÔNG HỢP LỆ** (dưới 50%), rồi bấm **Bước vào bàn đàm phán** để chuyển sang bài thuyết trình.
 
 Phím tắt: `A`–`D` chọn đáp án · `Q` quay nhóm · `Enter` sang câu tiếp · `F` toàn màn hình.
 
@@ -33,4 +33,5 @@ Nguồn: bài giảng Nghiệp vụ ngoại thương (Chương 1–3) và tiểu
 - Một file `index.html` duy nhất, không cần cài đặt, chạy trên mọi trình duyệt.
 - Có giao diện sáng/tối, dùng được trên máy chiếu và điện thoại.
 - Tự lưu ván đang chơi: lỡ tải lại trang vẫn bấm “Tiếp tục ván đang chơi” được.
-- Đã chạy thử tự động hơn 400 ván (ngẫu nhiên số nhóm, câu hỏi, đúng/sai, vòng quay) để kiểm tra điểm số, hợp đồng và lỗi.
+- Nền là cảnh cảng container Cát Lái (cần cẩu, tàu, xe container, tàu lai dắt), tự đổi sang cảnh đêm ở giao diện tối.
+- Đã chạy thử tự động hơn 500 ván (ngẫu nhiên số nhóm, câu hỏi, đúng/sai, vòng quay) để kiểm tra hợp đồng, kết quả hợp lệ/không hợp lệ và lỗi.
