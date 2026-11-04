@@ -273,12 +273,19 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
 .qfoot { display: flex; justify-content: space-between; align-items: center; gap: .8rem; flex-wrap: wrap; margin-top: auto; }
 .qfoot .hint { font-size: .82rem; color: var(--ink-3); }
 
-.side { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 1rem; min-height: 0; min-width: 0; }
-.resp { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; display: grid; gap: .8rem; box-shadow: var(--shadow); }
-.resp-now { display: flex; align-items: center; gap: .9rem; }
-.resp-now .who { flex: 1; min-width: 0; }
-.resp-now .who b { display: block; font-size: 1.5rem; font-weight: 800; line-height: 1.15; }
-.resp-now .who b.none { font-size: 1.05rem; color: var(--ink-3); font-weight: 600; }
+.side { display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; min-width: 0; }
+/* Compact responder strip at the foot of the question card */
+.resp { width: 100%; display: flex; align-items: center; gap: .7rem 1.1rem; flex-wrap: wrap; padding: .6rem .7rem .6rem .8rem; border: 1.5px dashed var(--line); border-radius: 14px; background: var(--surface-2); }
+.resp-who { display: flex; align-items: center; gap: .6rem; min-width: 9.5rem; }
+.resp-who b { display: block; font-size: 1.3rem; font-weight: 800; line-height: 1.1; color: var(--accent); }
+.resp-who b.none { font-size: .95rem; color: var(--ink-3); font-weight: 600; }
+.resp-pick { display: flex; align-items: center; gap: .45rem .6rem; flex-wrap: wrap; flex: 1; min-width: 0; }
+.wheel-btn { flex: none; width: 3.3rem; height: 3.3rem; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(224, 96, 27, .35); margin-left: auto; }
+.wheel-btn svg { width: 2rem; height: 2rem; transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+.wheel-btn:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
+@media (hover: hover) { .wheel-btn:not(:disabled):hover svg { transform: rotate(90deg); } }
+.resp .ring { width: 2.7rem; height: 2.7rem; }
+.resp .ring span { font-size: .85rem; }
 .ring { width: 3.6rem; height: 3.6rem; position: relative; flex: none; }
 .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .ring .rbg { stroke: var(--line); }
@@ -286,20 +293,19 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
 .ring.low .rfg { stroke: var(--bad); }
 .ring span { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: grid; place-items: center; font-weight: 800; font-size: 1.05rem; }
 .ring.out span { color: var(--bad); font-size: .7rem; text-align: center; line-height: 1.1; }
-.gchips { display: flex; flex-wrap: wrap; gap: .4rem; }
-.gchip { border: 1.5px solid var(--line); background: var(--surface-2); border-radius: 8px; padding: .32em .75em; font-weight: 700; cursor: pointer; font-size: .9rem; min-height: 2.1rem; }
+.gchips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.gchip { border: 1.5px solid var(--line); background: var(--surface); border-radius: 9px; min-width: 2.35rem; height: 2.35rem; padding: 0 .5rem; font-weight: 800; cursor: pointer; font-size: 1rem; font-variant-numeric: tabular-nums; }
 .gchip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .gchip:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
-.resp-actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
-.resp-actions .btn { flex: 1; min-width: 10rem; }
+@media (hover: hover) { .gchip:not(:disabled):not(.on):hover { border-color: var(--accent); } }
 
 /* ---------- Sales contract (always a white paper document) ---------- */
 .contract { background: var(--paper); color: var(--paper-ink); border: 1px solid var(--paper-line); border-radius: 4px; padding: 1.1rem 1.2rem 1rem; overflow: auto; -webkit-overflow-scrolling: touch; min-height: 0; box-shadow: 0 1px 1px rgba(0, 0, 0, .08), 0 12px 30px rgba(0, 0, 0, .2); color-scheme: only light; }
-.doc { font-family: var(--f-doc); font-size: .78rem; line-height: 1.5; }
+.doc { font-family: var(--f-doc); font-size: .86rem; line-height: 1.5; }
 .doc p { margin: 0 0 .35rem; }
 .doc i { color: var(--paper-mute); }
 .doc-head { text-align: center; border-bottom: 2px solid var(--paper-ink); padding-bottom: .5rem; margin-bottom: .6rem; }
-.doc-title { font-weight: 700; font-size: 1.1rem; letter-spacing: .14em; }
+.doc-title { font-weight: 700; font-size: 1.25rem; letter-spacing: .14em; }
 .doc-title span { display: block; font-size: .78rem; letter-spacing: .05em; }
 .doc-meta { display: flex; justify-content: space-between; gap: .6rem; flex-wrap: wrap; margin-top: .4rem; font-size: .74rem; }
 .doc-basis, .art { padding: .35rem .4rem; margin: 0 -.4rem .15rem; border-radius: 3px; }
@@ -429,13 +435,25 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
   .app.in-game .game { min-height: 0; }
   .app.in-game .desk { overflow: hidden; }
   .app.in-game .qcard { overflow: auto; }
+  /* keep the responder strip / next buttons visible even if a long question scrolls */
+  .app.in-game .qfoot { position: -webkit-sticky; position: sticky; bottom: -1.2rem; margin: auto -1.5rem -1.2rem; padding: .6rem 1.5rem 1.2rem; background: var(--surface); z-index: 2; }
+}
+@media (min-width: 1001px) and (max-height: 820px) {
+  .qcard { gap: .6rem; padding-top: .9rem; }
+  .qstage { font-size: 1.25rem; }
+  .scenario { font-size: .93rem; padding: .65rem .9rem; }
+  .scenario ul { margin-top: .3rem; gap: .1rem; }
+  .qtext { font-size: 1.12rem; }
+  .opt { min-height: 3.2rem; padding: .5rem .8rem; font-size: .96rem; }
+  .opt .L { width: 2.1rem; height: 2.1rem; font-size: 1.15rem; }
+  .resp { padding: .4rem .6rem; }
 }
 @media (max-width: 1000px) {
   body[data-screen="intro"] .bd-veil { background: rgba(var(--bg-rgb), .8); }
   .brief-grid { grid-template-columns: minmax(0, 1fr); }
   .desk { grid-template-columns: minmax(0, 1fr); }
   .side { display: contents; }
-  .resp { order: 1; } .qcard { order: 2; } .contract { order: 3; max-height: 75vh; }
+  .contract { max-height: 75vh; }
   .parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .why-grid { grid-template-columns: minmax(0, 1fr); }
 }
@@ -474,7 +492,7 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
 }
 @media (pointer: coarse) {
   .setup-actions .note, .qfoot .hint .kbd-hint { display: none; }
-  .gchip { min-height: 2.5rem; padding: .4em .9em; }
+  .gchip { min-width: 2.7rem; height: 2.7rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -608,7 +626,6 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
       <div class="desk">
         <article class="qcard" id="qcard" aria-live="polite"></article>
         <aside class="side">
-          <div class="resp" id="resp"></div>
           <div class="contract" id="contract"></div>
         </aside>
       </div>
@@ -1205,9 +1222,12 @@ function startGame() {
     at: freshAttempt()
   };
   // Switched-off questions: write their clauses up front, unless an enabled question writes the same clause later.
+  // The offer clause sits at the top of the contract, so it is always pre-filled when its question is off;
+  // otherwise its blank would point at the later counter-offer question and read out of order.
   QUESTIONS.forEach(function (q, i) {
     if (st.enabled[i]) return;
     var keys = fillsOf(q).map(function (f) { return f.key; }).filter(function (k) {
+      if (q.id === "offer") return true;
       return !QUESTIONS.some(function (q2, j) { return st.enabled[j] && fillsOf(q2).some(function (f2) { return f2.key === k; }); });
     });
     if (keys.length) applyFill(g, q, false, true, keys);
@@ -1363,7 +1383,7 @@ function renderQuestion() {
   }).join("");
   var foot = at.resolved
     ? '<span class="hint">Điều khoản đã được ghi vào hợp đồng.</span><span style="display:flex;gap:.6rem;flex-wrap:wrap"><button class="btn" data-action="explain">Xem giải thích</button><button class="btn btn-primary btn-lg" data-action="next" id="btn-next">' + (g.qi + 1 >= g.order.length ? "Xem kết quả hợp đồng" : "Câu tiếp theo") + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></span>'
-    : '<span class="hint">Chọn nhóm trả lời, rồi bấm đáp án nhóm đưa ra.<span class="kbd-hint"> Phím <span class="kbd">A</span>–<span class="kbd">D</span>.</span></span>';
+    : '<div class="resp" id="resp"></div>';
   $("qcard").innerHTML =
     '<div class="qmeta">' + (q.star ? '<span class="chip hot">Câu hỏi Incoterms</span>' : "") + '<span class="chip src">' + esc(q.chapter) + "</span></div>" +
     '<h2 class="qstage">' + esc(q.stage) + "</h2>" +
@@ -1374,19 +1394,18 @@ function renderQuestion() {
 }
 function groupById(id) { var gs = S.game.groups; for (var i = 0; i < gs.length; i++) if (gs[i].id === id) return gs[i]; return null; }
 function renderResp() {
+  var box = $("resp"); if (!box) return;
   var g = S.game, at = g.at;
-  var who = at.group != null ? "<b>Nhóm " + at.group + "</b>"
-    : (at.resolved ? '<b class="none">Đã có đáp án cho câu này</b>' : '<b class="none">Chưa chọn nhóm trả lời</b>');
+  var who = at.group != null ? "<b>Nhóm " + at.group + "</b>" : '<b class="none">Chưa chọn nhóm</b>';
   var chips = g.groups.map(function (gr) {
     var tried = at.triedGroups.indexOf(gr.id) >= 0;
-    return '<button class="gchip' + (at.group === gr.id ? " on" : "") + '" data-action="pick" data-g="' + gr.id + '" id="gchip-' + gr.id + '"' + ((tried || at.resolved) ? " disabled" : "") + ">Nhóm " + gr.id + "</button>";
+    return '<button class="gchip' + (at.group === gr.id ? " on" : "") + '" data-action="pick" data-g="' + gr.id + '" id="gchip-' + gr.id + '" aria-label="Nhóm ' + gr.id + '" title="Nhóm ' + gr.id + '"' + ((tried || at.resolved) ? " disabled" : "") + ">" + gr.id + "</button>";
   }).join("");
-  $("resp").innerHTML =
-    '<div class="resp-now"><div class="who"><span class="eyebrow">Đang trả lời</span>' + who + "</div>" + ringHTML() + "</div>" +
-    '<div><span class="eyebrow">Nhóm giơ tay, bấm để chọn</span><div class="gchips" style="margin-top:.4rem">' + chips + "</div></div>" +
-    '<div class="resp-actions"><button class="btn btn-primary" data-action="wheel-open" id="btn-wheel"' + ((at.resolved || !spinCandidates().length) ? " disabled" : "") + ">" +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2"/><path d="M12 1.5v4.3M12 18.2v4.3M1.5 12h4.3M18.2 12h4.3M4.6 4.6l3 3M16.4 16.4l3 3M4.6 19.4l3-3M16.4 7.6l3-3"/></svg>' +
-      "Quay ngẫu nhiên</button></div>";
+  box.innerHTML =
+    '<div class="resp-who">' + ringHTML() + '<div><span class="eyebrow">Đang trả lời</span>' + who + "</div></div>" +
+    '<div class="resp-pick"><span class="eyebrow">Nhóm giơ tay</span><div class="gchips">' + chips + "</div></div>" +
+    '<button class="wheel-btn" data-action="wheel-open" id="btn-wheel" title="Quay ngẫu nhiên (phím Q)" aria-label="Quay ngẫu nhiên chọn nhóm"' + ((at.resolved || !spinCandidates().length) ? " disabled" : "") + ">" +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5M4.6 4.6l2.5 2.5M16.9 16.9l2.5 2.5M4.6 19.4l2.5-2.5M16.9 7.1l2.5-2.5"/></svg></button>';
   updateRing();
 }
 function ringHTML() {
@@ -1395,6 +1414,8 @@ function ringHTML() {
 }
 
 /* ---------- Sales contract ---------- */
+/* Standard 14-article international sales contract (Chapter 6). Price sits at Article 6, after Shipment and
+   Payment, so the blanks the questions fill run top to bottom in question order. */
 function todayStr() { var d = new Date(); function p(n) { return (n < 10 ? "0" : "") + n; } return p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear(); }
 function renderContract(stampKey, target) {
   var g = S.game, box = target || $("contract");
@@ -1407,37 +1428,68 @@ function renderContract(stampKey, target) {
     return '<span class="fill' + (f.nego ? " nego blink" : "") + '">' + esc(f.v) + "</span>" + (f.s ? '<span class="fill-sub">' + esc(f.s) + "</span>" : "") +
       (f.warn ? '<span class="doc-note">✎ Điền sau sự cố: không nhóm nào trả lời đúng</span>' : "");
   }
-  var pf = g.filled.price;
+  function art(n, en, vi, body, key) {
+    return '<section class="art"' + (key ? ' data-key="' + key + '"' : "") + "><h4>Article " + n + ". " + en + " <span>/ Điều " + n + ". " + vi + "</span></h4>" + body + "</section>";
+  }
+  var del = g.filled.delivery, pf = g.filled.price;
   var priceCell = !pf ? blank("price") : '<span class="fill' + (pf.nego ? " nego blink" : "") + '">' + esc(pf.v) + "</span>" + (pf.warn ? '<span class="doc-note">✎ sau sự cố</span>' : "");
-  var priceNote = pf ? "<p><i>" + esc(pf.s) + "</i></p>" : "";
+  var priceNote = pf ? '<p class="fill-sub">' + esc(pf.s) + "</p>" : "";
+  var termText = del ? "FOB Cat Lai Port, Incoterms® 2020" : "the delivery terms in Article 4";
+  var signNote = g.done ? "Chưa ký · chờ chốt giá Điều 6" : "Chưa ký";
   box.innerHTML =
     '<article class="doc">' +
       '<header class="doc-head"><div class="doc-title">SALES CONTRACT<span>HỢP ĐỒNG MUA BÁN HÀNG HÓA QUỐC TẾ</span></div>' +
-        '<div class="doc-meta"><span>No. / Số: <b>01/2026/AN-SR</b></span><span>Date / Ngày: <b>' + todayStr() + "</b></span></div></header>" +
-      '<p class="doc-basis" data-key="basis"><b>Pursuant to / Căn cứ:</b> ' + fill("basis") + "</p>" +
+        '<div class="doc-meta"><span>No. / Số: <b>01/2026/AN-SR</b></span><span>Place / Nơi ký: <b>Ho Chi Minh City</b></span><span>Date / Ngày: <b>' + todayStr() + "</b></span></div></header>" +
+      '<p class="doc-basis" data-key="basis"><b>Pursuant to / Căn cứ:</b> the Commercial Law of Viet Nam 2005; the needs and capabilities of both parties; and ' + fill("basis") + "</p>" +
+      '<p class="doc-agree">This contract is made by and between:</p>' +
       '<div class="doc-parties">' +
-        "<p><b>THE SELLER / BÊN BÁN:</b> AN NAM FOOD JOINT STOCK COMPANY<br><i>Công ty Cổ phần Thực phẩm An Nam</i><br>Address: Ho Chi Minh City, Viet Nam<br>Represented by: Export Director</p>" +
-        "<p><b>THE BUYER / BÊN MUA:</b> SIAM RETAIL &amp; DISTRIBUTION CO., LTD<br>Address: Bangkok, Thailand<br>Represented by: Vice President, Purchasing</p>" +
+        "<p><b>THE SELLER / BÊN BÁN: AN NAM FOOD JOINT STOCK COMPANY</b><br><i>Công ty Cổ phần Thực phẩm An Nam</i><br>" +
+          "Address: Ho Chi Minh City, Viet Nam<br>Tel: +84 28 xxxx xxxx · Email: export@annamfood.example<br>" +
+          "Bank: Vietcombank, Ho Chi Minh City Branch · A/C No.: xxxx xxxx xxxx (USD)<br>" +
+          "Represented by: Mr. Nguyen Van A – Export Director</p>" +
+        "<p><b>THE BUYER / BÊN MUA: SIAM RETAIL &amp; DISTRIBUTION CO., LTD</b><br>" +
+          "Address: Bangkok, Thailand<br>Tel: +66 2 xxx xxxx · Email: purchasing@siamretail.example<br>" +
+          "Represented by: Mr. Somchai S. – Vice President, Purchasing</p>" +
       "</div>" +
-      '<p class="doc-agree">Both parties agree to sign this contract with the following terms and conditions. <i>Hai bên thống nhất ký kết hợp đồng với các điều khoản sau:</i></p>' +
-      '<section class="art" data-key="price"><h4>Article 1. Commodity – Quantity – Price <span>/ Hàng hóa – Số lượng – Giá</span></h4>' +
-        '<div style="overflow-x:auto"><table><thead><tr><th>No.</th><th>Description of goods</th><th>Qty (kg)</th><th>Unit price (USD/kg)</th><th>Amount (USD)</th></tr></thead>' +
-        '<tbody><tr><td class="num">1</td><td>Soft dried mango &amp; jackfruit, grade A<br><i>Xoài, mít sấy dẻo loại A</i></td><td class="num">8,000</td><td class="num">' + priceCell + '</td><td class="num">—</td></tr></tbody></table></div>' +
-        priceNote + "<p>Quantity tolerance: ±5% at Seller's option. Total: 01 × 20' container.</p></section>" +
-      '<section class="art" data-key="delivery"><h4>Article 2. Shipment <span>/ Giao hàng</span></h4>' +
+      '<p class="doc-agree">Both parties have agreed to sign this contract with the following terms and conditions. <i>Hai bên thống nhất ký kết hợp đồng với các điều khoản sau:</i></p>' +
+      art(1, "Commodity", "Tên hàng",
+        "<p>Soft dried mango and soft dried jackfruit, Grade A, brand AN NAM. Country of origin: Viet Nam.<br><i>Xoài sấy dẻo và mít sấy dẻo loại A, xuất xứ Việt Nam.</i></p>") +
+      art(2, "Quality", "Chất lượng",
+        "<p>Grade A, as per the sealed sample approved by both parties (moisture, colour, taste and sugar content). Free from foreign matter, mould and insects. Shelf life: 12 months from the production date. Conforming to the food safety regulations of Thailand (Thai FDA).</p>") +
+      art(3, "Quantity", "Số lượng",
+        "<p>8,000 kg net (± 5% at the Seller's option), packed in 800 cartons and loaded in 01 × 20' GP container.</p>") +
+      art(4, "Shipment", "Giao hàng",
         "<p>Terms of delivery: " + fill("delivery") + "</p>" +
-        "<p>Port of loading: Cat Lai, Ho Chi Minh City · Port of discharge: Laem Chabang, Thailand<br>Partial shipment: not allowed · Transshipment: not allowed</p></section>" +
-      '<section class="art" data-key="payment"><h4>Article 3. Payment <span>/ Thanh toán</span></h4><p>' + fill("payment") + "</p></section>" +
-      '<section class="art" data-key="docs"><h4>Article 4. Documents required <span>/ Chứng từ</span></h4><p>' + fill("docs") + "</p></section>" +
-      '<section class="art"><h4>Article 5. Packing and marking <span>/ Bao bì, ký mã hiệu</span></h4><p>Export cartons of 10 kg net, labels in Thai and English. Shipping mark: AN-SR / LAEM CHABANG / C/No.</p></section>' +
-      '<section class="art"><h4>Article 6. Inspection <span>/ Giám định</span></h4><p>Quality and quantity certified by an independent surveyor at the port of loading, at Seller\'s cost.</p></section>' +
-      '<section class="art"><h4>Article 7. Force majeure <span>/ Bất khả kháng</span></h4><p>As defined in the ICC Force Majeure Clause 2020. The affected party shall notify the other within 07 days.</p></section>' +
-      '<section class="art"><h4>Article 8. Claim <span>/ Khiếu nại</span></h4><p>Claims must be lodged in writing within 30 days after arrival at the port of discharge, with a surveyor\'s report.</p></section>' +
-      '<section class="art"><h4>Article 9. Arbitration <span>/ Trọng tài</span></h4><p>Disputes are first settled by negotiation; failing that, by the Vietnam International Arbitration Centre (VIAC). The award is final and binding.</p></section>' +
-      '<section class="art"><h4>Article 10. General terms <span>/ Điều khoản chung</span></h4><p>Made in 04 English originals, 02 for each party, effective from the date of signing.</p></section>' +
-      '<div class="sign"><div><b>FOR THE SELLER</b><br><i>Đại diện bên bán</i><div class="line">Chưa ký</div>Export Director</div>' +
-        '<div><b>FOR THE BUYER</b><br><i>Đại diện bên mua</i><div class="line">Chưa ký</div>VP, Purchasing</div></div>' +
-      '<p class="doc-foot">Hợp đồng mẫu dùng trong trò chơi lớp học. Tên và thông tin doanh nghiệp là giả định.</p>' +
+        "<p>Port of loading: Cat Lai Port, Ho Chi Minh City, Viet Nam<br>Port of discharge: Laem Chabang Port, Thailand<br>Time of shipment: not later than 15 December 2026<br>Partial shipment: not allowed · Transshipment: not allowed</p>" +
+        "<p>Shipping advice: within 24 hours after loading, the Seller shall e-mail the Buyer the container number, B/L number, vessel name, ETD and ETA.</p>", "delivery") +
+      art(5, "Payment", "Thanh toán",
+        "<p>Method of payment: " + fill("payment") + "</p>" +
+        "<p>Beneficiary: An Nam Food Joint Stock Company – Vietcombank, Ho Chi Minh City Branch.</p>" +
+        '<p data-key="docs">Documents required / Chứng từ xuất trình: ' + fill("docs") + "</p>", "payment") +
+      art(6, "Price", "Giá cả",
+        '<div style="overflow-x:auto"><table><thead><tr><th>No.</th><th>Description of goods</th><th>Qty (kg)</th><th>Unit price (USD/kg)</th><th>Amount (USD)</th></tr></thead>' +
+        '<tbody><tr><td class="num">1</td><td>Soft dried mango &amp; jackfruit, Grade A<br><i>Xoài, mít sấy dẻo loại A</i></td><td class="num">8,000</td><td class="num">' + priceCell + '</td><td class="num">—</td></tr></tbody></table></div>' +
+        priceNote +
+        "<p>Currency: US Dollar (USD). The unit price is understood " + termText + ", including export packing and marking.<br>Total contract value: to be confirmed once the unit price is agreed.</p>", "price") +
+      art(7, "Packing and marking", "Bao bì và ký mã hiệu",
+        "<p>Inner: food-grade PE bags of 500 g. Outer: 5-ply export cartons, 10 kg net each. Labels in Thai and English as required by Thai FDA.<br>Shipping mark: AN-SR / LAEM CHABANG / C/No. 1–800 / MADE IN VIET NAM.</p>") +
+      art(8, "Warranty", "Bảo hành",
+        "<p>The Seller warrants that the goods are newly produced, conform to Articles 1–3 and have at least 10 months of remaining shelf life on arrival at the port of discharge.</p>") +
+      art(9, "Insurance", "Bảo hiểm",
+        "<p>" + (del ? "To be covered by the Buyer, as the goods are sold on FOB terms: risk passes to the Buyer once the goods are on board at Cat Lai." : "As per the delivery terms in Article 4.") + "</p>") +
+      art(10, "Claim", "Khiếu nại",
+        "<p>Quality claims within 30 days and quantity claims within 15 days after the goods arrive at the port of discharge, supported by a survey report from an independent surveyor in Thailand. The Seller shall reply within 15 days of receiving a claim.</p>") +
+      art(11, "Force majeure", "Bất khả kháng",
+        "<p>Governed by the ICC Force Majeure Clause 2020. The affected party shall notify the other within 07 days and provide a certificate from a competent authority. If the event lasts more than 60 days, either party may terminate this contract without penalty.</p>") +
+      art(12, "Penalty", "Phạt vi phạm",
+        "<p>Late delivery: 0.5% of the value of the delayed goods per week of delay. Late payment: 0.5% of the overdue amount per week. The total penalty shall not exceed 8% of the value of the breached obligation (Article 301, Commercial Law of Viet Nam 2005).</p>") +
+      art(13, "Arbitration", "Trọng tài",
+        "<p>Disputes shall first be settled by negotiation. If no settlement is reached within 30 days, they shall be finally settled by the Vietnam International Arbitration Centre (VIAC) under its Rules of Arbitration. Place of arbitration: Ho Chi Minh City. Language: English. The award is final and binding on both parties.</p>") +
+      art(14, "Other terms and conditions", "Điều khoản khác",
+        "<p>This contract is governed by the laws of Viet Nam; trade terms are interpreted under Incoterms® 2020. Any amendment is valid only if made in writing and signed by both parties. This contract is made in 04 English originals, 02 for each party, of equal validity, and comes into effect from the signing date.</p>") +
+      '<div class="sign"><div><b>FOR THE SELLER</b><br><i>Đại diện bên bán</i><div class="line">' + signNote + "</div>Nguyen Van A<br><i>Export Director</i></div>" +
+        '<div><b>FOR THE BUYER</b><br><i>Đại diện bên mua</i><div class="line">' + signNote + "</div>Somchai S.<br><i>VP, Purchasing</i></div></div>" +
+      '<p class="doc-foot">Hợp đồng mẫu dùng trong trò chơi lớp học. Tên doanh nghiệp, người đại diện và số liệu là giả định.</p>' +
     "</article>";
   if (stampKey) {
     var el = box.querySelector('[data-key="' + stampKey + '"]');
