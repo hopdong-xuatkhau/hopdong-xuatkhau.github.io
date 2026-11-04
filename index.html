@@ -1,10 +1,13 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="only light">
 <meta name="darkreader-lock">
+<meta name="theme-color" content="#EDF2F5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <title>Hợp đồng Sài Gòn – Bangkok</title>
 <meta name="description" content="Trò chơi Nghiệp vụ ngoại thương & Logistics: soạn hợp đồng xuất khẩu xoài sấy sang Thái Lan, chọn Incoterms, thanh toán, chứng từ và bước vào bàn đàm phán.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='8' width='26' height='16' rx='2' fill='%23E5621C'/%3E%3Cpath d='M8 11v10M12 11v10M16 11v10M20 11v10M24 11v10' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
@@ -12,70 +15,60 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Big+Shoulders+Stencil+Display:wght@700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
-/* Layout: a working container terminal fills the page behind everything (fixed backdrop);
+/* Layout: a working container terminal fills the page behind everything (fixed backdrop, day or night);
    screens float above it — intro on the left with the terminal in view, then a one-screen
-   "port control room": route strip, question desk, responder panel and the live sales contract. */
+   "port control room": tracking map, question desk, responder panel and the live sales contract.
+   Light is the default look; dark (night port) is only switched on with the moon button. */
 :root {
-  --bg: #E6ECEF; --bg-rgb: 230, 236, 239;
-  --bg-2: #D8E2E7;
-  --surface: #FBFCFD; --surface-rgb: 251, 252, 253;
-  --surface-2: #F0F4F6;
-  --ink: #0D2131; --ink-2: #445C6B; --ink-3: #74899A;
-  --line: #C8D4DB;
-  --accent: #E0601B; --accent-ink: #FFFFFF; --accent-soft: #FBE2D2;
-  --sea: #A9CFDD; --sea-2: #7FB6CA; --sea-ink: #1C5B77;
-  --land: #DCE4CF; --land-ink: #5E6F4A;
-  --teal: #0D7480;
-  --ok: #1C8549; --ok-soft: #D7EFE0;
-  --bad: #C2342A; --bad-soft: #F7DDD9;
-  --gold: #A97B0C;
+  --bg: #EDF2F5; --bg-rgb: 237, 242, 245; --bg-2: #DFE8ED;
+  --surface: #FFFFFF; --surface-rgb: 255, 255, 255; --surface-2: #F2F6F8;
+  --ink: #0D2131; --ink-2: #445C6B; --ink-3: #74899A; --line: #CCD8DF;
+  --accent: #E0601B; --accent-ink: #FFFFFF; --accent-soft: #FCE4D4;
+  --sea: #BFE1ED; --sea-deep: #9FCFE1; --sea-2: #7FB6CA; --sea-ink: #1C5B77; --coast: #6E9FB2;
+  --land: #E7EEDC; --land-dot: rgba(94, 111, 74, .22); --land-ink: #5E6F4A; --grid: rgba(13, 33, 49, .05);
+  --teal: #0D7480; --ok: #1C8549; --ok-soft: #DDF2E5; --bad: #C2342A; --bad-soft: #F9E1DD; --gold: #A97B0C; --gold-soft: #FBF0D2;
   --paper: #FFFFFF; --paper-ink: #1B1E22; --paper-line: #D6D3CC; --paper-mute: #6A6F76; --paper-head: #F2F1EE; --paper-flash: #DFF3E6; --red-ink: #C2342A;
   --c1: #E0601B; --c2: #0D7480; --c3: #2D4E80; --c4: #A8363F; --c5: #B88A12; --c6: #4F7A3A;
-  --sky-1: #B9D5E4; --sky-2: #EFE5D6; --sun: #EF7A35; --cloud: rgba(255, 255, 255, .78);
-  --city: #A9BCC7; --city-2: #93A8B5; --quay: #7A8992; --quay-top: #AEBAC1; --win: #86A9BD; --lamp: #F3D27C;
-  --shadow: 0 1px 2px rgba(13,33,49,.06), 0 10px 28px rgba(13,33,49,.12);
-  --scrim: rgba(9,22,33,.55);
-  --f-ui: "Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --sky-top: #86C1E6; --sky-mid: #C8E4F3; --sky-low: #F6E8D5; --day: 1; --night: 0;
+  --sun: #F58A3A; --cloud: rgba(255, 255, 255, .9);
+  --city-far: #BACBD6; --bf1: #D9E3E9; --bf2: #C2D1DB; --bf3: #E4DDD0; --bf4: #A9C0CE; --bf-roof: #8EA4B2; --bwin: #8FB0C4; --bwin-lit: #8FB0C4;
+  --quay: #7A8992; --quay-top: #B0BCC3; --win: #86A9BD; --lamp: #F3D27C;
+  --shadow: 0 1px 2px rgba(13, 33, 49, .06), 0 10px 28px rgba(13, 33, 49, .12);
+  --scrim: rgba(9, 22, 33, .5);
+  --f-ui: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --f-doc: "Noto Serif", Georgia, "Times New Roman", serif;
   --f-code: "Big Shoulders Stencil Display", "Be Vietnam Pro", Impact, "Arial Narrow", sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #07131D; --bg-rgb: 7, 19, 29; --bg-2: #0B1B29; --surface: #0E2131; --surface-rgb: 14, 33, 49; --surface-2: #13293C;
-    --ink: #E6EEF3; --ink-2: #A1B4C2; --ink-3: #6E8595; --line: #20384C;
-    --accent: #FF7B35; --accent-ink: #1B0B02; --accent-soft: #3B2316; --sea: #0C2639; --sea-2: #1A4A68; --sea-ink: #7FC4DD; --land: #16251D; --land-ink: #8FA67A;
-    --teal: #33B9C2; --ok: #3CCB78; --ok-soft: #0F2F1E; --bad: #FF6A5B; --bad-soft: #3A1613; --gold: #E9BB3D;
-    --c1: #F2742E; --c2: #1E9AA4; --c3: #4C72B0; --c4: #C8505A; --c5: #D7A82A; --c6: #6C9A50;
-    --sky-1: #040C16; --sky-2: #143049; --sun: #F1E2B8; --cloud: rgba(255, 255, 255, .05);
-    --city: #13283A; --city-2: #1A3346; --quay: #1F2B34; --quay-top: #31404B; --win: #FFD36B; --lamp: #FFD873;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35); --scrim: rgba(2,8,13,.72);
-    color-scheme: dark;
-  }
+  color-scheme: only light;
 }
 :root[data-theme="dark"] {
   --bg: #07131D; --bg-rgb: 7, 19, 29; --bg-2: #0B1B29; --surface: #0E2131; --surface-rgb: 14, 33, 49; --surface-2: #13293C;
   --ink: #E6EEF3; --ink-2: #A1B4C2; --ink-3: #6E8595; --line: #20384C;
-  --accent: #FF7B35; --accent-ink: #1B0B02; --accent-soft: #3B2316; --sea: #0C2639; --sea-2: #1A4A68; --sea-ink: #7FC4DD; --land: #16251D; --land-ink: #8FA67A;
-  --teal: #33B9C2; --ok: #3CCB78; --ok-soft: #0F2F1E; --bad: #FF6A5B; --bad-soft: #3A1613; --gold: #E9BB3D;
+  --accent: #FF7B35; --accent-ink: #1B0B02; --accent-soft: #3B2316;
+  --sea: #113149; --sea-deep: #0B263A; --sea-2: #1E5070; --sea-ink: #7FC4DD; --coast: #2D5D77;
+  --land: #15241C; --land-dot: rgba(143, 166, 122, .14); --land-ink: #8FA67A; --grid: rgba(255, 255, 255, .045);
+  --teal: #33B9C2; --ok: #3CCB78; --ok-soft: #0F2F1E; --bad: #FF6A5B; --bad-soft: #3A1613; --gold: #E9BB3D; --gold-soft: #3A2E10;
   --c1: #F2742E; --c2: #1E9AA4; --c3: #4C72B0; --c4: #C8505A; --c5: #D7A82A; --c6: #6C9A50;
-  --sky-1: #040C16; --sky-2: #143049; --sun: #F1E2B8; --cloud: rgba(255, 255, 255, .05);
-  --city: #13283A; --city-2: #1A3346; --quay: #1F2B34; --quay-top: #31404B; --win: #FFD36B; --lamp: #FFD873;
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35); --scrim: rgba(2,8,13,.72);
+  --sky-top: #02060F; --sky-mid: #0A1A2E; --sky-low: #1C3652; --day: 0; --night: 1;
+  --cloud: rgba(170, 195, 220, .07);
+  --city-far: #0F2236; --bf1: #13253A; --bf2: #172C43; --bf3: #1B2F42; --bf4: #102238; --bf-roof: #0C1B2C; --bwin: #22364B; --bwin-lit: #FFD36B;
+  --quay: #1F2B34; --quay-top: #31404B; --win: #FFD36B; --lamp: #FFD873;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 30px rgba(0, 0, 0, .35); --scrim: rgba(2, 8, 13, .72);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { font-size: clamp(15px, min(0.62vw + 9px, 1.1vh + 7px), 21px); height: 100%; }
+html { font-size: clamp(15px, min(0.62vw + 9px, 1.1vh + 7px), 21px); height: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body {
   margin: 0; min-height: 100%; background: var(--bg); color: var(--ink);
-  font-family: var(--f-ui); line-height: 1.5; -webkit-font-smoothing: antialiased;
+  font-family: var(--f-ui); line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 [hidden] { display: none !important; }
-button { font: inherit; color: inherit; }
+button { font: inherit; color: inherit; touch-action: manipulation; }
 h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
 p { margin: 0; }
 .eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
@@ -83,79 +76,92 @@ p { margin: 0; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 
 /* ---------- Port backdrop ---------- */
-#backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.bd-sky { position: absolute; inset: 0; background: linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 66%); }
+#backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bd-sky { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 42%, var(--sky-low) 70%); }
 .bd-scene { position: absolute; left: 0; right: 0; bottom: 0; height: min(80vh, 60vw); }
 .bd-scene svg { width: 100%; height: 100%; display: block; }
-.bd-veil { position: absolute; inset: 0; background: rgba(var(--bg-rgb), .86); transition: background .6s ease; }
-body[data-screen="intro"] .bd-veil { background: linear-gradient(90deg, rgba(var(--bg-rgb), .95) 0%, rgba(var(--bg-rgb), .86) 40%, rgba(var(--bg-rgb), .05) 66%, rgba(var(--bg-rgb), 0) 100%); }
-body[data-screen="brief"] .bd-veil { background: rgba(var(--bg-rgb), .78); }
-body[data-screen="final"] .bd-veil, body[data-screen="present"] .bd-veil { background: rgba(var(--bg-rgb), .7); }
+.bd-veil { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(var(--bg-rgb), .84); transition: background .6s ease; }
+body[data-screen="intro"] .bd-veil { background: linear-gradient(90deg, rgba(var(--bg-rgb), .95) 0%, rgba(var(--bg-rgb), .86) 40%, rgba(var(--bg-rgb), .04) 66%, rgba(var(--bg-rgb), 0) 100%); }
+body[data-screen="brief"] .bd-veil { background: rgba(var(--bg-rgb), .76); }
+body[data-screen="final"] .bd-veil, body[data-screen="present"] .bd-veil { background: rgba(var(--bg-rgb), .66); }
 .app { position: relative; z-index: 1; }
 /* Scene paints: theme-aware parts only; ship, crane and container colours are fixed like real liveries. */
+.k-day, .k-night { transition: opacity .8s ease; }
+.k-day { opacity: var(--day); } .k-night { opacity: var(--night); }
 .k-sun { fill: var(--sun); } .k-cloud { fill: var(--cloud); }
-.k-city { fill: var(--city); } .k-city-2 { fill: var(--city-2); }
+.k-far { fill: var(--city-far); }
+.bf1 { fill: var(--bf1); } .bf2 { fill: var(--bf2); } .bf3 { fill: var(--bf3); } .bf4 { fill: var(--bf4); } .bfr { fill: var(--bf-roof); }
+.bw { fill: var(--bwin); } .bw.lit { fill: var(--bwin-lit); }
+.k-farlit { fill: #FFD36B; }
 .k-sea { fill: var(--sea); } .k-horizon { stroke: var(--sea-2); stroke-width: 2; fill: none; }
 .k-quay { fill: var(--quay); } .k-quay-top { fill: var(--quay-top); } .k-fender { fill: #1B2733; opacity: .75; }
 .k-wave { fill: none; stroke: var(--sea-2); stroke-width: 3; stroke-linecap: round; }
-.k-crane-far { fill: none; stroke: var(--city-2); stroke-width: 6; stroke-linejoin: round; }
+.k-crane-far { fill: none; stroke: var(--city-far); stroke-width: 6; stroke-linejoin: round; }
 .win { fill: var(--win); } .k-lamp { fill: var(--lamp); }
+.tw { animation: twinkle 3.2s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: .25; } }
 
+/* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5em;
   border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
-  padding: .62em 1.1em; border-radius: 999px; font-weight: 600; cursor: pointer;
+  padding: .62em 1.1em; border-radius: 999px; font-weight: 600; cursor: pointer; min-height: 2.6rem;
   transition: transform .12s ease, background .15s ease, border-color .15s ease;
 }
-.btn:hover { border-color: var(--ink-3); }
 .btn:active { transform: translateY(1px); }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
 .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.btn-primary:hover { border-color: var(--ink); }
 .btn-lg { font-size: 1.08rem; padding: .78em 1.5em; }
-.btn-ghost { background: rgba(var(--surface-rgb), .6); }
+.btn-ghost { background: rgba(var(--surface-rgb), .7); }
 .btn svg { width: 1.15em; height: 1.15em; flex: none; }
-.icon-btn { width: 2.4rem; height: 2.4rem; padding: 0; border-radius: 50%; }
+.icon-btn { width: 2.6rem; height: 2.6rem; min-height: 0; padding: 0; border-radius: 50%; }
 .icon-btn svg { width: 1.15rem; height: 1.15rem; }
+.i-sun { display: none; }
+:root[data-theme="dark"] .i-sun { display: block; }
+:root[data-theme="dark"] .i-moon { display: none; }
+@media (hover: hover) {
+  .btn:hover { border-color: var(--ink-3); }
+  .btn-primary:hover { border-color: var(--ink); }
+}
 
-.app { min-height: 100vh; display: flex; flex-direction: column; }
+.app { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
 .screen { flex: 1; display: flex; flex-direction: column; }
-.cn-badge { font-family: var(--f-code); font-size: 1.05rem; letter-spacing: .08em; border: 2px solid var(--ink); padding: .1em .55em; border-radius: 4px; background: rgba(var(--surface-rgb), .55); }
+.cn-badge { font-family: var(--f-code); font-size: 1.05rem; letter-spacing: .08em; border: 2px solid var(--ink); padding: .1em .55em; border-radius: 4px; background: rgba(var(--surface-rgb), .6); white-space: nowrap; }
 .tag-line { display: inline-flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
 .top-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .tools { display: flex; gap: .4rem; }
 
 /* ---------- Intro ---------- */
-.intro { max-width: 1320px; width: 100%; margin: 0 auto; padding-block: 1.8rem 3rem; display: grid; gap: 1.6rem; }
-.intro-col { width: min(100%, 44rem); display: grid; gap: 1.3rem; }
-.intro h1 { font-size: clamp(2.1rem, 4vw, 3.7rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.06; }
+.intro { max-width: 1320px; width: 100%; margin: 0 auto; padding-top: 1.8rem; padding-bottom: 3rem; display: grid; gap: 1.6rem; }
+.intro-col { width: 100%; max-width: 44rem; display: grid; gap: 1.3rem; }
+.intro h1 { font-size: clamp(2rem, 4vw, 3.7rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.06; }
 .intro h1 .h1-route { display: block; font-family: var(--f-code); font-weight: 800; letter-spacing: .02em; color: var(--accent); font-size: .92em; margin-top: .2em; }
 .lede { font-size: 1.06rem; color: var(--ink-2); max-width: 38em; }
-.booking { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1.5px solid var(--ink); border-radius: 8px; overflow: hidden; background: rgba(var(--surface-rgb), .82); }
+.booking { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1.5px solid var(--ink); border-radius: 8px; overflow: hidden; background: rgba(var(--surface-rgb), .88); }
 .booking > div { padding: .5rem .7rem; border-left: 1.5px dashed var(--line); min-width: 0; }
 .booking > div:first-child { border-left: 0; }
 .booking span { display: block; font-family: var(--f-code); font-size: .82rem; letter-spacing: .1em; color: var(--ink-3); }
 .booking b { display: block; font-size: .88rem; line-height: 1.25; }
-.setup { background: rgba(var(--surface-rgb), .93); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.3rem 1.4rem; display: grid; gap: 1.1rem; box-shadow: var(--shadow); }
+.setup { background: rgba(var(--surface-rgb), .95); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.3rem 1.4rem; display: grid; gap: 1.1rem; box-shadow: var(--shadow); }
 .setup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem 1.5rem; }
-.field { display: grid; gap: .4rem; align-content: start; }
+.field { display: grid; gap: .45rem; align-content: start; }
 .field label, .field .lbl { font-weight: 600; font-size: .92rem; }
 .field .hint { font-size: .8rem; color: var(--ink-3); }
 .stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; width: max-content; }
-.stepper button { border: 0; background: var(--surface-2); width: 2.4rem; height: 2.4rem; cursor: pointer; font-size: 1.2rem; font-weight: 700; }
+.stepper button { border: 0; background: var(--surface-2); width: 2.6rem; height: 2.6rem; cursor: pointer; font-size: 1.2rem; font-weight: 700; }
 .stepper output { min-width: 3rem; text-align: center; font-weight: 800; font-size: 1.15rem; }
-.check { display: flex; align-items: center; gap: .55rem; cursor: pointer; font-size: .92rem; }
-.check input { width: 1.15rem; height: 1.15rem; accent-color: var(--accent); }
-select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); width: max-content; }
+.check { display: flex; align-items: center; gap: .55rem; cursor: pointer; font-size: .92rem; min-height: 1.9rem; }
+.check input { width: 1.2rem; height: 1.2rem; accent-color: var(--accent); flex: none; }
+select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; border-radius: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); width: max-content; max-width: 100%; }
 .qpick { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .4rem 1rem; }
 .qpick .check { padding: .42rem .6rem; border-radius: 8px; background: var(--surface-2); }
-.qpick .check small { color: var(--ink-3); margin-left: auto; font-weight: 600; white-space: nowrap; }
+.qpick .check small { color: var(--ink-3); margin-left: auto; font-weight: 600; white-space: nowrap; padding-left: .4rem; }
 .setup-actions { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
 .setup-actions .note { color: var(--ink-3); font-size: .82rem; }
 .kbd { font: 700 .75rem var(--f-ui); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 .35em; background: var(--surface-2); }
 
 /* ---------- Brief ---------- */
-.brief { max-width: 1180px; width: 100%; margin: 0 auto; padding-block: 2rem 3rem; display: grid; gap: 1.6rem; }
+.brief { max-width: 1180px; width: 100%; margin: 0 auto; padding-top: 2rem; padding-bottom: 3rem; display: grid; gap: 1.6rem; }
 .brief-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
 .order { background: var(--paper); color: var(--paper-ink); border: 1px solid var(--paper-line); border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: var(--shadow); font-family: var(--f-doc); }
 .order .eyebrow { font-family: var(--f-ui); color: var(--paper-mute); }
@@ -173,47 +179,68 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 .rule p { color: var(--ink-2); font-size: .92rem; }
 
 /* ---------- Game header ---------- */
-.topbar { display: flex; align-items: center; gap: 1rem; padding-block: .75rem; flex-wrap: wrap; }
+.topbar { display: flex; align-items: center; gap: 1rem; padding-top: .75rem; padding-bottom: .75rem; flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: .7rem; min-width: 0; }
 .brand .cn-badge { font-size: .95rem; }
 .brand b { font-size: 1rem; white-space: nowrap; }
 .prog { display: flex; align-items: center; gap: .55rem; margin-left: auto; }
 .pips { display: flex; gap: .3rem; }
 .pip { width: 1.6rem; height: .5rem; border-radius: 3px; background: var(--line); }
-.pip.done { background: var(--ok); }
-.pip.warn { background: var(--gold); }
-.pip.now { background: var(--accent); }
+.pip.done { background: var(--ok); } .pip.warn { background: var(--gold); } .pip.bad { background: var(--bad); } .pip.now { background: var(--accent); }
 .health { display: flex; align-items: center; gap: .55rem; min-width: 12rem; }
 .health .bar { flex: 1; height: .62rem; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
 .health .bar i { display: block; height: 100%; width: 100%; background: var(--ok); transition: width .6s ease, background .3s; }
 .health b { font-size: .95rem; min-width: 3ch; text-align: right; }
 
-/* ---------- Route strip (track spans 6%–94% of the width) ---------- */
-.routebox { border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--land); box-shadow: var(--shadow); }
-.route { position: relative; height: clamp(5.4rem, 14vh, 8.6rem); background: var(--land); }
-.rt-water { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.rt-water .sea { fill: var(--sea); }
-.rt-water .ripple { fill: none; stroke: var(--sea-2); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.rt-tag { position: absolute; top: .45rem; font-size: .7rem; font-weight: 800; letter-spacing: .2em; color: var(--land-ink); white-space: nowrap; }
-.rt-tag.rt-gulf { color: var(--sea-ink); }
-.rt-line { position: absolute; left: 6%; right: 6%; top: 58%; border-top: 3px dotted var(--ink); opacity: .45; }
-.rt-prog { position: absolute; left: 6%; top: calc(58% - 1px); height: 5px; width: 0; background: var(--accent); border-radius: 3px; transition: width 1.1s cubic-bezier(.45,.05,.2,1); }
-.rt-node { position: absolute; top: 58%; width: 0; height: 0; }
-.rt-node i { position: absolute; left: 0; top: 0; width: 15px; height: 15px; transform: translate(-50%, -50%); border-radius: 50%; background: var(--surface); border: 2.5px solid var(--ink); }
-.rt-node span { position: absolute; top: .7rem; left: 0; transform: translateX(-50%); white-space: nowrap; font-size: .74rem; font-weight: 600; color: var(--ink-2); }
-.rt-node.first span { transform: translateX(-30%); }
-.rt-node.last span { transform: translateX(-70%); }
-.rt-node.reached i { background: var(--accent); }
-.rt-node.now i { width: 19px; height: 19px; }
+/* ---------- Tracking map (track spans 6%–94% of the width) ---------- */
+.routebox { border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+.route {
+  position: relative; height: clamp(5.8rem, 14.5vh, 9rem); overflow: hidden;
+  background-color: var(--land);
+  background-image: radial-gradient(var(--land-dot) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+}
+.rt-map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+.rt-map .sea { fill: var(--sea); }
+.rt-map .deep { fill: var(--sea-deep); }
+.rt-map .coast { fill: none; stroke: var(--coast); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.rt-map .lane-bg { fill: none; stroke: var(--ink-3); stroke-width: 2.4; stroke-dasharray: 2 7; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.rt-map .lane-glow { fill: none; stroke: var(--accent); stroke-opacity: .22; stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.rt-map .lane { fill: none; stroke: var(--accent); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.rt-grid { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 2.8rem 2.8rem; box-shadow: inset 0 -16px 26px -20px rgba(0, 0, 0, .18); }
+.rt-tag { position: absolute; top: .4rem; font-size: .68rem; font-weight: 800; letter-spacing: .22em; color: var(--land-ink); white-space: nowrap; }
+.rt-tag.rt-gulf { color: var(--sea-ink); letter-spacing: .3em; font-style: italic; }
+.rt-wave { position: absolute; width: 1.6rem; height: .6rem; color: var(--sea-2); opacity: .9; }
+.rt-compass { position: absolute; width: 1.9rem; height: 1.9rem; }
+.rt-compass .ring { fill: rgba(var(--surface-rgb), .65); stroke: var(--sea-ink); stroke-width: 1.2; }
+.rt-compass .ns { fill: var(--sea-ink); } .rt-compass .n { fill: var(--accent); }
+.rt-compass text { fill: var(--sea-ink); font: 800 7px var(--f-ui); }
+.rt-node { position: absolute; width: 0; height: 0; z-index: 1; }
+.rt-node i { position: absolute; left: 0; top: 0; width: 1.85rem; height: 1.85rem; transform: translate(-50%, -50%); border-radius: 50%; background: var(--surface); border: 2px solid var(--ink-2); color: var(--ink-2); display: grid; place-items: center; box-shadow: 0 2px 6px rgba(0, 0, 0, .15); }
+.rt-node i svg { width: 1.02rem; height: 1.02rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rt-node.reached i { background: var(--accent); border-color: var(--accent); color: #fff; }
+.rt-node.now i::after { content: ""; position: absolute; top: -6px; left: -6px; right: -6px; bottom: -6px; border-radius: 50%; border: 2px solid var(--accent); animation: ping 1.8s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.45); opacity: 0; } }
+.rt-node span { position: absolute; top: 1.1rem; left: 0; transform: translateX(-50%); white-space: nowrap; font-size: .72rem; font-weight: 600; color: var(--ink-2); background: rgba(var(--surface-rgb), .78); padding: 0 .4em; border-radius: 4px; }
+.rt-node.first span { transform: translateX(-28%); }
+.rt-node.last span { transform: translateX(-72%); }
 .rt-node.now span { color: var(--ink); font-weight: 800; }
-.rt-vehicle { position: absolute; top: 58%; left: 6%; width: 0; height: 0; z-index: 2; transition: left 1.1s cubic-bezier(.45,.05,.2,1); }
-.rt-vehicle svg { position: absolute; left: 0; transform: translateX(-50%); display: block; filter: drop-shadow(0 2px 1px rgba(0,0,0,.2)); }
-.rt-truck { height: 2.5rem; bottom: -3px; }
-.rt-ship { height: 2.8rem; bottom: -.5rem; display: none !important; }
+.rt-node b.rt-badge { position: absolute; left: .55rem; top: -1.45rem; min-width: 1.1rem; height: 1.1rem; padding: 0 .25rem; border-radius: 999px; background: var(--bad); color: #fff; font-size: .66rem; font-weight: 800; display: grid; place-items: center; border: 2px solid var(--surface); }
+.rt-vehicle { position: absolute; top: 58%; left: 6%; width: 0; height: 0; z-index: 2; --tilt: 0deg; }
+.rt-vehicle svg { position: absolute; left: 0; display: block; transform-origin: 50% 100%; transform: translateX(-50%) rotate(var(--tilt)); filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .22)); }
+.rt-truck { height: 2.35rem; bottom: .62rem; }
+.rt-ship { height: 2.6rem; bottom: .3rem; display: none !important; }
 .rt-vehicle.at-sea .rt-truck { display: none !important; }
 .rt-vehicle.at-sea .rt-ship { display: block !important; }
-.rt-inc { position: absolute; top: 14%; width: 1.25rem; height: 1.25rem; margin-left: -.625rem; border-radius: 50%; background: var(--bad); color: #fff; font-weight: 800; font-size: .78rem; display: grid; place-items: center; border: 2px solid var(--surface); z-index: 1; }
-.route-now { display: none; padding: .4rem .8rem; font-size: .85rem; font-weight: 600; background: var(--surface); border-top: 1px solid var(--line); }
+.rt-status { display: flex; align-items: center; gap: .55rem .9rem; flex-wrap: wrap; padding: .38rem .8rem; font-size: .8rem; border-top: 1px solid var(--line); background: var(--surface); }
+.rt-status .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: beacon 1.8s infinite; flex: none; }
+@keyframes beacon { 0% { box-shadow: 0 0 0 0 rgba(28, 133, 73, .55); } 100% { box-shadow: 0 0 0 .55rem rgba(28, 133, 73, 0); } }
+.rt-status .cn { font-family: var(--f-code); font-size: .95rem; letter-spacing: .08em; }
+.rt-status .ev { font-family: var(--f-code); font-size: .82rem; letter-spacing: .12em; color: var(--accent-ink); background: var(--accent); padding: .05em .55em; border-radius: 4px; }
+.rt-status .loc { color: var(--ink-2); font-weight: 600; min-width: 0; }
+.rt-status .leg { margin-left: auto; color: var(--ink-3); font-weight: 700; }
 
 /* ---------- Game main ---------- */
 .game { flex: 1; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: .8rem; padding-bottom: 1rem; }
@@ -234,7 +261,7 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
   background: var(--surface); border: 2px solid var(--line); border-radius: 12px; padding: .8rem .95rem; cursor: pointer;
   font-size: 1.02rem; font-weight: 600; min-height: 3.9rem; transition: border-color .15s, background .15s, transform .12s;
 }
-.opt:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); }
+@media (hover: hover) { .opt:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); } }
 .opt .L { width: 2.4rem; height: 2.4rem; border-radius: 8px; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--f-code); font-size: 1.35rem; font-weight: 800; }
 .opt.wrong { border-color: var(--bad); background: var(--bad-soft); text-decoration: line-through; text-decoration-color: var(--bad); color: var(--ink-2); cursor: not-allowed; }
 .opt.wrong .L { background: var(--bad); color: #fff; }
@@ -242,7 +269,7 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 .opt.right .L { background: var(--ok); color: #fff; }
 .opt:disabled { cursor: default; }
 .opt.shake { animation: shake .4s; }
-@keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 .qfoot { display: flex; justify-content: space-between; align-items: center; gap: .8rem; flex-wrap: wrap; margin-top: auto; }
 .qfoot .hint { font-size: .82rem; color: var(--ink-3); }
 
@@ -257,17 +284,17 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 .ring .rbg { stroke: var(--line); }
 .ring .rfg { stroke: var(--teal); transition: stroke-dashoffset .25s linear, stroke .2s; }
 .ring.low .rfg { stroke: var(--bad); }
-.ring span { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; font-size: 1.05rem; }
+.ring span { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: grid; place-items: center; font-weight: 800; font-size: 1.05rem; }
 .ring.out span { color: var(--bad); font-size: .7rem; text-align: center; line-height: 1.1; }
 .gchips { display: flex; flex-wrap: wrap; gap: .4rem; }
-.gchip { border: 1.5px solid var(--line); background: var(--surface-2); border-radius: 8px; padding: .32em .75em; font-weight: 700; cursor: pointer; font-size: .9rem; }
+.gchip { border: 1.5px solid var(--line); background: var(--surface-2); border-radius: 8px; padding: .32em .75em; font-weight: 700; cursor: pointer; font-size: .9rem; min-height: 2.1rem; }
 .gchip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .gchip:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
 .resp-actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
 .resp-actions .btn { flex: 1; min-width: 10rem; }
 
 /* ---------- Sales contract (always a white paper document) ---------- */
-.contract { background: var(--paper); color: var(--paper-ink); border: 1px solid var(--paper-line); border-radius: 4px; padding: 1.1rem 1.2rem 1rem; overflow: auto; min-height: 0; box-shadow: 0 1px 1px rgba(0,0,0,.08), 0 12px 30px rgba(0,0,0,.2); }
+.contract { background: var(--paper); color: var(--paper-ink); border: 1px solid var(--paper-line); border-radius: 4px; padding: 1.1rem 1.2rem 1rem; overflow: auto; -webkit-overflow-scrolling: touch; min-height: 0; box-shadow: 0 1px 1px rgba(0, 0, 0, .08), 0 12px 30px rgba(0, 0, 0, .2); color-scheme: only light; }
 .doc { font-family: var(--f-doc); font-size: .78rem; line-height: 1.5; }
 .doc p { margin: 0 0 .35rem; }
 .doc i { color: var(--paper-mute); }
@@ -299,32 +326,46 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 @keyframes blink { 50% { opacity: .45; } }
 
 /* ---------- Modal ---------- */
-.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--scrim); padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
-.sheet { width: min(860px, 100%); max-height: 100%; overflow: auto; background: var(--surface); color: var(--ink); border-radius: 18px; border: 1.5px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,.35); padding: 1.5rem 1.7rem 1.4rem; display: grid; gap: 1rem; animation: pop .28s cubic-bezier(.2,1.3,.4,1); }
+.modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 50; display: grid; place-items: center; background: var(--scrim); padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); }
+.sheet { width: 100%; max-width: 960px; max-height: 100%; overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; background: var(--surface); color: var(--ink); border-radius: 18px; border: 1.5px solid var(--line); box-shadow: 0 30px 80px rgba(0, 0, 0, .35); padding: 1.4rem 1.6rem 1.3rem; display: grid; gap: .9rem; animation: pop .28s cubic-bezier(.2, 1.3, .4, 1); }
 @keyframes pop { from { transform: translateY(14px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
 .sheet.bad { border-top: 6px solid var(--bad); }
 .sheet.good { border-top: 6px solid var(--ok); }
 .sheet.info { border-top: 6px solid var(--gold); }
-.stampmark { display: inline-block; font-family: var(--f-code); font-weight: 800; font-size: 1.05rem; letter-spacing: .12em; padding: .15em .7em; border: 3px solid currentColor; border-radius: 6px; transform: rotate(-3deg); width: max-content; }
+.stampmark { display: inline-block; font-family: var(--f-code); font-weight: 800; font-size: 1.05rem; letter-spacing: .12em; padding: .15em .7em; border: 3px solid currentColor; border-radius: 6px; transform: rotate(-3deg); width: max-content; max-width: 100%; }
 .sheet.bad .stampmark { color: var(--bad); }
 .sheet.good .stampmark { color: var(--ok); }
 .sheet.info .stampmark { color: var(--gold); }
-.sheet h2 { font-size: 1.65rem; font-weight: 800; }
-.sheet .body { font-size: 1.04rem; color: var(--ink-2); }
+.sheet h2 { font-size: 1.6rem; font-weight: 800; }
+.sheet .body { font-size: 1.02rem; color: var(--ink-2); }
 .sheet .body strong { color: var(--ink); }
 .impact { display: flex; flex-wrap: wrap; gap: .5rem; }
 .impact span { font-weight: 700; font-size: .85rem; padding: .3em .8em; border-radius: 999px; background: var(--bad-soft); color: var(--bad); border: 1px solid var(--bad); }
 .impact span.ok { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); }
 .impact span.neutral { background: var(--surface-2); color: var(--ink-2); border-color: var(--line); }
-.explain { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: .9rem 1.05rem; display: grid; gap: .45rem; font-size: .98rem; }
-.explain .eyebrow { color: var(--teal); }
-.explain .note { font-size: .9rem; color: var(--ink-2); border-top: 1px dashed var(--line); padding-top: .45rem; }
+.box { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: .85rem 1rem; display: grid; gap: .45rem; font-size: .96rem; min-width: 0; }
+.box > .eyebrow { color: var(--teal); }
+.box.why-bad > .eyebrow { color: var(--bad); }
+.box.hint-box { background: var(--gold-soft); border-color: var(--gold); }
+.box.hint-box > .eyebrow { color: var(--gold); }
+.box ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .35rem; }
+.box li { color: var(--ink-2); }
+.box li b { color: var(--ink); }
+.lead { font-weight: 600; color: var(--ink); }
+.why-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: .8rem; align-items: start; }
+.others { list-style: none; padding: 0 !important; }
+.others li { display: grid; grid-template-columns: 1.7rem minmax(0, 1fr); gap: .55rem; align-items: start; }
+.others li .L { width: 1.7rem; height: 1.7rem; border-radius: 6px; display: grid; place-items: center; background: var(--bad); color: #fff; font-family: var(--f-code); font-size: 1rem; font-weight: 800; }
+.others li b { display: block; font-size: .9rem; }
+.others li span.t { font-size: .88rem; }
+.note { font-size: .9rem; color: var(--ink-2); border-top: 1px dashed var(--line); padding-top: .45rem; }
 .sheet-actions { display: flex; gap: .7rem; justify-content: flex-end; flex-wrap: wrap; }
+.sheet-actions.sticky { position: -webkit-sticky; position: sticky; bottom: -1.3rem; margin: 0 -1.6rem -1.3rem; padding: .75rem 1.6rem 1.3rem; background: var(--surface); box-shadow: 0 -14px 14px -14px rgba(0, 0, 0, .28); z-index: 2; }
 .src-line { font-size: .8rem; color: var(--ink-3); }
 
 /* Incoterms risk/cost diagram */
-.ico-diagram { overflow-x: auto; }
-.icd { min-width: 560px; display: grid; grid-template-columns: 4.4rem repeat(4, minmax(0, 1fr)); font-size: .78rem; }
+.ico-diagram { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.icd { min-width: 540px; display: grid; grid-template-columns: 4.4rem repeat(4, minmax(0, 1fr)); font-size: .78rem; }
 .icd .hd { font-weight: 700; color: var(--ink-2); text-align: center; padding: 0 .2rem .4rem; line-height: 1.25; }
 .icd .term { font-family: var(--f-code); font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; padding-left: .35rem; }
 .icd .row { grid-column: 2 / -1; position: relative; height: 2.2rem; border-left: 1px dashed var(--line); margin-right: 14px; }
@@ -339,32 +380,32 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 
 /* ---------- Wheel ---------- */
 .wheel-wrap { display: grid; justify-items: center; gap: 1rem; }
-.wheel-stage { position: relative; width: min(30rem, 78vw, 62vh); aspect-ratio: 1; max-width: 100%; }
+.wheel-stage { position: relative; width: min(30rem, 78vw, 58vh); height: min(30rem, 78vw, 58vh); max-width: 100%; }
 .wheel-stage canvas { width: 100%; height: 100%; display: block; }
-.pointer { position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 30px solid var(--accent); filter: drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
+.pointer { position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 30px solid var(--accent); filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .35)); }
 .wheel-result { text-align: center; min-height: 3.6rem; }
 .wheel-result b { display: block; font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1.1; }
-.wheel-result.pop b { animation: pop .4s cubic-bezier(.2,1.6,.4,1); }
+.wheel-result.pop b { animation: pop .4s cubic-bezier(.2, 1.6, .4, 1); }
 
 /* ---------- Verdict ---------- */
-.final { flex: 1; max-width: 1100px; width: 100%; margin: 0 auto; padding-block: 2rem 3rem; display: grid; align-content: center; justify-items: center; gap: 2.2rem; text-align: center; }
+.final { flex: 1; max-width: 1100px; width: 100%; margin: 0 auto; padding-top: 2rem; padding-bottom: 3rem; display: grid; align-content: center; justify-items: center; gap: 2.2rem; text-align: center; }
 .verdict { --vc: var(--ok); display: grid; justify-items: center; gap: 1.1rem; }
 .verdict.bad { --vc: var(--bad); }
 .v-no { font-family: var(--f-doc); font-size: 1.05rem; color: var(--ink-2); }
 .v-stamp {
   font-family: var(--f-code); font-weight: 800; color: var(--vc); line-height: 1.02; letter-spacing: .04em;
-  font-size: clamp(3rem, 8.5vw, 7.5rem); padding: .12em .45em .16em; border: .09em solid var(--vc); border-radius: .14em;
-  background: rgba(var(--surface-rgb), .72);
+  font-size: clamp(2.6rem, 8.5vw, 7.5rem); padding: .12em .45em .16em; border: .09em solid var(--vc); border-radius: .14em;
+  background: rgba(var(--surface-rgb), .82);
   box-shadow: inset 0 0 0 .05em rgba(var(--surface-rgb), .9), inset 0 0 0 .085em var(--vc);
-  transform: rotate(-4deg); animation: slam .55s cubic-bezier(.2,1.5,.4,1) both; max-width: 100%;
+  transform: rotate(-4deg); animation: slam .55s cubic-bezier(.2, 1.5, .4, 1) both; max-width: 100%;
 }
 .v-stamp small { display: block; font-size: .36em; letter-spacing: .2em; }
 @keyframes slam { 0% { transform: rotate(-4deg) scale(1.9); opacity: 0; } 100% { transform: rotate(-4deg) scale(1); opacity: 1; } }
-.v-line { font-size: 1.1rem; color: var(--ink-2); }
+.v-line { font-size: 1.1rem; color: var(--ink-2); max-width: 40em; }
 .final-actions { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; }
 
 /* ---------- Presentation hand-off ---------- */
-.present { flex: 1; display: grid; align-content: center; max-width: 1240px; width: 100%; margin: 0 auto; padding-block: 2rem 3rem; gap: 2rem; }
+.present { flex: 1; display: grid; align-content: center; max-width: 1240px; width: 100%; margin: 0 auto; padding-top: 2rem; padding-bottom: 3rem; gap: 2rem; }
 .present-head { display: grid; gap: .6rem; }
 .present h1 { font-size: clamp(2rem, 4.4vw, 4rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
 .present h1 .th { display: block; font-family: var(--f-code); color: var(--accent); font-size: 1.15em; letter-spacing: .04em; }
@@ -383,39 +424,57 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 
 /* ---------- Responsive ---------- */
 @media (min-width: 1001px) and (min-height: 680px) {
-  .app.in-game { height: 100vh; min-height: 0; }
+  .app.in-game { height: 100vh; height: 100dvh; min-height: 0; }
   .app.in-game .screen { min-height: 0; }
   .app.in-game .game { min-height: 0; }
   .app.in-game .desk { overflow: hidden; }
   .app.in-game .qcard { overflow: auto; }
 }
 @media (max-width: 1000px) {
-  body[data-screen="intro"] .bd-veil { background: rgba(var(--bg-rgb), .82); }
+  body[data-screen="intro"] .bd-veil { background: rgba(var(--bg-rgb), .8); }
   .brief-grid { grid-template-columns: minmax(0, 1fr); }
   .desk { grid-template-columns: minmax(0, 1fr); }
-  .side { grid-template-rows: auto auto; }
-  .contract { max-height: 70vh; }
+  .side { display: contents; }
+  .resp { order: 1; } .qcard { order: 2; } .contract { order: 3; max-height: 75vh; }
   .parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
   .opts { grid-template-columns: minmax(0, 1fr); }
   .booking { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .booking > div:nth-child(3) { border-left: 0; }
   .booking > div:nth-child(n+3) { border-top: 1.5px dashed var(--line); }
-  .rt-node span, .rt-tag { display: none; }
-  .route { height: 4.6rem; }
-  .rt-truck { height: 1.9rem; }
-  .rt-ship { height: 2.2rem; bottom: -.38rem; }
-  .route-now { display: block; }
+  .rt-node span, .rt-tag, .rt-wave { display: none; }
+  .route { height: 5rem; }
+  .rt-node i { width: 1.45rem; height: 1.45rem; }
+  .rt-node i svg { width: .82rem; height: .82rem; }
+  .rt-truck { height: 1.8rem; bottom: .45rem; }
+  .rt-ship { height: 2rem; bottom: .2rem; }
+  .rt-compass { display: none; }
+  .rt-status { font-size: .74rem; padding: .35rem .6rem; }
+  .rt-status .leg { margin-left: 0; }
   .topbar { gap: .6rem; }
   .prog { margin-left: 0; width: 100%; justify-content: space-between; }
   .health { min-width: 0; flex: 1; }
   .brand b { display: none; }
   .kv { grid-template-columns: 7.5rem minmax(0, 1fr); }
   .parts { grid-template-columns: minmax(0, 1fr); }
-  .sheet { padding: 1.2rem 1.1rem; }
+  .sheet { padding: 1.15rem 1rem; border-radius: 14px; }
+  .sheet-actions.sticky { bottom: -1.15rem; margin: 0 -1rem -1.15rem; padding: .7rem 1rem 1.15rem; }
+  .sheet h2 { font-size: 1.35rem; }
   .qcard { padding: 1rem; }
+  .qstage { font-size: 1.25rem; }
+  .qtext { font-size: 1.15rem; }
   .sign { gap: .5rem; }
+  .sheet-actions .btn { flex: 1 1 auto; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .route { height: 4.6rem; }
+  .rt-node span, .rt-tag, .rt-wave, .rt-compass { display: none; }
+}
+@media (pointer: coarse) {
+  .setup-actions .note, .qfoot .hint .kbd-hint { display: none; }
+  .gchip { min-height: 2.5rem; padding: .4em .9em; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -433,8 +492,8 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
       <div class="top-row">
         <div class="tag-line"><span class="cn-badge">ANMU 202611 7</span><span class="eyebrow">Nghiệp vụ ngoại thương &amp; Logistics · Nhóm 1</span></div>
         <div class="tools">
-          <button class="btn icon-btn" data-action="theme" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-          <button class="btn icon-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          <button class="btn icon-btn" data-action="theme" title="Đổi chế độ ngày/đêm" aria-label="Đổi chế độ ngày/đêm"><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
+          <button class="btn icon-btn fs-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
         </div>
       </div>
       <div class="intro-col">
@@ -510,7 +569,7 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
           <div class="rule"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
             <div><h3>Soạn hợp đồng qua <span id="brief-n">6</span> bước</h3><p>Mỗi câu hỏi là một điều khoản. Trả lời đúng: điều khoản được ghi vào hợp đồng và container đi thêm một chặng.</p></div></div>
           <div class="rule"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
-            <div><h3>Chọn sai là có sự cố</h3><p>Mỗi đáp án sai kéo theo một tình huống thật và làm giảm sức khỏe hợp đồng. Kết thúc còn từ 50% trở lên thì hợp đồng <strong>hợp lệ</strong>, dưới 50% là <strong>không hợp lệ</strong>.</p></div></div>
+            <div><h3>Chọn sai là có sự cố</h3><p>Mỗi đáp án sai kéo theo một tình huống thật và làm giảm sức khỏe hợp đồng. Hợp đồng <strong>hợp lệ</strong> khi mọi điều khoản đều được các nhóm trả lời đúng. Câu nào phải bấm “Xem đáp án đúng” thì hợp đồng <strong>không hợp lệ</strong>.</p></div></div>
           <div class="rule"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v6.5M12 14.5V21M3 12h6.5M14.5 12H21"/></svg></div>
             <div><h3>Ai trả lời?</h3><p>Nhóm nào giơ tay thì bấm chọn nhóm đó. Không ai giơ tay thì quay bánh lái để chọn ngẫu nhiên.</p></div></div>
         </div>
@@ -531,15 +590,15 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
           <span class="eyebrow tnum" id="prog-label">Câu 1/6</span>
           <div class="pips" id="pips"></div>
         </div>
-        <div class="health" title="Sức khỏe hợp đồng (từ 50% là hợp lệ)">
-          <span class="eyebrow">Hợp đồng</span>
+        <div class="health" title="Sức khỏe hợp đồng: giảm mỗi khi có sự cố">
+          <span class="eyebrow">Sức khỏe</span>
           <div class="bar"><i id="health-bar"></i></div>
           <b class="tnum" id="health-val">100%</b>
         </div>
         <div class="tools">
           <button class="btn icon-btn" data-action="sound" id="btn-sound" title="Bật/tắt âm thanh" aria-label="Bật/tắt âm thanh"></button>
-          <button class="btn icon-btn" data-action="theme" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-          <button class="btn icon-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          <button class="btn icon-btn" data-action="theme" title="Đổi chế độ ngày/đêm" aria-label="Đổi chế độ ngày/đêm"><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
+          <button class="btn icon-btn fs-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
           <button class="btn icon-btn" data-action="ask-restart" title="Chơi lại" aria-label="Chơi lại"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
         </div>
       </header>
@@ -569,7 +628,7 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="sheet" id="sheet"></div></div>
 <div class="modal" id="wheel" hidden role="dialog" aria-modal="true" aria-label="Vòng quay chọn nhóm">
-  <div class="sheet info" style="width:min(640px,100%)">
+  <div class="sheet info" style="max-width:640px">
     <div class="wheel-wrap">
       <span class="eyebrow">Bánh lái may mắn</span>
       <div class="wheel-stage"><canvas id="wheel-canvas" width="600" height="600"></canvas><div class="pointer"></div></div>
@@ -590,8 +649,10 @@ select.sel { font: inherit; padding: .5em .8em; border-radius: 8px; border: 1.5p
 
 /* ===================== DATA ===================== */
 var STAGES = ["Kho An Nam", "Cảng Cát Lái", "Thông quan XK", "Xếp lên tàu", "Vịnh Thái Lan", "Laem Chabang", "Kho Siam Retail"];
-var VALID_MIN = 50;
+var EVENTS = ["STUFFING", "GATE IN", "CUSTOMS CLEARED", "LOADED ON BOARD", "IN TRANSIT", "DISCHARGED", "DELIVERED"];
+var PLACES = ["Kho An Nam · TP. Hồ Chí Minh", "Cảng Cát Lái · VNCLI", "Hải quan cảng Cát Lái", "Tàu AN NAM EXPRESS · bến Cát Lái", "Vịnh Thái Lan · đang hải trình", "Cảng Laem Chabang · THLCH", "Kho Siam Retail · Bangkok"];
 
+/* Each wrong option: c.title / c.text = what happens to the contract; c.why = what that option really means and why it does not fit. */
 var QUESTIONS = [
   {
     id: "offer", stage: "Bước 1 · Gửi chào hàng", chapter: "Chương 2 · Giao dịch trực tiếp",
@@ -599,14 +660,24 @@ var QUESTIONS = [
     question: "An Nam đang gửi loại thư gì?",
     options: [
       { t: "Chào hàng tự do (Free offer)", c: { title: "Lời chào không ai tin", tag: "Mất uy tín", dmg: 20,
-        text: "Chào hàng tự do không ràng buộc trách nhiệm, thường ghi “Offer without engagement” và gửi cho nhiều khách cùng lúc. Siam Retail hiểu rằng An Nam có thể bán lô hàng cho người khác bất cứ lúc nào, nên ưu tiên nhà cung cấp Indonesia đã cam kết giữ giá." } },
+        text: "An Nam gửi kiểu chào hàng không cam kết. Siam Retail hiểu rằng An Nam có thể bán lô hàng cho người khác bất cứ lúc nào, nên ưu tiên nhà cung cấp Indonesia đã cam kết giữ giá.",
+        why: "Chào hàng tự do không có thời hạn hiệu lực, không ràng buộc trách nhiệm người bán, thường gửi cho nhiều khách cùng lúc và ghi câu “Offer without engagement”. Thư của An Nam thì ngược lại: có thời hạn 15 ngày và chỉ gửi cho một mình Siam Retail." } },
       { t: "Chào hàng cố định (Firm offer)", correct: true },
       { t: "Đơn đặt hàng (Order)", c: { title: "Nhầm vai người mua", tag: "Sai vai trò", dmg: 15,
-        text: "Đặt hàng là lời đề nghị ký kết hợp đồng từ phía <strong>người mua</strong>. An Nam là người bán mà gửi “đơn đặt hàng” khiến Siam Retail bối rối và nghi ngờ tính chuyên nghiệp của đối tác Việt Nam ngay từ email đầu tiên." } },
+        text: "Siam Retail nhận được một “đơn đặt hàng” từ chính người bán, nên bối rối và nghi ngờ tính chuyên nghiệp của đối tác Việt Nam ngay từ email đầu tiên.",
+        why: "Đặt hàng (Order) là lời đề nghị ký kết hợp đồng do người mua lập và gửi cho người bán, thường dùng với khách hàng quen. Ở đây người gửi thư là An Nam, tức người bán, nên không thể là đơn đặt hàng." } },
       { t: "Hoàn giá (Counter-offer)", c: { title: "Hoàn giá khi chưa có giá", tag: "Sai quy trình", dmg: 15,
-        text: "Hoàn giá là đề nghị mới khi đã nhận chào hàng nhưng không chấp nhận toàn bộ. Siam Retail mới hỏi giá, chưa có lời chào nào để “hoàn”. Thư của An Nam không có giá trị như một lời chào hàng, Siam Retail phải hỏi lại và giao dịch chậm mất một tuần." } }
+        text: "Thư của An Nam không có giá trị như một lời chào hàng, Siam Retail phải hỏi lại từ đầu và giao dịch chậm mất một tuần.",
+        why: "Hoàn giá là đề nghị mới khi một bên đã nhận được chào hàng (hoặc đặt hàng) nhưng không đồng ý toàn bộ. Lúc này Siam Retail mới chỉ hỏi giá, chưa có lời chào nào để “hoàn”." } }
     ],
-    explain: "Chào hàng cố định nêu rõ thời hạn hiệu lực, ràng buộc trách nhiệm người bán và chỉ chào một lô hàng cho một đối tác. Trong thời hạn hiệu lực, nếu người mua chấp nhận hoàn toàn thì hợp đồng coi như được ký kết.",
+    lead: "Thư của An Nam có đủ ba dấu hiệu của chào hàng cố định: gửi cho một khách duy nhất, có thời hạn hiệu lực rõ ràng và ràng buộc trách nhiệm người bán.",
+    points: [
+      "<b>Chào hàng (Offer)</b> là lời đề nghị ký kết hợp đồng do người bán gửi, nêu tên hàng, quy cách, số lượng, giá, điều kiện giao hàng, thời gian giao hàng, thanh toán…",
+      "<b>Cố định</b> nghĩa là có thời hạn hiệu lực (ở đây 15 ngày). Trong thời gian đó An Nam bị ràng buộc: không được tự ý đổi giá hay bán lô hàng cho người khác.",
+      "Nếu Siam Retail <b>chấp nhận hoàn toàn</b> trong 15 ngày thì hợp đồng coi như đã được ký kết.",
+      "Chỉ gửi cho một đối tác thể hiện sự cam kết nghiêm túc, rất hợp với đối tác Thái vốn coi trọng lòng tin khi mới bắt đầu làm ăn."
+    ],
+    hint: "Xem kỹ: ai là người gửi thư, gửi cho mấy khách hàng, và thư có ghi thời hạn hiệu lực hay không.",
     source: "Chương 2 · B2. Chào hàng (Offer/Quotation)",
     fill: [{ key: "basis", v: "Firm Offer No. 01/AN, valid for 15 days", s: "Thư chào hàng cố định số 01/AN, hiệu lực 15 ngày" }]
   },
@@ -616,15 +687,25 @@ var QUESTIONS = [
     question: "Điều khoản giao hàng nên ghi theo điều kiện Incoterms® 2020 nào?",
     options: [
       { t: "EXW — Kho An Nam, TP.HCM", c: { title: "Container kẹt ở kho", tag: "Kẹt thông quan", dmg: 25,
-        text: "Theo EXW, người bán không phải thông quan xuất khẩu, cũng không phải xếp hàng lên xe: nghĩa vụ tối thiểu. Nhưng Siam Retail là doanh nghiệp Thái, không thể tự làm thủ tục xuất khẩu tại Việt Nam. Container nằm chờ ở kho, hãng tàu chuyển lô hàng sang chuyến sau, phát sinh phí lưu container." } },
+        text: "Siam Retail là doanh nghiệp Thái, không thể tự làm thủ tục xuất khẩu tại Việt Nam. Container nằm chờ ở kho, hãng tàu chuyển lô hàng sang chuyến sau và phát sinh phí lưu container.",
+        why: "EXW (Giao tại xưởng) là điều kiện người bán có nghĩa vụ ít nhất: chỉ để hàng sẵn tại kho của mình, không xếp hàng lên xe, không làm thủ tục xuất khẩu. Tình huống lại yêu cầu An Nam thông quan xuất khẩu và giao lên tàu tại Cát Lái." } },
       { t: "FOB — Cảng Cát Lái", correct: true },
       { t: "CIF — Cảng Laem Chabang", c: { title: "Gánh cước và bảo hiểm thay khách", tag: "Đội chi phí", dmg: 20,
-        text: "Theo CIF, An Nam phải thuê tàu, trả cước tới Laem Chabang và mua bảo hiểm (tối thiểu điều kiện C). Giá chào lại tính theo kiểu “giao lên tàu”, nên cước và phí bảo hiểm đội lên mà không ai trả. Lô hàng lỗ, còn Siam Retail phải hủy booking với hãng tàu quen." } },
+        text: "An Nam phải tự thuê tàu, trả cước tới Laem Chabang và mua bảo hiểm, trong khi giá chào chưa tính các khoản này. Lô hàng bị lỗ, còn Siam Retail phải hủy booking với hãng tàu quen.",
+        why: "CIF (Tiền hàng, bảo hiểm và cước): người bán phải thuê tàu, trả cước tới cảng đến và mua bảo hiểm (tối thiểu điều kiện C), dù rủi ro vẫn chuyển ở cảng xếp hàng. Tình huống nói rõ Siam Retail tự thuê tàu và tự mua bảo hiểm." } },
       { t: "DDP — Kho Siam Retail, Bangkok", c: { title: "Ôm trọn rủi ro đến tận Bangkok", tag: "Trách nhiệm tối đa", dmg: 30,
-        text: "DDP là điều kiện người bán chịu trách nhiệm lớn nhất: An Nam phải thông quan nhập khẩu tại Thái Lan, nộp thuế và VAT 7%, chở hàng tận kho người mua. Không có pháp nhân tại Thái, hồ sơ nhập khẩu bị kẹt ở hải quan Laem Chabang, phí lưu bãi tăng từng ngày." } }
+        text: "An Nam không có pháp nhân tại Thái Lan nên hồ sơ nhập khẩu bị kẹt ở hải quan Laem Chabang, phí lưu bãi tăng từng ngày, còn thuế và VAT 7% thì An Nam phải gánh.",
+        why: "DDP (Giao hàng đã nộp thuế) là điều kiện người bán chịu trách nhiệm lớn nhất: chở hàng tới tận kho người mua, làm cả thủ tục nhập khẩu và nộp thuế tại Thái Lan. Hoàn toàn ngược với cách chia trách nhiệm trong tình huống." } }
     ],
-    explain: "FOB (Free On Board, giao hàng trên tàu): người bán thông quan xuất khẩu và giao hàng lên con tàu do người mua chỉ định tại cảng xếp hàng. Rủi ro và chi phí chuyển sang người mua khi hàng đã ở trên tàu. Người mua thuê tàu, trả cước và tự quyết định mua bảo hiểm.",
+    lead: "Ba chi tiết trong tình huống khớp đúng với FOB: người bán thông quan xuất khẩu, người bán giao hàng lên con tàu do người mua chỉ định tại cảng xếp hàng, còn người mua tự thuê tàu và mua bảo hiểm.",
+    points: [
+      "<b>FOB (Free On Board, giao hàng trên tàu)</b> thuộc nhóm 4 điều kiện chỉ dùng cho vận tải đường biển và thủy nội địa: FAS, FOB, CFR, CIF.",
+      "<b>An Nam (người bán):</b> đóng hàng, chở ra cảng Cát Lái, làm thủ tục và nộp thuế xuất khẩu, xếp hàng lên tàu. Rủi ro và chi phí chuyển sang người mua khi hàng đã nằm trên tàu.",
+      "<b>Siam Retail (người mua):</b> thuê tàu, trả cước biển, tự quyết định mua bảo hiểm, làm thủ tục và nộp thuế, VAT khi nhập khẩu vào Thái Lan.",
+      "<b>Cách ghi trong hợp đồng:</b> FOB + tên cảng xếp hàng + phiên bản Incoterms, ví dụ “FOB Cat Lai Port, Viet Nam – Incoterms® 2020”."
+    ],
     note: "Lưu ý theo Chương 1: hàng đóng container thường được giao cho người chuyên chở tại bãi trước khi lên tàu. Khi đó nên chuyển FOB → FCA, CFR → CPT, CIF → CIP.",
+    hint: "Gạch chân ba chi tiết: ai thông quan xuất khẩu, rủi ro chuyển sang người mua ở đâu, và ai thuê tàu, mua bảo hiểm.",
     source: "Chương 1 · Incoterms® 2020, nhóm vận tải đường biển (FAS, FOB, CFR, CIF)",
     fill: [{ key: "delivery", v: "FOB Cat Lai Port, Ho Chi Minh City, Viet Nam – Incoterms® 2020", s: "Rủi ro chuyển sang người mua khi hàng đã xếp lên tàu" }],
     diagram: "incoterms"
@@ -635,15 +716,25 @@ var QUESTIONS = [
     question: "Hợp đồng nên chọn phương thức thanh toán nào?",
     options: [
       { t: "Chuyển tiền T/T, trả sau 60 ngày kể từ khi nhận hàng", c: { title: "Hàng đã đi, tiền chưa về", tag: "Chôn vốn", dmg: 25,
-        text: "Chuyển tiền phụ thuộc hoàn toàn vào thiện chí người mua. Hàng giao xong, 60 ngày sau Siam Retail báo đang “tái cơ cấu dòng tiền” và xin lùi thanh toán. Khoảng 40.000 USD của An Nam bị chiếm dụng mà không ngân hàng nào bảo đảm." } },
+        text: "Hàng giao xong, 60 ngày sau Siam Retail báo đang “tái cơ cấu dòng tiền” và xin lùi thanh toán. Khoảng 40.000 USD của An Nam bị chiếm dụng mà không ngân hàng nào bảo đảm.",
+        why: "Chuyển tiền (T/T) là người mua tự yêu cầu ngân hàng của mình chuyển tiền cho người bán; ngân hàng chỉ làm dịch vụ chuyển, không cam kết gì. Trả sau 60 ngày nghĩa là An Nam giao hàng trước và hoàn toàn phụ thuộc vào thiện chí của người mua." } },
       { t: "Nhờ thu kèm chứng từ D/A (chấp nhận trả tiền đổi chứng từ)", c: { title: "Ký chấp nhận rồi… không trả", tag: "Rủi ro D/A", dmg: 20,
-        text: "Với D/A, ngân hàng thu hộ giao chứng từ ngay khi người mua ký chấp nhận hối phiếu: Siam Retail nhận hàng trước, trả tiền sau. Ngân hàng chỉ thu hộ, không cam kết trả tiền. Đến hạn mà Siam Retail không thanh toán, An Nam phải tự đi đòi nợ ở nước ngoài." } },
+        text: "Siam Retail ký chấp nhận hối phiếu, lấy chứng từ đi nhận hàng. Đến hạn mà họ không thanh toán, An Nam phải tự đi đòi nợ ở nước ngoài.",
+        why: "Nhờ thu D/A: ngân hàng chỉ thu hộ, giao chứng từ ngay khi người mua ký chấp nhận hối phiếu, tức là người mua nhận hàng trước, trả tiền sau. Ngân hàng không cam kết trả tiền, nên rủi ro cho người bán còn cao hơn D/P." } },
       { t: "Tín dụng chứng từ: L/C không hủy ngang, trả ngay (at sight)", correct: true },
       { t: "Nhờ thu trơn (Clean collection)", c: { title: "Chứng từ gửi thẳng, tiền treo lơ lửng", tag: "Không bảo đảm", dmg: 25,
-        text: "Nhờ thu trơn: An Nam gửi thẳng bộ chứng từ cho người mua, chỉ nhờ ngân hàng thu hộ hối phiếu. Siam Retail có chứng từ để nhận hàng mà chưa cần trả tiền. Nhận hàng và thanh toán bị tách rời, quyền lợi người bán không được bảo đảm." } }
+        text: "Siam Retail có chứng từ để nhận hàng mà chưa cần trả tiền. Hàng đã về tay người mua trong khi khoản tiền vẫn còn treo.",
+        why: "Nhờ thu trơn: người bán gửi thẳng chứng từ hàng hóa cho người mua, chỉ nhờ ngân hàng thu tiền theo hối phiếu. Việc giao hàng và trả tiền tách rời nhau, nên quyền lợi người bán không được bảo đảm." } }
     ],
-    explain: "Với L/C, ngân hàng phát hành phía người mua cam kết trả tiền khi người bán xuất trình bộ chứng từ phù hợp với L/C. L/C không hủy ngang không thể bị sửa đổi hay hủy bỏ nếu người thụ hưởng không đồng ý, nên rất hợp với đối tác mới.",
+    lead: "Yêu cầu “có ngân hàng cam kết trả tiền khi xuất trình chứng từ hợp lệ” chính là định nghĩa của phương thức tín dụng chứng từ (L/C).",
+    points: [
+      "<b>Quy trình:</b> ký hợp đồng → Siam Retail xin ngân hàng ở Thái mở L/C → ngân hàng thông báo L/C cho An Nam → An Nam giao hàng, lập bộ chứng từ → ngân hàng kiểm tra chứng từ và trả tiền.",
+      "<b>Không hủy ngang (Irrevocable):</b> sau khi mở, L/C không bị sửa đổi hay hủy bỏ nếu An Nam (người thụ hưởng) không đồng ý.",
+      "<b>Trả ngay (at sight):</b> ngân hàng thanh toán ngay khi bộ chứng từ phù hợp, An Nam không phải chờ.",
+      "Rất hợp với lần giao dịch đầu tiên, khi hai bên chưa đủ tin nhau. L/C được điều chỉnh bởi UCP 600."
+    ],
     note: "Mặt trái: chỉ một sai sót nhỏ trong bộ chứng từ cũng có thể khiến ngân hàng từ chối thanh toán. Câu tiếp theo sẽ cho thấy điều đó.",
+    hint: "Tìm phương thức mà ngân hàng, chứ không phải người mua, đứng ra cam kết trả tiền.",
     source: "Chương 3 · Phương thức tín dụng chứng từ (L/C), UCP 600",
     fill: [{ key: "payment", v: "100% by Irrevocable Documentary Credit (L/C) at sight, subject to UCP 600", s: "Thư tín dụng không hủy ngang, trả ngay" }]
   },
@@ -653,15 +744,25 @@ var QUESTIONS = [
     question: "An Nam cần xin giấy chứng nhận xuất xứ (C/O) mẫu nào?",
     options: [
       { t: "C/O Form E", c: { title: "Sai mẫu C/O, thuế quay lại", tag: "Mất ưu đãi thuế", dmg: 25,
-        text: "Form E dành cho hàng ASEAN – Trung Quốc. Hải quan Thái không chấp nhận để hưởng ưu đãi ATIGA, nên lô xoài sấy chịu thuế nhập khẩu thông thường và giá về Bangkok tăng vọt. Ngân hàng còn thấy chứng từ không đúng yêu cầu của L/C và từ chối thanh toán." } },
+        text: "Hải quan Thái không chấp nhận Form E để hưởng ưu đãi ATIGA, nên lô xoài sấy chịu thuế nhập khẩu thông thường và giá về Bangkok tăng vọt. Ngân hàng cũng thấy chứng từ không đúng yêu cầu của L/C và từ chối thanh toán.",
+        why: "C/O Form E dùng cho hàng hóa trao đổi giữa các nước ASEAN với Trung Quốc (Hiệp định ACFTA). Hàng Việt Nam xuất sang Thái Lan thuộc nội khối ASEAN nên không dùng mẫu này." } },
       { t: "C/O Form D", correct: true },
       { t: "C/O Form B", c: { title: "C/O không ưu đãi", tag: "Mất ưu đãi thuế", dmg: 20,
-        text: "Form B là C/O không ưu đãi: chỉ chứng minh hàng có xuất xứ Việt Nam, không đem lại thuế suất 0%. Siam Retail phải nộp thuế nhập khẩu thông thường và đòi An Nam giảm giá để bù lại." } },
+        text: "Siam Retail phải nộp thuế nhập khẩu thông thường và đòi An Nam giảm giá để bù lại.",
+        why: "C/O Form B là mẫu không ưu đãi: chỉ chứng minh hàng được sản xuất tại Việt Nam, không giúp được hưởng thuế suất ưu đãi của bất kỳ hiệp định nào." } },
       { t: "Không cần, hàng trong khối ASEAN tự động được 0%", c: { title: "Thiếu chứng từ, L/C bị từ chối", tag: "Bộ chứng từ bất hợp lệ", dmg: 30,
-        text: "Ưu đãi thuế không tự động có, phải có C/O hợp lệ. Thiếu C/O, bộ chứng từ không khớp L/C (“các chứng từ không đủ”) nên ngân hàng từ chối thanh toán. Hàng nằm ở cảng Laem Chabang chờ bổ sung giấy tờ." } }
+        text: "Thiếu C/O, bộ chứng từ không khớp yêu cầu của L/C nên ngân hàng từ chối thanh toán. Hàng nằm ở cảng Laem Chabang chờ bổ sung giấy tờ.",
+        why: "Ưu đãi thuế không tự động có: hải quan nước nhập khẩu chỉ áp thuế 0% khi có C/O hợp lệ chứng minh hàng có xuất xứ ASEAN. Ngoài ra, “chứng từ không đủ” là một trong những lý do phổ biến khiến ngân hàng từ chối thanh toán L/C." } }
     ],
-    explain: "C/O Form D là giấy chứng nhận xuất xứ ưu đãi dùng cho hàng hóa trao đổi giữa các nước ASEAN. Có Form D hợp lệ, hàng Việt Nam được hưởng thuế nhập khẩu 0% vào Thái Lan theo ATIGA.",
+    lead: "Việt Nam và Thái Lan cùng là thành viên ASEAN, nên ưu đãi thuế áp dụng theo Hiệp định ATIGA. Muốn hưởng ưu đãi đó thì phải có C/O mẫu D.",
+    points: [
+      "<b>C/O (Certificate of Origin)</b> là giấy chứng nhận xuất xứ hàng hóa. Mỗi hiệp định thương mại dùng một mẫu C/O riêng (D, E, AK, AJ, EUR.1…).",
+      "<b>Form D</b> dùng cho hàng hóa trao đổi giữa các nước ASEAN. Có Form D hợp lệ, xoài sấy Việt Nam vào Thái Lan được thuế nhập khẩu 0%.",
+      "C/O cũng là một chứng từ trong bộ chứng từ thanh toán L/C ở câu trước. Thiếu hoặc sai mẫu là ngân hàng có quyền từ chối thanh toán.",
+      "Ở Việt Nam, C/O mẫu D do các cơ quan thuộc Bộ Công Thương cấp."
+    ],
     note: "Dù thuế nhập khẩu 0%, hàng vẫn chịu VAT 7% tại Thái Lan. Thực phẩm còn cần giấy phép của Cục Quản lý Thực phẩm và Dược phẩm Thái Lan (FDA) để thông quan.",
+    hint: "Mỗi hiệp định dùng một mẫu C/O riêng. Hãy nghĩ đến mẫu dành cho các nước ASEAN buôn bán với nhau.",
     source: "Chương 3 · Chứng từ thanh toán (Certificate of Origin) · Tiểu luận Nhóm 1, mục 4.1.2",
     fill: [{ key: "docs", v: "Signed Commercial Invoice (3 originals); Packing List; Full set (3/3) clean on board Ocean B/L; C/O Form D; Thai FDA import permit", s: "Có C/O Form D để hưởng thuế nhập khẩu 0% theo ATIGA" }]
   },
@@ -671,14 +772,23 @@ var QUESTIONS = [
     question: "Về mặt nghiệp vụ, thư trả lời này là gì?",
     options: [
       { t: "Chấp nhận (Acceptance): hợp đồng đã ký kết với giá 4,80 USD/kg", c: { title: "Bán dưới giá sàn", tag: "Hụt lợi nhuận", dmg: 25,
-        text: "Chấp nhận chỉ có hiệu lực khi đồng ý <strong>hoàn toàn và vô điều kiện</strong>. An Nam tưởng hợp đồng đã thành và cho đóng hàng ở giá 4,80, thấp hơn giá sàn 0,40 USD/kg: hụt khoảng 3.200 USD so với mức có lãi cho 8 tấn." } },
+        text: "An Nam tưởng hợp đồng đã thành và cho đóng hàng ở giá 4,80, thấp hơn giá sàn 0,40 USD/kg: hụt khoảng 3.200 USD so với mức có lãi cho 8 tấn.",
+        why: "Một câu trả lời “đồng ý nhưng đổi giá” không phải là chấp nhận. Chấp nhận chỉ có hiệu lực khi đồng ý hoàn toàn và vô điều kiện với lời chào, nên hợp đồng giá 4,80 chưa hề hình thành." } },
       { t: "Chấp nhận: hợp đồng đã ký kết với giá 5,20 USD/kg vì chào hàng còn hiệu lực", c: { title: "Giao hàng rồi mới cãi giá", tag: "Tranh chấp", dmg: 30,
-        text: "Siam Retail chưa hề đồng ý giá 5,20. An Nam xuất hàng rồi đòi thanh toán theo giá chào, hai bên tranh chấp, bộ chứng từ bị treo ở ngân hàng, còn đối tác Thái cảm thấy bị ép và mất mặt." } },
+        text: "An Nam xuất hàng rồi đòi thanh toán theo giá chào. Hai bên tranh chấp, bộ chứng từ bị treo ở ngân hàng, còn đối tác Thái cảm thấy bị ép và mất mặt.",
+        why: "Chào hàng cố định chỉ thành hợp đồng khi người mua chấp nhận đúng các điều kiện trong đó. Siam Retail đã từ chối giá 5,20 bằng cách đưa ra giá khác, nên không có hợp đồng nào ở giá 5,20." } },
       { t: "Hoàn giá (Counter-offer): chào hàng cũ coi như bị hủy, hai bên phải thương lượng tiếp", correct: true },
       { t: "Chỉ là hỏi giá, không ràng buộc, không cần trả lời", c: { title: "Im lặng là mất khách", tag: "Mất cơ hội", dmg: 20,
-        text: "Đây là một đề nghị mới với điều kiện cụ thể, không phải hỏi giá. An Nam im lặng, Siam Retail hiểu là bị từ chối và ký với nhà cung cấp khác. Cơ hội vào chuỗi siêu thị Bangkok khép lại." } }
+        text: "An Nam im lặng, Siam Retail hiểu là bị từ chối và ký với nhà cung cấp khác. Cơ hội vào chuỗi siêu thị Bangkok khép lại.",
+        why: "Hỏi giá là khi người mua mới hỏi thông tin, chưa đưa ra điều kiện cụ thể. Ở đây Siam Retail đã nêu giá và đồng ý các điều kiện còn lại, tức là một đề nghị mới cần được trả lời." } }
     ],
-    explain: "Hoàn giá là đề nghị mới khi một bên không chấp nhận hoàn toàn các điều khoản của chào hàng. Khi hoàn giá, chào giá trước coi như đã hủy, và thường phải qua nhiều lần hoàn giá mới đi đến thỏa thuận chung. Đây chính là lúc cần đàm phán.",
+    lead: "Siam Retail nói “đồng ý” nhưng lại đổi giá từ 5,20 xuống 4,80 USD/kg. Khi đổi một điều kiện chủ yếu như giá, đó không còn là chấp nhận mà là hoàn giá.",
+    points: [
+      "<b>Chấp nhận (Acceptance)</b> chỉ có hiệu lực khi đủ 4 điều kiện: đồng ý hoàn toàn và vô điều kiện, còn trong thời hạn hiệu lực, do đúng người được chào hàng đưa ra, và được gửi đến tận tay người chào hàng.",
+      "<b>Hoàn giá (Counter-offer)</b> là đề nghị mới khi không đồng ý toàn bộ điều khoản. Khi có hoàn giá, chào hàng cố định 01/AN coi như bị hủy, An Nam không còn bị ràng buộc bởi giá 5,20.",
+      "Lúc này <b>chưa có hợp đồng</b>. Hai bên phải thương lượng tiếp, thường qua nhiều vòng hoàn giá, cho đến khi một bên chấp nhận hoàn toàn."
+    ],
+    hint: "Chấp nhận phải là đồng ý hoàn toàn và vô điều kiện. Thư của Siam Retail có thay đổi điều kiện nào không?",
     source: "Chương 2 · B3. Hoàn giá & B5. Chấp nhận",
     fill: [
       { key: "price", v: "USD 4.80 ↔ 5.20", s: "Siam Retail hoàn giá 4,80 · giá sàn An Nam 5,20" },
@@ -691,15 +801,25 @@ var QUESTIONS = [
     question: "Trưởng đoàn An Nam nên phản hồi thế nào?",
     options: [
       { t: "Đồng ý ngay 4,80 USD/kg để giữ khách, lỗ một chút cũng được", c: { title: "Mềm dẻo quá hóa thiệt", tag: "Đàm phán mềm dẻo", dmg: 20,
-        text: "Liên tục lùi bước trước sức ép là nhược điểm của kiểu đàm phán mềm dẻo. An Nam bán dưới giá sàn, và đối tác sẽ lấy 4,80 làm mốc để ép giá cho các đơn sau." } },
+        text: "An Nam bán dưới giá sàn, và đối tác sẽ lấy mức 4,80 làm mốc để tiếp tục ép giá cho các đơn hàng sau.",
+        why: "Đây là kiểu đàm phán mềm dẻo: giữ được hòa khí nhưng liên tục lùi bước trước sức ép, dễ thiệt thòi về tiền bạc và để lại điều khoản lỏng lẻo." } },
       { t: "Phản bác thẳng: “Giá đó vô lý! Không 5,20 thì thôi.”", c: { title: "Đối tác mất mặt, lặng lẽ rút lui", tag: "Đàm phán cứng rắn", dmg: 30,
-        text: "Người Thái rất sợ mất mặt trước đông người và hiếm khi nói “không” (kreng jai). Họ vẫn mỉm cười, nói “sẽ xem xét lại”… rồi không liên lạc nữa." } },
+        text: "Người Thái vẫn mỉm cười, nói “chúng tôi sẽ xem xét lại”… rồi không bao giờ liên lạc nữa.",
+        why: "Đây là kiểu đàm phán cứng rắn: đối đầu, giữ chặt lập trường. Với người Thái, làm đối tác mất mặt trước đông người là điều tối kỵ; họ hiếm khi nói “không” (kreng jai) mà im lặng rút lui." } },
       { t: "Thể hiện sự thấu hiểu, giải thích chi phí kiểm định FDA, rồi đưa ra phương án đổi giá lấy sản lượng hoặc thanh toán sớm", correct: true },
       { t: "Đồng ý 4,80 USD/kg nhưng âm thầm giảm chất lượng để bù lỗ", c: { title: "Từ khiếu nại đến trọng tài", tag: "Vi phạm hợp đồng", dmg: 35,
-        text: "Hàng không đúng phẩm chất đã thỏa thuận, Siam Retail khiếu nại và đòi bồi thường. Tranh chấp có thể kéo đến trọng tài thương mại. Mất tiền, mất uy tín, mất luôn thị trường Thái." } }
+        text: "Hàng không đúng phẩm chất đã thỏa thuận, Siam Retail khiếu nại và đòi bồi thường, tranh chấp có thể kéo đến trọng tài thương mại. Mất tiền, mất uy tín, mất luôn thị trường Thái.",
+        why: "Đây không phải đàm phán mà là vi phạm hợp đồng: giao hàng sai phẩm chất đã cam kết. Hậu quả là khiếu nại, bồi thường thiệt hại và mất uy tín lâu dài." } }
     ],
-    explain: "Đây là đàm phán theo nguyên tắc: tách con người khỏi vấn đề, dựa trên tiêu chuẩn khách quan, hướng tới hai bên cùng có lợi (win-win). Giữ thể diện cho đối tác Thái nhưng vẫn giữ vững giới hạn lợi nhuận.",
+    lead: "Phương án này giữ được cả hai thứ quan trọng nhất: thể diện của đối tác Thái và mức lợi nhuận tối thiểu của An Nam.",
+    points: [
+      "<b>Thấu hiểu trước:</b> ghi nhận áp lực cạnh tranh của Siam Retail để đối tác không bị mất mặt. Người Thái rất coi trọng thể diện và hòa khí.",
+      "<b>Giải thích bằng số liệu:</b> chi phí kiểm định FDA, bao bì, vận chuyển là lý do khách quan khiến giá khó giảm thêm.",
+      "<b>Đưa phương án đổi lấy:</b> giảm giá nếu đối tác tăng sản lượng hoặc thanh toán sớm. Hai bên cùng có lợi (win-win) mà giá không rơi xuống dưới mức sàn.",
+      "Đây là <b>đàm phán theo nguyên tắc</b>: tách con người khỏi vấn đề, dựa trên tiêu chuẩn khách quan, hướng tới kết quả hài hòa."
+    ],
     note: "Vậy cuối cùng An Nam chốt được mức giá nào? Câu trả lời nằm trong phần thuyết trình.",
+    hint: "Có ba kiểu đàm phán: cứng rắn, mềm dẻo và theo nguyên tắc. Kiểu nào giữ được cả quan hệ lẫn lợi nhuận?",
     source: "Nhóm 1 · Nghệ thuật đàm phán với Thái Lan",
     fill: [{ key: "price", v: "Under negotiation", s: "Đang đàm phán: 4,80 (Siam Retail) ↔ 5,20 (giá sàn An Nam)", nego: true }]
   }
@@ -707,7 +827,8 @@ var QUESTIONS = [
 
 var LETTERS = ["A", "B", "C", "D"];
 var STORE_SETTINGS = "sgnbkk.settings.v1";
-var STORE_GAME = "sgnbkk.game.v2";
+var STORE_GAME = "sgnbkk.game.v3";
+var STORE_THEME = "sgnbkk.theme.v2";
 
 /* ===================== STATE ===================== */
 var S = {
@@ -729,6 +850,7 @@ function groupIds(settings) {
   return ids;
 }
 function fillsOf(q) { return q.fill; }
+function reduceMotion() { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
 
 /* ===================== ILLUSTRATIONS ===================== */
 var HULL = "#18232E", WHITE = "#F3F5F6", RED = "#B3302A", ORANGE = "#E0601B", ORANGE_D = "#A9470F", YELLOW = "#F2B705", STEEL = "#8C9AA4", BLUE = "#2D4E80";
@@ -752,11 +874,8 @@ function shipModel(seed) {
   s.push('<text x="540" y="-30" text-anchor="end" font-family="Big Shoulders Stencil Display, Impact, sans-serif" font-weight="800" font-size="19" letter-spacing="3" fill="' + WHITE + '">AN NAM EXPRESS</text>');
   s.push('<text x="16" y="-16" font-family="Big Shoulders Stencil Display, Impact, sans-serif" font-weight="800" font-size="10" letter-spacing="1.5" fill="' + WHITE + '">SAIGON</text>');
   s.push('<circle cx="578" cy="-58" r="4" fill="' + WHITE + '" opacity=".8"/>');
-  // draft marks at the bow
   s.push('<path d="M596 -14h5M596 -24h5M596 -34h5" stroke="' + WHITE + '" stroke-width="1.5"/>');
-  // funnel
   s.push('<path d="M30 -66 L36 -140 H62 L66 -66Z" fill="' + WHITE + '"/><rect x="35" y="-128" width="28" height="12" fill="' + ORANGE + '"/><rect x="36" y="-146" width="26" height="7" fill="' + HULL + '"/>');
-  // accommodation block and bridge
   s.push('<rect x="74" y="-148" width="58" height="82" fill="' + WHITE + '"/>');
   s.push('<rect x="64" y="-162" width="78" height="14" fill="' + WHITE + '"/>');
   var w = "";
@@ -764,7 +883,6 @@ function shipModel(seed) {
   for (var ry = -140; ry <= -82; ry += 13) for (var wx = 80; wx < 128; wx += 9) w += '<rect class="win" x="' + wx + '" y="' + ry + '" width="6" height="6"/>';
   s.push(w);
   s.push('<path d="M103 -162 V-182 M94 -176 H112" stroke="' + WHITE + '" stroke-width="2"/><circle cx="103" cy="-184" r="2.4" fill="#FF4D3D"/>');
-  // container bays
   var c = "";
   for (var x = 142; x + 38 <= 552; x += 41) {
     var tiers = 3 + Math.floor(r() * 3);
@@ -807,11 +925,10 @@ function crane(o) {
   s += '<path d="M' + (x + 10) + ' ' + (top + 46) + ' L' + (x + 91) + ' ' + (gy - 175) + ' M' + (x + 91) + ' ' + (top + 46) + ' L' + (x + 10) + ' ' + (gy - 175) + '" stroke="' + dark + '" stroke-width="5"/>';
   s += '<path d="M' + (x + 5) + ' ' + top + ' L' + ax + ' ' + ay + ' L' + (x + 96) + ' ' + top + '" fill="none" stroke="' + col + '" stroke-width="8" stroke-linejoin="round"/>';
   if (o.raised) {
-    // boom lifted up while no ship is under it
     var hx = x + 96, tx = x + 150, ty = top - 330;
     s += '<path d="M' + hx + ' ' + (top + 6) + ' L' + tx + ' ' + ty + '" stroke="' + col + '" stroke-width="13"/>';
     s += '<path d="M' + ax + ' ' + ay + ' L' + (tx - 2) + ' ' + (ty + 40) + '" stroke="' + dark + '" stroke-width="3"/>';
-    s += '<rect x="' + (x - 70) + '" y="' + top + '" width="' + 166 + '" height="12" fill="' + col + '"/>';
+    s += '<rect x="' + (x - 70) + '" y="' + top + '" width="166" height="12" fill="' + col + '"/>';
     s += '<rect x="' + (x - 70) + '" y="' + (top - 26) + '" width="62" height="26" fill="' + WHITE + '"/><rect x="' + (x - 70) + '" y="' + (top - 26) + '" width="62" height="5" fill="' + col + '"/>';
     s += '<path d="M' + ax + ' ' + ay + ' L' + (x - 50) + ' ' + top + '" stroke="' + dark + '" stroke-width="3"/>';
     s += '<circle cx="' + tx + '" cy="' + ty + '" r="4" fill="#FF4D3D"/>';
@@ -839,18 +956,86 @@ function wave(y, x0, x1, amp, len) {
   for (var x = x0; x < x1; x += len) d += " q" + (len / 2) + " " + (-amp) + " " + len + " 0";
   return '<path class="k-wave" d="' + d + '"/>';
 }
+// One city building with a window grid; windows are split into "lit" and unlit groups so night mode lights some of them.
+function building(x, w, h, kind, r, opts) {
+  opts = opts || {};
+  var base = 604, top = base - h, face = "bf" + (1 + (kind % 4)), s = "";
+  if (opts.taper) {
+    s += '<path class="' + face + '" d="M' + n1(x) + ' ' + (base + 2) + ' L' + n1(x + opts.taper) + ' ' + n1(top) + ' H' + n1(x + w - opts.taper) + ' L' + n1(x + w) + ' ' + (base + 2) + 'Z"/>';
+  } else {
+    s += '<rect class="' + face + '" x="' + n1(x) + '" y="' + n1(top) + '" width="' + n1(w) + '" height="' + n1(h + 2) + '"/>';
+  }
+  s += '<rect x="' + n1(x + w * 0.76) + '" y="' + n1(top + (opts.taper ? 8 : 0)) + '" width="' + n1(w * 0.2) + '" height="' + n1(h + 2 - (opts.taper ? 8 : 0)) + '" fill="#000" opacity=".07"/>';
+  var pad = opts.taper ? opts.taper + 3 : 5;
+  var cols = Math.max(2, Math.floor((w - pad * 2 + 3) / 6.5)), rows = Math.max(2, Math.floor((h - 12) / 8.5));
+  var gx = x + (w - (cols * 6.5 - 3)) / 2, unlit = "", lit = "";
+  for (var ri = 0; ri < rows; ri++) for (var ci = 0; ci < cols; ci++) {
+    var cell = '<rect x="' + n1(gx + ci * 6.5) + '" y="' + n1(top + 8 + ri * 8.5) + '" width="3.5" height="4.6"/>';
+    if (r() < 0.36) lit += cell; else unlit += cell;
+  }
+  s += '<g class="bw">' + unlit + '</g><g class="bw lit">' + lit + '</g>';
+  if (kind === 1 && !opts.noCrown) s += '<rect class="' + face + '" x="' + n1(x + w * 0.2) + '" y="' + n1(top - 12) + '" width="' + n1(w * 0.6) + '" height="13"/><rect class="' + face + '" x="' + n1(x + w * 0.35) + '" y="' + n1(top - 22) + '" width="' + n1(w * 0.3) + '" height="11"/>';
+  if (kind === 2 && !opts.noCrown) s += '<rect class="bfr" x="' + n1(x + w * 0.55) + '" y="' + n1(top - 10) + '" width="12" height="7" rx="2"/><path d="M' + n1(x + w * 0.55 + 2) + ' ' + n1(top - 3) + 'v3M' + n1(x + w * 0.55 + 10) + ' ' + n1(top - 3) + 'v3" stroke="#8EA4B2" stroke-width="1.4"/><rect class="bfr" x="' + n1(x + 5) + '" y="' + n1(top - 5) + '" width="9" height="5"/>';
+  if (kind === 0 && !opts.noCrown) s += '<path d="M' + n1(x + w / 2) + ' ' + n1(top) + ' V' + n1(top - 26) + '" stroke="#8EA4B2" stroke-width="2"/><circle cx="' + n1(x + w / 2) + '" cy="' + n1(top - 27) + '" r="2.2" fill="#FF4D3D"/>';
+  if (kind === 3 && !opts.noCrown) s += '<path class="' + face + '" d="M' + n1(x) + ' ' + n1(top) + ' L' + n1(x + w) + ' ' + n1(top - 16) + ' V' + n1(top) + 'Z"/>';
+  return s;
+}
+// Stepped bundled-tube supertall, standing in the city behind the terminal.
+function landmark(cx, r) {
+  var tubes = [[-34, 17, 200], [-17, 17, 262], [0, 18, 318], [18, 17, 270], [35, 16, 214]], s = "";
+  tubes.forEach(function (t) { s += building(cx + t[0], t[1], t[2], 1, r, { noCrown: true }); });
+  s += '<path d="M' + (cx + 9) + ' ' + (604 - 318) + ' V' + (604 - 360) + '" stroke="#8EA4B2" stroke-width="2.5"/><circle cx="' + (cx + 9) + '" cy="' + (604 - 362) + '" r="2.6" fill="#FF4D3D"/>';
+  return s;
+}
+function helipadTower(x, r) {
+  var s = building(x, 54, 214, 3, r, { taper: 7, noCrown: true });
+  s += '<rect class="bfr" x="' + (x + 22) + '" y="' + (604 - 226) + '" width="10" height="13"/>';
+  s += '<ellipse class="bfr" cx="' + (x + 36) + '" cy="' + (604 - 228) + '" rx="22" ry="3.6"/>';
+  return s;
+}
 // The full container-terminal panorama used as the page background.
 function portScene() {
-  var r = rng(29), s = [];
+  var r = rng(29), s = [], i, x;
   s.push('<svg viewBox="0 0 1600 900" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg">');
-  s.push('<g class="k-cloud">' + cloud(260, 170, 1) + cloud(780, 120, 1.25) + cloud(1150, 250, .85) + cloud(1500, 90, .7) + '</g>');
-  s.push('<circle cx="1400" cy="196" r="58" class="k-sun"/>');
-  var city = "";
-  for (var cx = 0; cx < 1600;) { var w = 24 + r() * 46, h = 24 + r() * 86; city += '<rect x="' + n1(cx) + '" y="' + n1(604 - h) + '" width="' + n1(w) + '" height="' + n1(h + 2) + '"/>'; cx += w + 3 + r() * 14; }
-  s.push('<g class="k-city">' + city + '</g>');
-  // a neighbouring terminal on the horizon
+  s.push('<defs><radialGradient id="g-sun"><stop offset="0" stop-color="#FFE0A8" stop-opacity=".95"/><stop offset="1" stop-color="#FFE0A8" stop-opacity="0"/></radialGradient>' +
+    '<radialGradient id="g-moon"><stop offset="0" stop-color="#F6EFD6" stop-opacity=".45"/><stop offset="1" stop-color="#F6EFD6" stop-opacity="0"/></radialGradient></defs>');
+  // night sky: stars and moon
+  var stars = "";
+  for (i = 0; i < 110; i++) {
+    var sx = n1(r() * 1600), sy = n1(r() * 470), sr = n1(0.6 + r() * 1.5);
+    stars += '<circle cx="' + sx + '" cy="' + sy + '" r="' + sr + '"' + (r() < 0.25 ? ' class="tw" style="animation-delay:' + n1(r() * 3) + 's"' : "") + "/>";
+  }
+  s.push('<g class="k-night" fill="#E9F1FF">' + stars + "</g>");
+  s.push('<g class="k-night"><circle cx="1380" cy="170" r="120" fill="url(#g-moon)"/><circle cx="1380" cy="170" r="40" fill="#F3EBD2"/>' +
+    '<circle cx="1366" cy="158" r="7" fill="#E1D6B6"/><circle cx="1393" cy="183" r="5" fill="#E1D6B6"/><circle cx="1395" cy="155" r="3.5" fill="#E1D6B6"/></g>');
+  // day sky: sun and birds
+  s.push('<g class="k-day"><circle cx="1400" cy="196" r="160" fill="url(#g-sun)"/><circle cx="1400" cy="196" r="56" class="k-sun"/></g>');
+  s.push('<g class="k-day" fill="none" stroke="#2E404B" stroke-width="2.4" stroke-linecap="round">' +
+    '<path d="M560 236 q6 -7 12 0 q6 -7 12 0"/><path d="M600 214 q5 -6 10 0 q5 -6 10 0"/><path d="M632 246 q4 -5 8 0 q4 -5 8 0"/><path d="M1080 150 q5 -6 10 0 q5 -6 10 0"/></g>');
+  s.push('<g class="k-cloud">' + cloud(260, 170, 1) + cloud(780, 120, 1.25) + cloud(1150, 270, .85) + cloud(1530, 96, .7) + "</g>");
+  // far city haze and its night lights
+  var far = "", farLit = "";
+  for (x = -10; x < 1600;) {
+    var fw = 28 + r() * 52, fh = 60 + r() * 130;
+    far += '<rect x="' + n1(x) + '" y="' + n1(604 - fh) + '" width="' + n1(fw) + '" height="' + n1(fh + 2) + '"/>';
+    for (var k = 0; k < 4; k++) if (r() < 0.6) farLit += '<rect x="' + n1(x + 4 + r() * (fw - 8)) + '" y="' + n1(604 - fh + 6 + r() * (fh - 14)) + '" width="2.6" height="3.2"/>';
+    x += fw + 2 + r() * 10;
+  }
+  s.push('<g class="k-far">' + far + '</g><g class="k-night k-farlit">' + farLit + "</g>");
+  // near city: detailed buildings, a stepped supertall and a tower with a helipad
+  var near = "";
+  for (x = -6; x < 1600;) {
+    if (x > 1120 && x < 1250) { x = 1258; continue; }
+    if (x > 1430 && x < 1500) { x = 1508; continue; }
+    var kind = Math.floor(r() * 4), bw = 30 + r() * 42, bh = 52 + r() * 150;
+    near += building(x, bw, bh, kind, r);
+    x += bw + 4 + r() * 10;
+  }
+  near += landmark(1190, r) + helipadTower(1446, r);
+  s.push(near);
+  // neighbouring terminal on the horizon, distant ship
   s.push('<g class="k-crane-far"><path d="M40 600 V520 H96 V600 M40 520 L68 470 L96 520 M10 522 H170"/><path d="M130 600 V528 H182 V600 M130 528 L156 482 L182 528 M100 530 H250"/></g>');
-  s.push('<g class="k-city-2"><path d="M1150 598 h132 l-9 9 h-115z"/><rect x="1162" y="584" width="80" height="14"/><rect x="1252" y="576" width="16" height="22"/></g>');
+  s.push('<g class="k-far"><path d="M1150 598 h132 l-9 9 h-115z"/><rect x="1162" y="584" width="80" height="14"/><rect x="1252" y="576" width="16" height="22"/></g>');
   // sea
   s.push('<rect x="0" y="600" width="1600" height="300" class="k-sea"/>');
   s.push('<path d="M0 600 H1600" class="k-horizon"/>');
@@ -863,44 +1048,47 @@ function portScene() {
   for (var fx = 30; fx < 840; fx += 80) fend += '<rect x="' + fx + '" y="734" width="18" height="38" rx="4" class="k-fender"/>';
   s.push(fend);
   s.push('<text x="40" y="828" font-family="Big Shoulders Stencil Display, Impact, sans-serif" font-weight="800" font-size="34" letter-spacing="6" fill="#ffffff" fill-opacity=".55">CAT LAI TERMINAL · BERTH 03</text>');
-  // yard stacks (back row)
   var yard = "";
   for (var yx = 6; yx + 62 < 640; yx += 65) {
     var tiers = 1 + Math.floor(r() * 4);
     for (var t = 0; t < tiers; t++) yard += box(yx, 640 - (t + 1) * 20, 62, 19.2, BOXES[Math.floor(r() * BOXES.length)]);
   }
-  s.push('<g opacity=".92">' + yard + '</g>');
-  // rubber-tyred gantry over the yard block
+  s.push('<g opacity=".95">' + yard + "</g>");
   s.push('<g><rect x="96" y="520" width="9" height="122" fill="' + WHITE + '"/><rect x="292" y="520" width="9" height="122" fill="' + WHITE + '"/>' +
     '<rect x="88" y="508" width="222" height="14" fill="' + BLUE + '"/><rect x="180" y="522" width="34" height="10" fill="' + HULL + '"/>' +
     '<path d="M190 532 V560 M204 532 V560" stroke="' + HULL + '" stroke-width="1.5"/><rect x="170" y="560" width="54" height="5" fill="' + YELLOW + '"/>' +
     '<circle cx="100" cy="646" r="7" fill="' + HULL + '"/><circle cx="297" cy="646" r="7" fill="' + HULL + '"/></g>');
-  // high-mast lighting
   [40, 650].forEach(function (lx) {
     s.push('<rect x="' + lx + '" y="440" width="5" height="200" fill="' + STEEL + '"/><rect x="' + (lx - 14) + '" y="434" width="33" height="8" fill="' + STEEL + '"/>' +
       '<circle cx="' + (lx - 8) + '" cy="446" r="3.5" class="k-lamp"/><circle cx="' + (lx + 2.5) + '" cy="446" r="3.5" class="k-lamp"/><circle cx="' + (lx + 13) + '" cy="446" r="3.5" class="k-lamp"/>');
   });
-  // ship at berth
-  s.push('<g transform="translate(868 772) scale(1.17)">' + shipModel(11) + '</g>');
-  // mooring lines
+  s.push('<g transform="translate(868 772) scale(1.17)">' + shipModel(11) + "</g>");
   s.push('<path d="M880 696 Q860 712 836 716 M884 700 Q872 716 820 719" stroke="' + HULL + '" stroke-width="2" fill="none"/>');
   s.push('<path d="M828 719 v-9 h12 v9z M812 719 v-9 h12 v9z" fill="' + HULL + '"/>');
-  // cranes: one idle with boom raised, one loading the ship
   s.push(crane({ x: 360, gy: 722, top: 312, raised: true }));
   s.push(crane({ x: 590, gy: 722, top: 290, back: 500, reach: 1390, trolley: 1130, hang: 520, load: BOXES[0] }));
-  // trucks on the apron
-  s.push('<g transform="translate(150 716) scale(1.35)">' + truckModel(BOXES[2], "ANMU 202611 7") + '</g>');
-  s.push('<g transform="translate(560 716) scale(-1.25 1.25)">' + truckModel(BOXES[3], "") + '</g>');
-  // water in front of the hull, tug and waves
+  s.push('<g transform="translate(150 716) scale(1.35)">' + truckModel(BOXES[2], "ANMU 202611 7") + "</g>");
+  s.push('<g transform="translate(560 716) scale(-1.25 1.25)">' + truckModel(BOXES[3], "") + "</g>");
   s.push('<path d="M846 784 q30 -6 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V900 H846Z" class="k-sea"/>');
-  s.push('<g transform="translate(1440 846) scale(1.15)">' + tugModel() + '</g>');
+  s.push('<g transform="translate(1440 846) scale(1.15)">' + tugModel() + "</g>");
   s.push('<path d="M1420 852 q30 -6 60 0 t60 0 t60 0 V900 H1420Z" class="k-sea"/>');
   s.push(wave(812, 880, 1600, 4, 64) + wave(866, 856, 1600, 4, 80) + wave(892, 900, 1600, 3, 56));
-  s.push('</svg>');
+  s.push("</svg>");
   return s.join("");
 }
-function truckSVG() { return '<svg class="rt-truck" viewBox="0 -52 140 54" aria-hidden="true">' + truckModel(ORANGE, "ANMU") + '</svg>'; }
-function shipSVG() { return '<svg class="rt-ship" viewBox="-6 -188 624 222" aria-hidden="true">' + shipModel(23) + '</svg>'; }
+function truckSVG() { return '<svg class="rt-truck" viewBox="0 -52 140 54" aria-hidden="true">' + truckModel(ORANGE, "ANMU") + "</svg>"; }
+function shipSVG() { return '<svg class="rt-ship" viewBox="-6 -188 624 222" aria-hidden="true">' + shipModel(23) + "</svg>"; }
+
+/* Stop icons for the tracking map (24×24, stroked). */
+var STOP_ICONS = [
+  '<path d="M3 21V9l9-5 9 5v12"/><path d="M7 21v-8h10v8M7 17h10"/>',
+  '<path d="M6 21V3M6 5h14M6 3l5 2M17 5v6"/><rect x="14.5" y="11" width="5" height="4"/><path d="M3 21h8"/>',
+  '<path d="M9 3h6v5l3 3H6l3-3z"/><path d="M5 15h14v3H5zM7 21h10"/>',
+  '<path d="M12 2v5M9 7h6"/><rect x="5" y="10" width="14" height="9" rx="1"/><path d="M9 10v9M12 10v9M15 10v9"/>',
+  '<path d="M2 9c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2M2 15c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/>',
+  '<circle cx="12" cy="5" r="2"/><path d="M12 7v14M8 11h8M5 14a7 7 0 0 0 14 0"/>',
+  '<path d="M4 10l1.5-5h13L20 10M4 10h16v10H4zM10 20v-5h4v5"/><path d="M4 10c0 1.4 1.1 2.4 2.7 2.4S9.3 11.4 9.3 10c0 1.4 1.1 2.4 2.7 2.4s2.7-1 2.7-2.4c0 1.4 1.1 2.4 2.7 2.4S20 11.4 20 10"/>'
+];
 
 /* ===================== SOUND ===================== */
 var actx = null;
@@ -1025,7 +1213,7 @@ function startGame() {
     if (keys.length) applyFill(g, q, false, true, keys);
   });
   S.game = g;
-  $("routebox").innerHTML = "";
+  resetRoute();
   $("brief-n").textContent = order.length;
   show("brief");
   SFX.horn();
@@ -1043,7 +1231,7 @@ function renderHeader() {
   $("pips").innerHTML = g.order.map(function (qidx, i) {
     var cls = "pip";
     var entry = g.log.filter(function (l) { return l.q === qidx && l.final; })[0];
-    if (entry) cls += entry.cleanFirst ? " done" : " warn";
+    if (entry) cls += entry.revealed ? " bad" : (entry.cleanFirst ? " done" : " warn");
     else if (i === g.qi) cls += " now";
     return '<span class="' + cls + '"></span>';
   }).join("");
@@ -1051,7 +1239,7 @@ function renderHeader() {
   $("health-val").textContent = h + "%";
   var bar = $("health-bar");
   bar.style.width = h + "%";
-  bar.style.background = h >= 70 ? "var(--ok)" : h >= VALID_MIN ? "var(--gold)" : "var(--bad)";
+  bar.style.background = h >= 70 ? "var(--ok)" : h >= 40 ? "var(--gold)" : "var(--bad)";
   renderSoundBtn();
 }
 function renderSoundBtn() {
@@ -1060,49 +1248,108 @@ function renderSoundBtn() {
     : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
 }
 
-/* ---------- Route strip ---------- */
+/* ---------- Tracking map ---------- */
 var NODE_N = STAGES.length;
-function nodePct(i) { return 6 + 88 * i / (NODE_N - 1); }
+var NODE_Y = [62, 50, 63, 52, 64, 54, 61];
+var routeAnim = { shown: null, raf: 0, safety: 0 };
+function nodeX(i) { return 6 + 88 * i / (NODE_N - 1); }
 function progressPct(g) { var total = g.order.length || 1; return 6 + 88 * Math.min(1, g.answered / total); }
+// Smooth Catmull-Rom curve through the stops; x and y are percentages of the map box.
+function laneY(x) {
+  var h = 88 / (NODE_N - 1), u = (x - 6) / h;
+  if (u < 0) u = 0; if (u > NODE_N - 1) u = NODE_N - 1;
+  var i = Math.min(NODE_N - 2, Math.floor(u)), t = u - i;
+  var p0 = NODE_Y[Math.max(0, i - 1)], p1 = NODE_Y[i], p2 = NODE_Y[i + 1], p3 = NODE_Y[Math.min(NODE_N - 1, i + 2)];
+  var t2 = t * t, t3 = t2 * t;
+  return 0.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3);
+}
+function laneD(x0, x1) {
+  var d = "M" + n1(x0) + " " + n1(laneY(x0));
+  for (var x = x0 + 0.5; x < x1; x += 0.5) d += " L" + n1(x) + " " + n1(laneY(x));
+  if (x1 > x0) d += " L" + n1(x1) + " " + n1(laneY(x1));
+  return d;
+}
+function stopIndex(x) { var k = 0; for (var i = 0; i < NODE_N; i++) if (x >= nodeX(i) - 0.01) k = i; return k; }
+function resetRoute() { $("routebox").innerHTML = ""; cancelAnimationFrame(routeAnim.raf); clearTimeout(routeAnim.safety); routeAnim.shown = null; }
 function buildRoute() {
   var nodes = STAGES.map(function (st, i) {
-    return '<div class="rt-node' + (i === 0 ? " first" : "") + (i === NODE_N - 1 ? " last" : "") + '" id="rt-node-' + i + '" style="left:' + n1(nodePct(i)) + '%"><i></i><span>' + esc(st) + "</span></div>";
+    return '<div class="rt-node' + (i === 0 ? " first" : "") + (i === NODE_N - 1 ? " last" : "") + '" id="rt-node-' + i + '" style="left:' + n1(nodeX(i)) + "%;top:" + n1(NODE_Y[i]) + '%">' +
+      '<i><svg viewBox="0 0 24 24">' + STOP_ICONS[i] + "</svg></i><span>" + esc(st) + "</span></div>";
   }).join("");
+  var waveSvg = '<svg viewBox="0 0 32 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 6c3.5 0 3.5-4 7-4s3.5 4 7 4 3.5-4 7-4 3.5 4 7 4"/></svg>';
   $("routebox").innerHTML =
-    '<div class="route">' +
-      '<svg class="rt-water" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
-        '<path class="sea" d="M57 0 C55.5 22 58.5 40 56.5 60 C55 80 57.5 92 57 100 L87.5 100 C89 80 86.5 62 88.5 42 C89.5 24 87 10 88 0 Z"/>' +
-        '<path class="ripple" d="M62 22 q2 -3 4 0 t4 0 M73 84 q2 -3 4 0 t4 0 M79 30 q1.5 -3 3 0"/>' +
+    '<div class="route" id="route">' +
+      '<svg class="rt-map" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
+        '<path class="sea" d="M53.5 0 C52 22 55 40 53 60 C51.5 80 54 92 53.5 100 L82.5 100 C84 80 81.5 62 83.5 42 C84.5 24 82 10 83 0 Z"/>' +
+        '<path class="deep" d="M57.5 0 C56 25 58.5 45 57 62 C56 80 58 92 57.5 100 L79 100 C80.5 82 78 62 80 44 C81 26 78.5 10 79.5 0 Z"/>' +
+        '<path class="coast" d="M53.5 0 C52 22 55 40 53 60 C51.5 80 54 92 53.5 100"/>' +
+        '<path class="coast" d="M83 0 C82 10 84.5 24 83.5 42 C81.5 62 84 80 82.5 100"/>' +
+        '<path class="lane-bg" d="' + laneD(6, 94) + '"/>' +
+        '<path class="lane-glow" id="rt-lane-glow" d="M6 ' + NODE_Y[0] + '"/>' +
+        '<path class="lane" id="rt-lane" d="M6 ' + NODE_Y[0] + '"/>' +
       "</svg>" +
+      '<div class="rt-grid"></div>' +
       '<span class="rt-tag" style="left:1.2%">VIỆT NAM</span>' +
-      '<span class="rt-tag rt-gulf" style="left:72%;transform:translateX(-50%)">VỊNH THÁI LAN</span>' +
+      '<span class="rt-tag rt-gulf" style="left:68%;transform:translateX(-50%)">VỊNH THÁI LAN</span>' +
       '<span class="rt-tag" style="right:1.2%">THÁI LAN</span>' +
-      '<div class="rt-line"></div><div class="rt-prog" id="rt-prog"></div>' + nodes +
-      '<div id="rt-incidents"></div>' +
+      '<span class="rt-wave" style="left:59%;top:24%">' + waveSvg + "</span>" +
+      '<span class="rt-wave" style="left:73%;top:30%">' + waveSvg + "</span>" +
+      '<span class="rt-wave" style="left:69%;top:80%">' + waveSvg + "</span>" +
+      '<svg class="rt-compass" style="left:54.6%;bottom:.35rem" viewBox="-22 -24 44 46" aria-hidden="true"><circle r="15" class="ring"/><path class="ns" d="M0 -12 L3.5 0 L0 12 L-3.5 0Z"/><path class="n" d="M0 -12 L3.5 0 L-3.5 0Z"/><path class="ns" d="M-12 0 L0 -2.4 L12 0 L0 2.4Z" opacity=".55"/><text y="-17" text-anchor="middle">N</text></svg>' +
+      nodes +
       '<div class="rt-vehicle" id="rt-vehicle">' + truckSVG() + shipSVG() + "</div>" +
     "</div>" +
-    '<div class="route-now" id="route-now"></div>';
+    '<div class="rt-status"><span class="dot"></span><b class="cn">ANMU 202611 7</b><span class="ev" id="rt-ev"></span><span class="loc" id="rt-loc"></span><span class="leg tnum" id="rt-leg"></span></div>';
+}
+function placeVehicle(x) {
+  var v = $("rt-vehicle"); if (!v) return;
+  var y = laneY(x);
+  v.style.left = n1(x) + "%";
+  v.style.top = n1(y) + "%";
+  v.classList.toggle("at-sea", x > nodeX(3) + 0.01 && x < nodeX(5) + 0.01);
+  var box = $("route"), W = box ? box.clientWidth || 1000 : 1000, H = box ? box.clientHeight || 120 : 120;
+  var dy = laneY(Math.min(94, x + 0.6)) - laneY(Math.max(6, x - 0.6));
+  var dx = Math.min(94, x + 0.6) - Math.max(6, x - 0.6);
+  var ang = dx > 0 ? Math.atan2(dy * H, dx * W) * 180 / Math.PI : 0;
+  v.style.setProperty("--tilt", n1(Math.max(-14, Math.min(14, ang))) + "deg");
+  var d = laneD(6, x);
+  $("rt-lane").setAttribute("d", d);
+  $("rt-lane-glow").setAttribute("d", d);
+}
+function animateRoute(to) {
+  var from = routeAnim.shown == null ? to : routeAnim.shown;
+  cancelAnimationFrame(routeAnim.raf); clearTimeout(routeAnim.safety);
+  routeAnim.shown = to;
+  if (fast() || reduceMotion() || Math.abs(to - from) < 0.01) { placeVehicle(to); return; }
+  var t0 = performance.now(), dur = 1300;
+  function step(now) {
+    var p = Math.min(1, (now - t0) / dur), e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+    placeVehicle(from + (to - from) * e);
+    if (p < 1) routeAnim.raf = requestAnimationFrame(step);
+  }
+  placeVehicle(from);
+  routeAnim.raf = requestAnimationFrame(step);
+  // Backup for background tabs, where animation frames pause.
+  routeAnim.safety = setTimeout(function () { cancelAnimationFrame(routeAnim.raf); placeVehicle(to); }, dur + 400);
 }
 function renderRoute() {
   var g = S.game;
   if (!$("rt-vehicle")) buildRoute();
-  var x = progressPct(g), reached = 0;
-  for (var i = 0; i < NODE_N; i++) if (x >= nodePct(i) - 0.01) reached = i;
-  var onShip = x > nodePct(3) + 0.01 && x < nodePct(5) + 0.01;
-  $("rt-prog").style.width = n1(x - 6) + "%";
-  var v = $("rt-vehicle");
-  v.style.left = n1(x) + "%";
-  v.classList.toggle("at-sea", onShip);
+  var x = progressPct(g), reached = stopIndex(x);
+  var counts = {};
+  g.incidents.forEach(function (inc) { counts[inc.node] = (counts[inc.node] || 0) + 1; });
   for (var k = 0; k < NODE_N; k++) {
     var nd = $("rt-node-" + k);
-    nd.classList.toggle("reached", x >= nodePct(k) - 0.01);
+    nd.classList.toggle("reached", x >= nodeX(k) - 0.01);
     nd.classList.toggle("now", k === reached);
+    var old = nd.querySelector(".rt-badge"); if (old) old.parentNode.removeChild(old);
+    if (counts[k]) nd.insertAdjacentHTML("beforeend", '<b class="rt-badge" title="Sự cố tại chặng này">' + counts[k] + "</b>");
   }
-  $("rt-incidents").innerHTML = g.incidents.map(function (inc, j) {
-    return '<span class="rt-inc" style="left:calc(' + n1(inc.pos) + "% + " + ((j % 3) - 1) * 16 + 'px)" title="Sự cố">!</span>';
-  }).join("");
-  $("route-now").innerHTML = "Container đang ở: <b>" + esc(STAGES[reached]) + "</b>";
-  $("routebox").setAttribute("aria-label", "Hành trình container: đang ở " + STAGES[reached]);
+  $("rt-ev").textContent = EVENTS[reached];
+  $("rt-loc").textContent = PLACES[reached];
+  $("rt-leg").textContent = "Chặng " + reached + "/" + (NODE_N - 1);
+  $("routebox").setAttribute("aria-label", "Hành trình container ANMU 202611 7: " + EVENTS[reached] + ", " + PLACES[reached]);
+  animateRoute(x);
 }
 
 function renderQuestion() {
@@ -1115,8 +1362,8 @@ function renderQuestion() {
       '<span class="L">' + LETTERS[i] + "</span><span>" + esc(o.t) + "</span></button>";
   }).join("");
   var foot = at.resolved
-    ? '<span class="hint">Điều khoản đã được ghi vào hợp đồng.</span><button class="btn btn-primary btn-lg" data-action="next" id="btn-next">' + (g.qi + 1 >= g.order.length ? "Xem kết quả hợp đồng" : "Câu tiếp theo") + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'
-    : '<span class="hint">Chọn nhóm trả lời ở khung bên phải, rồi bấm đáp án nhóm đưa ra. Phím <span class="kbd">A</span>–<span class="kbd">D</span>.</span>';
+    ? '<span class="hint">Điều khoản đã được ghi vào hợp đồng.</span><span style="display:flex;gap:.6rem;flex-wrap:wrap"><button class="btn" data-action="explain">Xem giải thích</button><button class="btn btn-primary btn-lg" data-action="next" id="btn-next">' + (g.qi + 1 >= g.order.length ? "Xem kết quả hợp đồng" : "Câu tiếp theo") + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></span>'
+    : '<span class="hint">Chọn nhóm trả lời, rồi bấm đáp án nhóm đưa ra.<span class="kbd-hint"> Phím <span class="kbd">A</span>–<span class="kbd">D</span>.</span></span>';
   $("qcard").innerHTML =
     '<div class="qmeta">' + (q.star ? '<span class="chip hot">Câu hỏi Incoterms</span>' : "") + '<span class="chip src">' + esc(q.chapter) + "</span></div>" +
     '<h2 class="qstage">' + esc(q.stage) + "</h2>" +
@@ -1162,7 +1409,7 @@ function renderContract(stampKey, target) {
   }
   var pf = g.filled.price;
   var priceCell = !pf ? blank("price") : '<span class="fill' + (pf.nego ? " nego blink" : "") + '">' + esc(pf.v) + "</span>" + (pf.warn ? '<span class="doc-note">✎ sau sự cố</span>' : "");
-  var priceNote = pf ? '<p><i>' + esc(pf.s) + "</i></p>" : "";
+  var priceNote = pf ? "<p><i>" + esc(pf.s) + "</i></p>" : "";
   box.innerHTML =
     '<article class="doc">' +
       '<header class="doc-head"><div class="doc-title">SALES CONTRACT<span>HỢP ĐỒNG MUA BÁN HÀNG HÓA QUỐC TẾ</span></div>' +
@@ -1250,7 +1497,7 @@ function answer(i) {
   if (o.correct) {
     var group = at.group, tries = at.tries;
     at.resolved = true;
-    g.log.push({ q: g.order[g.qi], group: group, opt: i, correct: true, final: true, cleanFirst: tries === 0 });
+    g.log.push({ q: g.order[g.qi], group: group, opt: i, correct: true, final: true, cleanFirst: tries === 0, revealed: false });
     g.answered += 1;
     applyFill(g, q, false, false);
     SFX.ok(); setTimeout(SFX.stamp, fast() ? 0 : 450);
@@ -1261,7 +1508,7 @@ function answer(i) {
     at.tries += 1;
     if (at.group != null && at.triedGroups.indexOf(at.group) < 0) at.triedGroups.push(at.group);
     g.health = Math.max(0, g.health - o.c.dmg);
-    g.incidents.push({ q: g.order[g.qi], opt: i, group: at.group, pos: progressPct(g) });
+    g.incidents.push({ q: g.order[g.qi], opt: i, group: at.group, node: stopIndex(progressPct(g)) });
     g.log.push({ q: g.order[g.qi], group: at.group, opt: i, correct: false });
     SFX.bad();
     var wrongGroup = at.group;
@@ -1277,7 +1524,7 @@ function reveal() {
   if (at.resolved) return;
   at.resolved = true; at.revealed = true; at.group = null; at.timerEnd = 0;
   stopTimer();
-  g.log.push({ q: g.order[g.qi], group: null, opt: -1, correct: false, final: true, cleanFirst: false });
+  g.log.push({ q: g.order[g.qi], group: null, opt: -1, correct: false, final: true, cleanFirst: false, revealed: true });
   g.answered += 1;
   applyFill(g, q, true, false);
   SFX.stamp();
@@ -1285,6 +1532,8 @@ function reveal() {
   showResult(q, { kind: "reveal" });
   saveGame();
 }
+function revealedCount(g) { return g.log.filter(function (l) { return l.final && l.revealed; }).length; }
+function isValid(g) { return revealedCount(g) === 0; }
 function next() {
   var g = S.game;
   if (!g || !g.at.resolved) return;
@@ -1294,7 +1543,7 @@ function next() {
     g.filled.price = { v: "Under negotiation", s: "Đang đàm phán: 4,80 (Siam Retail) ↔ 5,20 (giá sàn An Nam)", nego: true, warn: !!p.warn };
     g.done = true;
     renderFinal(); show("final");
-    if (g.health >= VALID_MIN) { SFX.horn(); setTimeout(SFX.stamp, fast() ? 0 : 300); } else SFX.bad();
+    if (isValid(g)) { SFX.horn(); setTimeout(SFX.stamp, fast() ? 0 : 300); } else SFX.bad();
     return;
   }
   g.qi += 1;
@@ -1310,6 +1559,7 @@ function openModal(html, kind, primary) {
   var sheet = $("sheet");
   sheet.className = "sheet " + (kind || "");
   sheet.innerHTML = html;
+  sheet.scrollTop = 0;
   $("modal").hidden = false;
   modalPrimary = primary || null;
   var focusEl = sheet.querySelector("[data-primary]") || sheet.querySelector("button");
@@ -1327,9 +1577,24 @@ function showIncident(q, o, i, groupId) {
     '<h2 id="modal-title" style="margin-top:.3rem">' + esc(c.title) + "</h2></div>" +
     '<p class="body">' + c.text + "</p>" +
     '<div class="impact"><span>Sức khỏe hợp đồng −' + c.dmg + "%</span><span>" + esc(c.tag) + '</span><span class="neutral">Còn lại: ' + Math.round(S.game.health) + "%</span></div>" +
-    '<div class="sheet-actions"><button class="btn" data-action="reveal">Xem đáp án đúng</button>' +
+    '<div class="box why-bad"><span class="eyebrow">Vì sao đáp án ' + LETTERS[i] + " sai?</span><p>" + c.why + "</p></div>" +
+    (canRetry ? '<div class="box hint-box"><span class="eyebrow">Gợi ý cho nhóm tiếp theo</span><p>' + esc(q.hint) + "</p></div>" : "") +
+    '<div class="sheet-actions sticky"><button class="btn" data-action="reveal">Xem đáp án đúng</button>' +
       (canRetry ? '<button class="btn btn-primary btn-lg" data-action="retry" data-primary>Mời nhóm khác trả lời</button>' : "") + "</div>";
   openModal(html, "bad", canRetry ? "retry" : "reveal");
+}
+function explanationHTML(q) {
+  var others = q.options.map(function (o, k) {
+    if (o.correct) return "";
+    return '<li><span class="L">' + LETTERS[k] + "</span><div><b>" + esc(o.t) + '</b><span class="t">' + o.c.why + "</span></div></li>";
+  }).join("");
+  var why = '<div class="box"><span class="eyebrow">Vì sao đúng?</span><p class="lead">' + esc(q.lead) + "</p>" +
+      "<ul>" + q.points.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul>" +
+      (q.diagram === "incoterms" ? incotermsDiagram() : "") + "</div>";
+  var wrong = '<div class="box"><span class="eyebrow" style="color:var(--bad)">Các đáp án còn lại sai ở đâu?</span><ul class="others">' + others + "</ul></div>";
+  // The Incoterms diagram needs the full width, so that one question stacks; the rest sit side by side on wide screens.
+  return (q.diagram ? why + wrong : '<div class="why-grid">' + why + wrong + "</div>") +
+    (q.note ? '<p class="note">' + esc(q.note) + "</p>" : "");
 }
 function showResult(q, info) {
   var correctIdx = 0; q.options.forEach(function (o, k) { if (o.correct) correctIdx = k; });
@@ -1337,15 +1602,18 @@ function showResult(q, info) {
     '<div><span class="eyebrow">Đáp án ' + LETTERS[correctIdx] + '</span><h2 id="modal-title" style="margin-top:.3rem">' + esc(q.options[correctIdx].t) + "</h2></div>";
   var impact = info.kind === "good"
     ? '<div class="impact">' + (info.group != null ? '<span class="ok">Nhóm ' + info.group + " trả lời đúng" + (info.tries ? " (lượt " + (info.tries + 1) + ")" : "") + "</span>" : '<span class="neutral">Không chọn nhóm trả lời</span>') + '<span class="ok">Container đi thêm một chặng</span></div>'
-    : '<div class="impact"><span class="neutral">Không nhóm nào trả lời đúng</span><span>Điều khoản ghi kèm cảnh báo sự cố</span></div>';
+    : '<div class="impact"><span class="neutral">Không nhóm nào trả lời đúng</span><span>Điều khoản này làm hợp đồng không hợp lệ</span></div>';
   var isLast = S.game.qi + 1 >= S.game.order.length;
-  var html = head + impact +
-    '<div class="explain"><span class="eyebrow">Vì sao?</span><p>' + esc(q.explain) + "</p>" + (q.diagram === "incoterms" ? incotermsDiagram() : "") +
-      (q.note ? '<p class="note">' + esc(q.note) + "</p>" : "") + "</div>" +
+  var html = head + impact + explanationHTML(q) +
     '<p class="src-line">Nguồn: ' + esc(q.source) + "</p>" +
-    '<div class="sheet-actions"><button class="btn" data-action="close-modal">Xem lại câu hỏi</button>' +
+    '<div class="sheet-actions sticky"><button class="btn" data-action="close-modal">Xem lại câu hỏi</button>' +
     '<button class="btn btn-primary btn-lg" data-action="next" data-primary>' + (isLast ? "Xem kết quả hợp đồng" : "Câu tiếp theo") + "</button></div>";
   openModal(html, info.kind === "good" ? "good" : "info", "next");
+}
+function showExplainAgain() {
+  var g = S.game; if (!g || !g.at.resolved) return;
+  var entry = g.log.filter(function (l) { return l.q === g.order[g.qi] && l.final; })[0];
+  showResult(curQ(), entry && !entry.revealed ? { kind: "good", group: entry.group, tries: g.at.tries } : { kind: "reveal" });
 }
 function incotermsDiagram() {
   var rows = [{ t: "EXW", cost: 0, risk: 0 }, { t: "FOB", cost: 36, risk: 36, hl: true }, { t: "CIF", cost: 72, risk: 36 }, { t: "DDP", cost: 100, risk: 100 }];
@@ -1365,6 +1633,7 @@ function restart() {
   closeModal(); closeWheel(true);
   S.game = null;
   store(STORE_GAME, null);
+  resetRoute();
   renderIntro(); show("intro");
 }
 
@@ -1451,8 +1720,7 @@ function spinWheel() {
   var target = -(k * seg + jitter), TWO = Math.PI * 2;
   var startA = wheel.angle, base = startA + TWO * (fast() ? 1 : 6);
   var endA = base + (((target - base) % TWO) + TWO) % TWO;
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var dur = fast() ? 0 : (reduce ? 1200 : 4400);
+  var dur = fast() ? 0 : (reduceMotion() ? 1200 : 4400);
   spinning = true;
   $("btn-spin").disabled = true;
   $("wheel-result").className = "wheel-result";
@@ -1471,7 +1739,6 @@ function spinWheel() {
     if (p < 1) wheel.raf = requestAnimationFrame(frame); else finishSpin(k, token);
   }
   wheel.raf = requestAnimationFrame(frame);
-  // Backup: animation frames pause in background tabs, so always land the result on time.
   clearTimeout(wheel.safety);
   wheel.safety = setTimeout(function () {
     if (token !== wheel.token || !spinning) return;
@@ -1504,12 +1771,14 @@ function acceptSpin() {
 
 /* ===================== VERDICT & PRESENT ===================== */
 function renderFinal() {
-  var g = S.game, h = Math.max(0, Math.round(g.health)), ok = g.health >= VALID_MIN;
+  var g = S.game, ok = isValid(g), n = g.order.length, rev = revealedCount(g);
   $("final").innerHTML =
     '<div class="verdict' + (ok ? "" : " bad") + '" id="verdict" data-valid="' + (ok ? "1" : "0") + '">' +
       '<span class="v-no">Sales Contract No. 01/2026/AN-SR · An Nam → Siam Retail</span>' +
       '<div class="v-stamp" role="status">' + (ok ? "HỢP ĐỒNG HỢP LỆ" : "HỢP ĐỒNG KHÔNG HỢP LỆ") + "<small>" + (ok ? "VALID CONTRACT" : "INVALID CONTRACT") + "</small></div>" +
-      '<p class="v-line">Sức khỏe hợp đồng <b class="tnum">' + h + "%</b> · " + (ok ? "đạt" : "chưa đạt") + " mức tối thiểu " + VALID_MIN + "%</p>" +
+      '<p class="v-line">' + (ok
+        ? "Cả " + n + "/" + n + " điều khoản đều được các nhóm trả lời đúng."
+        : rev + "/" + n + " điều khoản không nhóm nào trả lời đúng, phải xem đáp án.") + "</p>" +
     "</div>" +
     '<div class="final-actions"><button class="btn btn-lg" data-action="ask-restart">Chơi lại</button>' +
       '<button class="btn btn-primary btn-lg" data-action="present">Bước vào bàn đàm phán <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>';
@@ -1525,7 +1794,7 @@ function renderPresent() {
   $("present").innerHTML =
     '<div class="top-row"><div class="tag-line"><span class="cn-badge">NHÓM 1</span><span class="eyebrow">Nghiệp vụ ngoại thương · Phần thuyết trình</span></div>' +
       '<div class="tools"><button class="btn btn-ghost" data-action="back-final">← Kết quả</button>' +
-      '<button class="btn icon-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>' +
+      '<button class="btn icon-btn fs-btn" data-action="fullscreen" title="Toàn màn hình (F)" aria-label="Toàn màn hình"' + (fsSupported() ? "" : " hidden") + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>' +
     '<div class="present-head"><span class="eyebrow">Nghệ thuật đàm phán với các nước ASEAN</span><h1>Bàn đàm phán ở Bangkok<span class="th">THAILAND</span></h1></div>' +
     '<div class="parts">' + parts.map(function (p) {
       return '<div class="part' + (p.key ? " key" : "") + '"><span class="n">' + p.n + "</span><b>" + esc(p.t) + "</b><p>" + esc(p.d) + "</p></div>";
@@ -1543,7 +1812,7 @@ function resumeGame() {
   if (!g.order || !g.groups || !g.at || typeof g.qi !== "number") { store(STORE_GAME, null); renderIntro(); toast("Ván cũ không đọc được, hãy bắt đầu ván mới."); return; }
   S.game = g;
   g.at.timerEnd = 0;
-  $("routebox").innerHTML = "";
+  resetRoute();
   if (saved.screen === "final") { renderFinal(); show("final"); }
   else if (saved.screen === "present") { renderPresent(); show("present"); }
   else if (saved.screen === "brief") { $("brief-n").textContent = g.order.length; show("brief"); }
@@ -1556,19 +1825,27 @@ function toast(msg) {
   var t = $("toast"); t.textContent = msg; t.hidden = false;
   clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 2600);
 }
+function applyTheme(t) {
+  var dark = t === "dark", root = document.documentElement;
+  root.setAttribute("data-theme", dark ? "dark" : "light");
+  var m = document.querySelector('meta[name="color-scheme"]'); if (m) m.setAttribute("content", dark ? "dark" : "only light");
+  var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute("content", dark ? "#07131D" : "#EDF2F5");
+}
 function toggleTheme() {
-  var root = document.documentElement, cur = root.getAttribute("data-theme");
-  var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  var isDark = cur ? cur === "dark" : sysDark;
-  root.setAttribute("data-theme", isDark ? "light" : "dark");
-  store("sgnbkk.theme", root.getAttribute("data-theme"));
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  applyTheme(next);
+  store(STORE_THEME, next);
   if (!$("wheel").hidden) drawWheel();
 }
+function fsSupported() { var d = document; return !!(d.fullscreenEnabled || d.webkitFullscreenEnabled); }
 function toggleFullscreen() {
+  var d = document, el = d.documentElement;
   try {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () { toast("Trình duyệt không cho bật toàn màn hình. Thử phím F11."); });
-    else toast("Trình duyệt không hỗ trợ toàn màn hình. Thử phím F11.");
+    if (d.fullscreenElement || d.webkitFullscreenElement) { (d.exitFullscreen || d.webkitExitFullscreen).call(d); return; }
+    var req = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (!req) { toast("Thiết bị này không hỗ trợ toàn màn hình."); return; }
+    var p = req.call(el);
+    if (p && p.catch) p.catch(function () { toast("Trình duyệt không cho bật toàn màn hình. Thử phím F11."); });
   } catch (e) { toast("Không bật được toàn màn hình. Thử phím F11."); }
 }
 
@@ -1588,6 +1865,7 @@ document.addEventListener("click", function (ev) {
     case "retry": closeModal(); renderResp(); toast("Chọn nhóm giơ tay hoặc quay ngẫu nhiên."); break;
     case "reveal": closeModal(); reveal(); break;
     case "next": next(); break;
+    case "explain": showExplainAgain(); break;
     case "close-modal": closeModal(); break;
     case "wheel-open": openWheel(); break;
     case "wheel-spin": spinWheel(); break;
@@ -1629,13 +1907,18 @@ document.addEventListener("keydown", function (ev) {
   if (lk === "q" || lk === "s") { openWheel(); return; }
   if (k === "Enter" && S.game.at.resolved && !(document.activeElement && document.activeElement.tagName === "BUTTON")) next();
 });
-window.addEventListener("resize", function () { if (!$("wheel").hidden) drawWheel(); });
+var resizeT = 0;
+window.addEventListener("resize", function () {
+  if (!$("wheel").hidden) drawWheel();
+  clearTimeout(resizeT);
+  resizeT = setTimeout(function () { if (S.screen === "game" && routeAnim.shown != null) placeVehicle(routeAnim.shown); }, 120);
+});
 
 /* ===================== BOOT ===================== */
 (function boot() {
-  var savedTheme = load("sgnbkk.theme");
-  if (savedTheme === "dark" || savedTheme === "light") document.documentElement.setAttribute("data-theme", savedTheme);
+  applyTheme(load(STORE_THEME) === "dark" ? "dark" : "light");
   try { $("bd-scene").innerHTML = portScene(); } catch (e) { /* the page still works without the backdrop */ }
+  if (!fsSupported()) Array.prototype.forEach.call(document.querySelectorAll(".fs-btn"), function (b) { b.hidden = true; });
   var st = load(STORE_SETTINGS);
   if (st && typeof st === "object") {
     if (typeof st.groupCount === "number") S.settings.groupCount = st.groupCount;
@@ -1656,9 +1939,10 @@ window.addEventListener("resize", function () { if (!$("wheel").hidden) drawWhee
 window.__game = {
   state: function () { return JSON.parse(JSON.stringify({ screen: S.screen, settings: S.settings, game: S.game })); },
   questions: QUESTIONS.length,
-  validMin: VALID_MIN,
   correctIndex: function (qidx) { var r = -1; QUESTIONS[qidx].options.forEach(function (o, i) { if (o.correct) r = i; }); return r; },
-  isSpinning: function () { return spinning; }
+  isSpinning: function () { return spinning; },
+  laneY: laneY,
+  nodeX: nodeX
 };
 })();
 </script>

@@ -9,9 +9,9 @@ Trò chơi lớp học môn **Nghiệp vụ ngoại thương & Logistics** (Nhó
 1. Ở màn hình đầu, chọn số nhóm trong lớp (mặc định loại Nhóm 1 vì đang thuyết trình), thời gian trả lời và các câu hỏi muốn dùng.
 2. Mỗi câu hỏi là một điều khoản của hợp đồng. Nhóm nào giơ tay thì bấm chọn nhóm đó; không ai giơ tay thì bấm **Quay ngẫu nhiên**.
 3. Bấm đáp án nhóm đưa ra:
-   - **Đúng:** điều khoản được ghi vào hợp đồng (Sales Contract song ngữ Anh – Việt) và container đi thêm một chặng.
-   - **Sai:** hiện ra sự cố xảy ra với hợp đồng (kẹt cảng, mất tiền, tranh chấp…), sức khỏe hợp đồng giảm. Có thể mời nhóm khác trả lời hoặc xem đáp án.
-4. Hết câu hỏi: màn hình chỉ đóng dấu **HỢP ĐỒNG HỢP LỆ** (sức khỏe từ 50%) hoặc **KHÔNG HỢP LỆ** (dưới 50%), rồi bấm **Bước vào bàn đàm phán** để chuyển sang bài thuyết trình.
+   - **Đúng:** điều khoản được ghi vào hợp đồng (Sales Contract song ngữ Anh – Việt), container đi thêm một chặng trên bản đồ theo dõi. Hiện giải thích chi tiết: vì sao đáp án đúng và từng đáp án còn lại sai ở đâu.
+   - **Sai:** hiện ra sự cố xảy ra với hợp đồng (kẹt cảng, mất tiền, tranh chấp…), giải thích vì sao đáp án đó sai và một gợi ý cho nhóm tiếp theo. Có thể mời nhóm khác trả lời hoặc xem đáp án.
+4. Hết câu hỏi: màn hình chỉ đóng dấu **HỢP ĐỒNG HỢP LỆ** (mọi điều khoản đều được các nhóm trả lời đúng) hoặc **KHÔNG HỢP LỆ** (có câu phải bấm “Xem đáp án đúng”), rồi bấm **Bước vào bàn đàm phán** để chuyển sang bài thuyết trình.
 
 Phím tắt: `A`–`D` chọn đáp án · `Q` quay nhóm · `Enter` sang câu tiếp · `F` toàn màn hình.
 
@@ -30,8 +30,8 @@ Nguồn: bài giảng Nghiệp vụ ngoại thương (Chương 1–3) và tiểu
 
 ## Kỹ thuật
 
-- Một file `index.html` duy nhất, không cần cài đặt, chạy trên mọi trình duyệt.
-- Có giao diện sáng/tối, dùng được trên máy chiếu và điện thoại.
+- Một file `index.html` duy nhất, không cần cài đặt, chạy trên máy tính, laptop, máy chiếu, máy tính bảng, iPhone và điện thoại Android (cả màn hình ngang).
+- Mặc định giao diện sáng (ban ngày) và không bị chế độ tối của trình duyệt tự làm tối. Nút mặt trăng chuyển sang cảnh cảng ban đêm: trăng, sao, cửa sổ tòa nhà sáng đèn.
+- Nền là cảnh cảng container Cát Lái: cần cẩu bờ, tàu, bãi container, xe đầu kéo, tàu lai dắt và dãy nhà cao tầng thành phố.
 - Tự lưu ván đang chơi: lỡ tải lại trang vẫn bấm “Tiếp tục ván đang chơi” được.
-- Nền là cảnh cảng container Cát Lái (cần cẩu, tàu, xe container, tàu lai dắt), tự đổi sang cảnh đêm ở giao diện tối.
-- Đã chạy thử tự động hơn 500 ván (ngẫu nhiên số nhóm, câu hỏi, đúng/sai, vòng quay) để kiểm tra hợp đồng, kết quả hợp lệ/không hợp lệ và lỗi.
+- Đã chạy thử tự động hơn 600 ván (ngẫu nhiên số nhóm, câu hỏi, đúng/sai, vòng quay) để kiểm tra hợp đồng, kết quả hợp lệ/không hợp lệ, bản đồ hành trình và lỗi.
