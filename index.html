@@ -246,24 +246,24 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
 /* ---------- Game main ---------- */
 .game { flex: 1; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: .8rem; padding-bottom: 1rem; }
 .desk { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1rem; min-height: 0; }
-.qcard { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.15rem 1.5rem 1.2rem; display: flex; flex-direction: column; gap: .85rem; min-width: 0; box-shadow: var(--shadow); }
+.qcard { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.15rem 1.5rem 1.2rem; display: flex; flex-direction: column; gap: calc(.85rem * var(--qfit, 1)); min-width: 0; box-shadow: var(--shadow); }
 .qmeta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 .chip { display: inline-flex; align-items: center; gap: .35em; font-size: .76rem; font-weight: 700; padding: .22em .7em; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-2); }
 .chip.hot { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .chip.src { background: transparent; }
-.qstage { font-size: 1.6rem; font-weight: 800; letter-spacing: -.01em; }
-.scenario { background: var(--surface-2); border-radius: 12px; padding: 1rem 1.15rem; color: var(--ink); font-size: 1.12rem; line-height: 1.55; border: 1px solid var(--line); }
+.qstage { font-size: calc(1.6rem * var(--qfit, 1)); font-weight: 800; letter-spacing: -.01em; }
+.scenario { background: var(--surface-2); border-radius: 12px; padding: calc(1rem * var(--qfit, 1)) 1.15rem; color: var(--ink); font-size: calc(1.12rem * var(--qfit, 1)); line-height: 1.55; border: 1px solid var(--line); }
 .scenario strong { color: var(--ink); }
 .scenario ul { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .25rem; }
-.qtext { font-size: 1.45rem; font-weight: 800; color: var(--ink); }
+.qtext { font-size: calc(1.45rem * var(--qfit, 1)); font-weight: 800; color: var(--ink); }
 .opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
 .opt {
-  display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: .85rem; align-items: center; text-align: left;
+  display: grid; grid-template-columns: calc(2.6rem * var(--qfit, 1)) minmax(0, 1fr); gap: .85rem; align-items: center; text-align: left;
   background: var(--surface); border: 2px solid var(--line); border-radius: 12px; padding: .8rem .95rem; cursor: pointer;
-  font-size: 1.15rem; font-weight: 600; line-height: 1.35; min-height: 4.2rem; transition: border-color .15s, background .15s, transform .12s;
+  font-size: calc(1.15rem * var(--qfit, 1)); font-weight: 600; line-height: 1.35; min-height: calc(4.2rem * var(--qfit, 1)); transition: border-color .15s, background .15s, transform .12s;
 }
 @media (hover: hover) { .opt:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); } }
-.opt .L { width: 2.6rem; height: 2.6rem; border-radius: 8px; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--f-code); font-size: 1.35rem; font-weight: 800; }
+.opt .L { width: calc(2.6rem * var(--qfit, 1)); height: calc(2.6rem * var(--qfit, 1)); border-radius: 8px; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--f-code); font-size: calc(1.35rem * var(--qfit, 1)); font-weight: 800; }
 .opt.wrong { border-color: var(--bad); background: var(--bad-soft); text-decoration: line-through; text-decoration-color: var(--bad); color: var(--ink-2); cursor: not-allowed; }
 .opt.wrong .L { background: var(--bad); color: #fff; }
 .opt.right { border-color: var(--ok); background: var(--ok-soft); }
@@ -439,7 +439,7 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
 .toast { position: fixed; left: 50%; top: calc(4.2rem + env(safe-area-inset-top, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: .6rem 1.1rem; border-radius: 999px; font-weight: 600; z-index: 60; box-shadow: var(--shadow); max-width: calc(100% - 32px); text-align: center; }
 
 /* ---------- Responsive ---------- */
-@media (min-width: 1001px) and (min-height: 680px) {
+@media (min-width: 1001px) and (min-height: 600px) {
   .app.in-game { height: 100vh; height: 100dvh; min-height: 0; }
   .app.in-game .screen { min-height: 0; }
   .app.in-game .game { min-height: 0; }
@@ -449,13 +449,13 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
   .app.in-game .qfoot { position: -webkit-sticky; position: sticky; bottom: -1.2rem; margin: auto -1.5rem -1.2rem; padding: .6rem 1.5rem 1.2rem; background: var(--surface); z-index: 2; }
 }
 @media (min-width: 1001px) and (max-height: 820px) {
-  .qcard { gap: .5rem; padding-top: .8rem; }
-  .qstage { font-size: 1.35rem; }
-  .scenario { font-size: 1.02rem; padding: .6rem .9rem; line-height: 1.42; }
+  .qcard { gap: calc(.5rem * var(--qfit, 1)); padding-top: .8rem; }
+  .qstage { font-size: calc(1.35rem * var(--qfit, 1)); }
+  .scenario { font-size: calc(1.02rem * var(--qfit, 1)); padding: .6rem .9rem; line-height: 1.42; }
   .scenario ul { margin-top: .3rem; gap: .1rem; }
-  .qtext { font-size: 1.25rem; }
-  .opt { min-height: 3.4rem; padding: .5rem .8rem; font-size: 1.05rem; grid-template-columns: 2.2rem minmax(0, 1fr); }
-  .opt .L { width: 2.2rem; height: 2.2rem; font-size: 1.2rem; }
+  .qtext { font-size: calc(1.25rem * var(--qfit, 1)); }
+  .opt { min-height: calc(3.4rem * var(--qfit, 1)); padding: .5rem .8rem; font-size: calc(1.05rem * var(--qfit, 1)); grid-template-columns: calc(2.2rem * var(--qfit, 1)) minmax(0, 1fr); }
+  .opt .L { width: calc(2.2rem * var(--qfit, 1)); height: calc(2.2rem * var(--qfit, 1)); font-size: calc(1.2rem * var(--qfit, 1)); }
   .resp { padding: .4rem .6rem; }
 }
 @media (max-width: 1000px) {
@@ -715,8 +715,8 @@ var QUESTIONS = [
   },
   {
     id: "incoterms", stage: "Bước 2 · Điều kiện giao hàng", chapter: "Chương 1 · Incoterms® 2020", star: true,
-    scenario: "Siam Retail đã có hãng tàu và công ty bảo hiểm quen ở Bangkok. Hai bên thống nhất chia trách nhiệm như sau:<ul><li>An Nam làm thủ tục <strong>thông quan xuất khẩu</strong> tại Việt Nam.</li><li>An Nam chịu mọi chi phí và rủi ro cho đến khi hàng được <strong>xếp lên con tàu do Siam Retail chỉ định tại cảng Cát Lái</strong>.</li><li>Siam Retail tự thuê tàu, trả cước biển và mua bảo hiểm cho chặng Cát Lái → Laem Chabang.</li></ul>",
-    question: "Điều khoản giao hàng nên ghi theo điều kiện Incoterms® 2020 nào?",
+    scenario: "Siam Retail đã có sẵn hãng tàu và bảo hiểm quen. Hai bên thống nhất:<ul><li>An Nam <strong>thông quan xuất khẩu</strong>, chịu chi phí và rủi ro đến khi hàng <strong>đã xếp lên tàu của Siam Retail tại cảng Cát Lái</strong>.</li><li>Siam Retail <strong>tự thuê tàu, trả cước biển và mua bảo hiểm</strong>.</li></ul>",
+    question: "Hợp đồng nên ghi điều kiện Incoterms® 2020 nào?",
     options: [
       { t: "EXW — Kho An Nam, TP.HCM", c: { title: "Container kẹt ở kho", tag: "Kẹt thông quan", dmg: 25,
         text: "Siam Retail là doanh nghiệp Thái, không thể tự làm thủ tục xuất khẩu tại Việt Nam. Container nằm chờ ở kho, hãng tàu chuyển lô hàng sang chuyến sau và phát sinh phí lưu container.",
@@ -857,7 +857,7 @@ var QUESTIONS = [
   }
 ];
 
-var APP_VERSION = "2026.11.05-1";
+var APP_VERSION = "2026.11.05-2";
 var LETTERS = ["A", "B", "C", "D"];
 var STORE_SETTINGS = "sgnbkk.settings.v1";
 var STORE_GAME = "sgnbkk.game.v3";
@@ -1260,6 +1260,18 @@ function curQ() { var g = S.game; return QUESTIONS[g.order[g.qi]]; }
 function renderGame(opts) {
   opts = opts || {};
   renderHeader(); renderRoute(); renderQuestion(); renderResp(); renderContract(opts.stampKey);
+  fitQuestion();
+}
+// On one-screen desktops, shrink the question text just enough that the question and all four answers fit.
+function fitQuestion() {
+  var qc = $("qcard"); if (!qc || S.screen !== "game") return;
+  qc.style.setProperty("--qfit", "1");
+  if (getComputedStyle(qc).overflowY !== "auto") return;
+  var f = 1;
+  while (qc.scrollHeight > qc.clientHeight + 1 && f > 0.62) {
+    f = Math.round((f - 0.03) * 100) / 100;
+    qc.style.setProperty("--qfit", String(f));
+  }
 }
 function renderHeader() {
   var g = S.game;
@@ -1991,7 +2003,7 @@ var resizeT = 0;
 window.addEventListener("resize", function () {
   if (!$("wheel").hidden) drawWheel();
   clearTimeout(resizeT);
-  resizeT = setTimeout(function () { if (S.screen === "game" && routeAnim.shown != null) placeVehicle(routeAnim.shown); }, 120);
+  resizeT = setTimeout(function () { if (S.screen === "game") { if (routeAnim.shown != null) placeVehicle(routeAnim.shown); fitQuestion(); } }, 120);
 });
 
 /* ===================== BOOT ===================== */
@@ -2012,7 +2024,7 @@ window.addEventListener("resize", function () {
   clampGroups();
   renderIntro();
   show("intro");
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!$("wheel").hidden) drawWheel(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!$("wheel").hidden) drawWheel(); fitQuestion(); });
 })();
 
 // Browsers may keep an old copy of the page for a few minutes after an update.
