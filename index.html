@@ -326,6 +326,14 @@ select.sel { font: inherit; font-size: max(16px, 1rem); padding: .5em .8em; bord
 .sign { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .9rem; text-align: center; font-size: .74rem; }
 .sign .line { height: 2.6rem; border-bottom: 1px solid var(--paper-ink); margin: .3rem .4rem .25rem; display: grid; place-items: center; color: var(--paper-mute); font: italic .68rem var(--f-ui); }
 .doc-foot { margin-top: .8rem; font: .64rem var(--f-ui); color: var(--paper-mute); text-align: center; }
+.contract { position: relative; }
+.art-split { padding: 0; }
+.slot { position: relative; border-radius: 6px; padding: .4rem .5rem; margin: 0 -.5rem .2rem; transition: box-shadow .3s ease, background-color .3s ease; }
+.slot.focus { box-shadow: 0 0 0 2.5px #D62F25; background-color: rgba(214, 47, 37, .05); padding-top: .85rem; margin-top: .55rem; animation: framePulse 1.8s ease-in-out infinite; }
+.slot.focus.done { box-shadow: 0 0 0 2.5px #1C8549; background-color: rgba(28, 133, 73, .06); animation: none; }
+@keyframes framePulse { 50% { box-shadow: 0 0 0 2.5px #D62F25, 0 0 0 7px rgba(214, 47, 37, .16); } }
+.slot-tag { position: absolute; top: -.72rem; right: .6rem; background: #D62F25; color: #fff; font: 800 .64rem var(--f-ui); letter-spacing: .06em; text-transform: uppercase; padding: .2em .7em; border-radius: 999px; white-space: nowrap; }
+.slot.done .slot-tag { background: #1C8549; }
 .stamp-in { animation: docFlash 1.8s ease; }
 @keyframes docFlash { 0% { background: var(--paper-flash); } 100% { background: transparent; } }
 .blink { animation: blink 1.6s ease-in-out infinite; }
@@ -1429,8 +1437,12 @@ function renderContract(stampKey, target) {
       (f.warn ? '<span class="doc-note">✎ Điền sau sự cố: không nhóm nào trả lời đúng</span>' : "");
   }
   function art(n, en, vi, body, key) {
-    return '<section class="art"' + (key ? ' data-key="' + key + '"' : "") + "><h4>Article " + n + ". " + en + " <span>/ Điều " + n + ". " + vi + "</span></h4>" + body + "</section>";
+    return '<section class="art' + (key ? " slot" + slotCls(key) : "") + '"' + (key ? ' data-key="' + key + '"' : "") + ">" + (key ? slotTag(key) : "") + "<h4>Article " + n + ". " + en + " <span>/ Điều " + n + ". " + vi + "</span></h4>" + body + "</section>";
   }
+  // The clause the current question is about gets a red frame (green once answered).
+  var focusKey = (S.screen === "game" && !g.done && g.order[g.qi] != null) ? fillsOf(QUESTIONS[g.order[g.qi]])[0].key : null;
+  function slotCls(key) { return key === focusKey ? " focus" + (g.at.resolved ? " done" : "") : ""; }
+  function slotTag(key) { return key === focusKey ? '<span class="slot-tag">Câu ' + (g.qi + 1) + (g.at.resolved ? " · đã điền" : " · đang hỏi") + "</span>" : ""; }
   var del = g.filled.delivery, pf = g.filled.price;
   var priceCell = !pf ? blank("price") : '<span class="fill' + (pf.nego ? " nego blink" : "") + '">' + esc(pf.v) + "</span>" + (pf.warn ? '<span class="doc-note">✎ sau sự cố</span>' : "");
   var priceNote = pf ? '<p class="fill-sub">' + esc(pf.s) + "</p>" : "";
@@ -1440,7 +1452,7 @@ function renderContract(stampKey, target) {
     '<article class="doc">' +
       '<header class="doc-head"><div class="doc-title">SALES CONTRACT<span>HỢP ĐỒNG MUA BÁN HÀNG HÓA QUỐC TẾ</span></div>' +
         '<div class="doc-meta"><span>No. / Số: <b>01/2026/AN-SR</b></span><span>Place / Nơi ký: <b>Ho Chi Minh City</b></span><span>Date / Ngày: <b>' + todayStr() + "</b></span></div></header>" +
-      '<p class="doc-basis" data-key="basis"><b>Pursuant to / Căn cứ:</b> the Commercial Law of Viet Nam 2005; the needs and capabilities of both parties; and ' + fill("basis") + "</p>" +
+      '<p class="doc-basis slot' + slotCls("basis") + '" data-key="basis">' + slotTag("basis") + "<b>Pursuant to / Căn cứ:</b> the Commercial Law of Viet Nam 2005; the needs and capabilities of both parties; and " + fill("basis") + "</p>" +
       '<p class="doc-agree">This contract is made by and between:</p>' +
       '<div class="doc-parties">' +
         "<p><b>THE SELLER / BÊN BÁN: AN NAM FOOD JOINT STOCK COMPANY</b><br><i>Công ty Cổ phần Thực phẩm An Nam</i><br>" +
@@ -1462,10 +1474,11 @@ function renderContract(stampKey, target) {
         "<p>Terms of delivery: " + fill("delivery") + "</p>" +
         "<p>Port of loading: Cat Lai Port, Ho Chi Minh City, Viet Nam<br>Port of discharge: Laem Chabang Port, Thailand<br>Time of shipment: not later than 15 December 2026<br>Partial shipment: not allowed · Transshipment: not allowed</p>" +
         "<p>Shipping advice: within 24 hours after loading, the Seller shall e-mail the Buyer the container number, B/L number, vessel name, ETD and ETA.</p>", "delivery") +
-      art(5, "Payment", "Thanh toán",
+      '<section class="art art-split"><div class="slot' + slotCls("payment") + '" data-key="payment">' + slotTag("payment") +
+        "<h4>Article 5. Payment <span>/ Điều 5. Thanh toán</span></h4>" +
         "<p>Method of payment: " + fill("payment") + "</p>" +
-        "<p>Beneficiary: An Nam Food Joint Stock Company – Vietcombank, Ho Chi Minh City Branch.</p>" +
-        '<p data-key="docs">Documents required / Chứng từ xuất trình: ' + fill("docs") + "</p>", "payment") +
+        "<p>Beneficiary: An Nam Food Joint Stock Company – Vietcombank, Ho Chi Minh City Branch.</p></div>" +
+        '<div class="slot' + slotCls("docs") + '" data-key="docs">' + slotTag("docs") + "<p>Documents required / Chứng từ xuất trình: " + fill("docs") + "</p></div></section>" +
       art(6, "Price", "Giá cả",
         '<div style="overflow-x:auto"><table><thead><tr><th>No.</th><th>Description of goods</th><th>Qty (kg)</th><th>Unit price (USD/kg)</th><th>Amount (USD)</th></tr></thead>' +
         '<tbody><tr><td class="num">1</td><td>Soft dried mango &amp; jackfruit, Grade A<br><i>Xoài, mít sấy dẻo loại A</i></td><td class="num">8,000</td><td class="num">' + priceCell + '</td><td class="num">—</td></tr></tbody></table></div>' +
@@ -1493,11 +1506,18 @@ function renderContract(stampKey, target) {
     "</article>";
   if (stampKey) {
     var el = box.querySelector('[data-key="' + stampKey + '"]');
-    if (el) {
-      el.classList.add("stamp-in");
-      if (el.scrollIntoView && !fast()) { try { el.scrollIntoView({ block: "nearest", behavior: "smooth" }); } catch (e) {} }
-    }
+    if (el) el.classList.add("stamp-in");
   }
+  var target = box.querySelector(".slot.focus") || (stampKey ? box.querySelector('[data-key="' + stampKey + '"]') : null);
+  var marker = focusKey ? focusKey + ":" + g.qi : (stampKey || "");
+  if (target && (stampKey || marker !== lastFocusMarker)) scrollContractTo(box, target);
+  lastFocusMarker = marker;
+}
+var lastFocusMarker = "";
+function scrollContractTo(box, el) {
+  if (fast()) return;
+  var top = Math.max(0, el.offsetTop - Math.max(16, (box.clientHeight - el.offsetHeight) / 2));
+  try { box.scrollTo({ top: top, behavior: reduceMotion() ? "auto" : "smooth" }); } catch (e) { box.scrollTop = top; }
 }
 
 /* ===================== TIMER ===================== */

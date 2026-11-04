@@ -32,6 +32,8 @@ Nguồn: bài giảng Nghiệp vụ ngoại thương (Chương 1–3) và tiểu
 
 Sales Contract song ngữ theo mẫu hợp đồng mua bán hàng hóa quốc tế (Chương 6): phần mở đầu (số, nơi ký, ngày, căn cứ, thông tin hai bên) và 14 điều khoản: Commodity, Quality, Quantity, Shipment, Payment, Price, Packing and marking, Warranty, Insurance, Claim, Force majeure, Penalty, Arbitration, Other terms. Điều khoản Giá được đặt sau Giao hàng và Thanh toán để các ô trống được điền lần lượt từ trên xuống theo thứ tự câu 1 → 6.
 
+Khi đang ở câu nào, điều khoản tương ứng trong hợp đồng được đóng khung đỏ kèm nhãn “Câu N · đang hỏi” và tự cuộn vào giữa khung hợp đồng; trả lời xong khung chuyển xanh “đã điền”.
+
 ## Kỹ thuật
 
 - Một file `index.html` duy nhất, không cần cài đặt, chạy trên máy tính, laptop, máy chiếu, máy tính bảng, iPhone và điện thoại Android (cả màn hình ngang).
